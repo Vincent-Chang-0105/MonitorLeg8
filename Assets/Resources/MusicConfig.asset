@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 46945052c9bb636479171f66bb4913a5, type: 3}
+  m_Name: MusicConfig
+  m_EditorClassIdentifier: 
+  sceneMusicMappings:
+  - sceneName: MainMenu
+    musicClip: {fileID: 8300000, guid: 2ddfcdab65147e840b4434e9bb810048, type: 3}
+  - sceneName: Level1
+    musicClip: {fileID: 8300000, guid: 04903c577033f214faa90af8daf62f57, type: 3}
+  - sceneName: Level 2
+    musicClip: {fileID: 8300000, guid: ab05a299a744eb041ab7b1ed36098546, type: 3}
+  - sceneName: Level 3
+    musicClip: {fileID: 8300000, guid: d2c2760f01e2b3a418a96accf0b2c3ad, type: 3}
+  - sceneName: Level 4
+    musicClip: {fileID: 8300000, guid: ee747b0e999a7f9458b5c21b9d6944a1, type: 3}
+  - sceneName: Level 5
+    musicClip: {fileID: 8300000, guid: e255cbab04fe00042b316bfa24b7ada4, type: 3}
+  eventMusicMappings: []
+  defaultMusic: {fileID: 8300000, guid: 2ddfcdab65147e840b4434e9bb810048, type: 3}
