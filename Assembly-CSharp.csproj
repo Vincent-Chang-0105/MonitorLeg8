@@ -73,9 +73,11 @@
     <Compile Include="Assets\_Scripts\Core\Utilities\GameObjectExtensions.cs" />
     <Compile Include="Assets\_Scripts\Core\Pattern\Singleton.cs" />
     <Compile Include="Assets\_Scripts\Systems\Systems.cs" />
+    <Compile Include="Assets\_Scripts\Systems\MonsterSpawner\MonsterSpawnTrigger.cs" />
     <Compile Include="Assets\TutorialInfo\Scripts\Readme.cs" />
     <Compile Include="Assets\QuickOutline\Scripts\Outline.cs" />
     <Compile Include="Assets\_Scripts\UI\Menu\MenuEventSystemHandler.cs" />
+    <Compile Include="Assets\_Scripts\Systems\MonsterSpawner\MonsterController.cs" />
     <Compile Include="Assets\_Scripts\Core\Pattern\PersistentSingleton.cs" />
     <Compile Include="Assets\_Scripts\Systems\Scriptables\MusicConfiiguration.cs" />
     <Compile Include="Assets\_Scripts\Player\PlayerInteraction\Interactable.cs" />
@@ -87,9 +89,11 @@
     <Compile Include="Assets\_Scripts\UI\Menu\MainMenuCameraEventHandler.cs" />
     <Compile Include="Assets\_Scripts\Systems\InterAction\MovingObjectInteractable.cs" />
     <Compile Include="Assets\_Scripts\Systems\Audio\AudioExtensions.cs" />
+    <Compile Include="Assets\_Scripts\Systems\MonsterSpawner\MonsterSpawnManager.cs" />
     <Compile Include="Assets\_Scripts\UI\Menu\MainMenuEventHandler.cs" />
     <Compile Include="Assets\_Scripts\Systems\Audio\Sound\SoundBuilder.cs" />
     <Compile Include="Assets\_Scripts\Systems\Input\InputSystem.cs" />
+    <Compile Include="Assets\_Scripts\Systems\MonsterSpawner\MonsterCleanup.cs" />
     <Compile Include="Assets\_Scripts\UI\Menu\VerticalLetterCarousel.cs" />
     <Compile Include="Assets\_Scripts\Player\PlayerMovement.cs" />
     <Compile Include="Assets\_Scripts\Systems\Audio\Sound\SoundManager.cs" />
@@ -1030,6 +1034,7 @@
     <ProjectReference Include="Unity.Postprocessing.Runtime.csproj" />
     <ProjectReference Include="Unity.Burst.Editor.csproj" />
     <ProjectReference Include="Unity.Burst.csproj" />
+    <ProjectReference Include="Unity.AI.Navigation.csproj" />
     <ProjectReference Include="Unity.Timeline.Editor.csproj" />
     <ProjectReference Include="Unity.VisualScripting.Shared.Editor.csproj" />
     <ProjectReference Include="Unity.VisualStudio.Editor.csproj" />
@@ -1044,15 +1049,18 @@
     <ProjectReference Include="Unity.InputSystem.ForUI.csproj" />
     <ProjectReference Include="Unity.VisualScripting.SettingsProvider.Editor.csproj" />
     <ProjectReference Include="Unity.PlasticSCM.Editor.csproj" />
+    <ProjectReference Include="Unity.AI.Navigation.Updater.csproj" />
     <ProjectReference Include="Unity.Postprocessing.Editor.csproj" />
     <ProjectReference Include="Unity.VisualScripting.State.Editor.csproj" />
     <ProjectReference Include="Unity.Mathematics.csproj" />
     <ProjectReference Include="Unity.TextMeshPro.csproj" />
     <ProjectReference Include="Unity.TextMeshPro.Editor.csproj" />
     <ProjectReference Include="Unity.Searcher.Editor.csproj" />
+    <ProjectReference Include="Unity.AI.Navigation.Editor.csproj" />
     <ProjectReference Include="Unity.VisualScripting.State.csproj" />
     <ProjectReference Include="Unity.VSCode.Editor.csproj" />
     <ProjectReference Include="Cinemachine.csproj" />
+    <ProjectReference Include="Unity.AI.Navigation.Editor.ConversionSystem.csproj" />
   </ItemGroup>
   <Import Project="Sdk.targets" Sdk="Microsoft.NET.Sdk" />
   <ItemGroup>
