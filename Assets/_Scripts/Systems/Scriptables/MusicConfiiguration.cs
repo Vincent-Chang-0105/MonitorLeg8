@@ -21,11 +21,11 @@ public class MusicConfiguration : ScriptableObject
     }
     
     [Header("Scene Music")]
-    [SerializeField] public List<SceneMusicPair> sceneMusicMappings = new List<SceneMusicPair>();
+    public List<SceneMusicPair> sceneMusicMappings = new List<SceneMusicPair>();
     
     [Header("Event Music")]
-    [SerializeField] public List<EventMusicPair> eventMusicMappings = new List<EventMusicPair>();
+    public List<EventMusicPair> eventMusicMappings = new List<EventMusicPair>();
     
     [Header("Default Music")]
-    [SerializeField] public AudioClip defaultMusic;
+    public AudioClip defaultMusic;
 }
