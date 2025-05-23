@@ -6,6 +6,7 @@ public class PlayerInteraction : MonoBehaviour
 {
     [SerializeField] private float interactionDistance;
     [SerializeField] private TextMeshProUGUI interactionText;
+    [SerializeField] private TextMeshProUGUI interactionName;
     [SerializeField] private Camera playerCamera;
     [SerializeField] private GameObject interactionIcon;
 
@@ -28,7 +29,24 @@ public class PlayerInteraction : MonoBehaviour
             {
                 HandleInteraction(interactable);
                 interactionText.text = interactable.GetDescription();
+                interactionName.text = interactable.GetName();
                 interactionIcon.SetActive(true);
+                
+                // ➕ NEW: Make interactionName follow the object in screen space
+                Vector3 screenPosition = playerCamera.WorldToScreenPoint(hit.collider.bounds.center);
+
+                // Optional: Check if it's in front of the camera
+                if (screenPosition.z > 0)
+                {
+                    interactionIcon.GetComponent<RectTransform>().position = new Vector3(screenPosition.x, screenPosition.y, 0);
+                    interactionName.rectTransform.position = new Vector3(screenPosition.x, screenPosition.y + 70f, 0); // optional offset
+                }
+                else
+                {
+                    // Object is behind the camera
+                    interactionName.text = "";
+                }
+
                 successfulHit = true;
             }
         }
@@ -36,6 +54,7 @@ public class PlayerInteraction : MonoBehaviour
         if (!successfulHit)
         {
             interactionText.text = "";
+            interactionName.text = "";
             interactionIcon.SetActive(false);
         }
 

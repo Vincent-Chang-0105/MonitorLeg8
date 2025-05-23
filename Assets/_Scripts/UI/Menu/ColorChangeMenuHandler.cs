@@ -47,10 +47,7 @@ public class ColorChangeMenuHandler : MenuEventSystemHandler
     }
     
     protected override void ResetToOriginalState(Selectable selectable)
-    {
-        // Reset scale to original
-        selectable.transform.localScale = _originalScales[selectable];
-        
+    {     
         // Reset text color
         ResetTextColor(selectable);
     }
@@ -61,10 +58,11 @@ public class ColorChangeMenuHandler : MenuEventSystemHandler
         Text legacyText = selectable.GetComponentInChildren<Text>();
         if (legacyText != null)
         {
-            _colorChangeTween = DOTween.To(() => legacyText.color, 
-                x => legacyText.color = x, 
-                targetColor, 
-                _colorChangeDuration);
+            _colorChangeTween = DOTween.To(() => legacyText.color,
+                x => legacyText.color = x,
+                targetColor,
+                _colorChangeDuration)
+                .SetUpdate(true);
             return;
         }
         
@@ -72,10 +70,11 @@ public class ColorChangeMenuHandler : MenuEventSystemHandler
         TextMeshProUGUI tmpText = selectable.GetComponentInChildren<TextMeshProUGUI>();
         if (tmpText != null)
         {
-            _colorChangeTween = DOTween.To(() => tmpText.color, 
-                x => tmpText.color = x, 
-                targetColor, 
-                _colorChangeDuration);
+            _colorChangeTween = DOTween.To(() => tmpText.color,
+                x => tmpText.color = x,
+                targetColor,
+                _colorChangeDuration)
+                .SetUpdate(true);
         }
     }
     

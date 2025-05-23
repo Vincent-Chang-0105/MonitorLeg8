@@ -6,6 +6,9 @@ using DG.Tweening; // Required for DOTween
 public class MovingObjectInteractable : Interactable
 {
     [SerializeField] private Transform objectToMove;
+    [SerializeField] private string objName;
+    [SerializeField] private string objDescription;
+
     
     [Header("Movement Settings")]
     [SerializeField] private Vector3 moveDirection = Vector3.forward; // Default direction is forward
@@ -38,7 +41,11 @@ public class MovingObjectInteractable : Interactable
     
     public override string GetDescription()
     {
-        return "Interact";
+        return objDescription;
+    }
+    public override string GetName()
+    {
+        return objName;
     }
 
     public override void Interact()
@@ -80,4 +87,6 @@ public class MovingObjectInteractable : Interactable
         Gizmos.color = Color.green;
         Gizmos.DrawSphere(targetPos, 0.1f);
     }
+
+
 }

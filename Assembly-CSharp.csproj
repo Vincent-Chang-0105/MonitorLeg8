@@ -66,6 +66,7 @@
   <ItemGroup>
     <Compile Include="Assets\_Scripts\Core\Utilities\Helpers.cs" />
     <Compile Include="Assets\_Scripts\Core\Utilities\FPSCounter.cs" />
+    <Compile Include="Assets\_Scripts\Systems\Tutorial\TutorialStep.cs" />
     <Compile Include="Assets\_Scripts\Systems\GameCore\GameManager.cs" />
     <Compile Include="Assets\_Scripts\UI\Menu\RobotMenuController.cs" />
     <Compile Include="Assets\_Scripts\Systems\Audio\Music\MusicManager.cs" />
@@ -85,6 +86,7 @@
     <Compile Include="Assets\_Scripts\Systems\Audio\Sound\SoundData.cs" />
     <Compile Include="Assets\_Scripts\Player\PlayerInteraction\PlayerInteraction.cs" />
     <Compile Include="Assets\_Scripts\Systems\Audio\Sound\SoundEmitter.cs" />
+    <Compile Include="Assets\_Scripts\Systems\Tutorial\TutorialData.cs" />
     <Compile Include="Assets\_Scripts\Systems\Management\PauseManager.cs" />
     <Compile Include="Assets\_Scripts\UI\Menu\MainMenuCameraEventHandler.cs" />
     <Compile Include="Assets\_Scripts\Systems\InterAction\MovingObjectInteractable.cs" />
@@ -92,12 +94,15 @@
     <Compile Include="Assets\_Scripts\Systems\MonsterSpawner\MonsterSpawnManager.cs" />
     <Compile Include="Assets\_Scripts\UI\Menu\MainMenuEventHandler.cs" />
     <Compile Include="Assets\_Scripts\Systems\Audio\Sound\SoundBuilder.cs" />
+    <Compile Include="Assets\_Scripts\UI\Menu\ScaleChangeMenuHandler.cs" />
     <Compile Include="Assets\_Scripts\Systems\Input\InputSystem.cs" />
     <Compile Include="Assets\_Scripts\Systems\MonsterSpawner\MonsterCleanup.cs" />
+    <Compile Include="Assets\_Scripts\Systems\Tutorial\TutorialManager.cs" />
     <Compile Include="Assets\_Scripts\UI\Menu\VerticalLetterCarousel.cs" />
     <Compile Include="Assets\_Scripts\Player\PlayerMovement.cs" />
     <Compile Include="Assets\_Scripts\Systems\Audio\Sound\SoundManager.cs" />
     <Compile Include="Assets\_Scripts\Core\Pattern\StaticInstance.cs" />
+    <Compile Include="Assets\_Scripts\Systems\Tutorial\ITutorialStep.cs" />
     <Compile Include="Assets\_Scripts\Systems\Audio\Music\MusicSelector.cs" />
   </ItemGroup>
   <ItemGroup>
