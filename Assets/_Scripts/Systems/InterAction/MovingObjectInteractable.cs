@@ -8,8 +8,9 @@ public class MovingObjectInteractable : Interactable
     [SerializeField] private Transform objectToMove;
     [SerializeField] private string objName;
     [SerializeField] private string objDescription;
+    [SerializeField] private int hintIdToComplete;
+    [SerializeField] private string objNamed;
 
-    
     [Header("Movement Settings")]
     [SerializeField] private Vector3 moveDirection = Vector3.forward; // Default direction is forward
     [SerializeField] private float moveDistance = 1f; // Default distance is 1 unit
@@ -24,19 +25,22 @@ public class MovingObjectInteractable : Interactable
     private void MoveObject()
     {
         if (isMoving) return; // Prevent multiple interactions while moving
-        
+
         isMoving = true;
-        
+
         // Determine whether to move forward or back
         Vector3 destination = isAtOriginalPosition ? targetPosition : originalPosition;
-        
+
         // Create the tween
         objectToMove.DOMove(destination, moveDuration)
             .SetEase(easeType)
-            .OnComplete(() => {
+            .OnComplete(() =>
+            {
                 isMoving = false;
                 isAtOriginalPosition = !isAtOriginalPosition; // Toggle position state
             });
+        
+        Debug.Log(hintIdToComplete);
     }
     
     public override string GetDescription()
@@ -51,6 +55,12 @@ public class MovingObjectInteractable : Interactable
     public override void Interact()
     {
         MoveObject();
+
+        if (objName != null)
+        {
+            Debug.Log($"Trying to complete hint: {hintIdToComplete}");
+            HintEvents.CompleteHint(hintIdToComplete);
+        }
     }
 
     // Start is called before the first frame update
@@ -67,12 +77,6 @@ public class MovingObjectInteractable : Interactable
         {
             Debug.LogError("Object to move is not assigned in " + gameObject.name);
         }
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 
     // Optional: You can visualize the movement path in the editor
