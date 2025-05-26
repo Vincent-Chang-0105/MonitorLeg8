@@ -8,8 +8,11 @@ public class MovingObjectInteractable : Interactable
     [SerializeField] private Transform objectToMove;
     [SerializeField] private string objName;
     [SerializeField] private string objDescription;
+
+    [Header("Hint")]
     [SerializeField] private int hintIdToComplete;
-    [SerializeField] private string objNamed;
+    [SerializeField] private int hintIdToTrigger;
+    private HintTrigger hintTrigger;
 
     [Header("Movement Settings")]
     [SerializeField] private Vector3 moveDirection = Vector3.forward; // Default direction is forward
@@ -40,7 +43,6 @@ public class MovingObjectInteractable : Interactable
                 isAtOriginalPosition = !isAtOriginalPosition; // Toggle position state
             });
         
-        Debug.Log(hintIdToComplete);
     }
     
     public override string GetDescription()
@@ -56,16 +58,15 @@ public class MovingObjectInteractable : Interactable
     {
         MoveObject();
 
-        if (objName != null)
-        {
-            Debug.Log($"Trying to complete hint: {hintIdToComplete}");
-            HintEvents.CompleteHint(hintIdToComplete);
-        }
+        // Trigger hints if component exists
+        if (hintTrigger != null)
+            hintTrigger.OnInteract();
     }
 
     // Start is called before the first frame update
     void Start()
     {
+        hintTrigger = GetComponent<HintTrigger>();
         // Store the original position
         if (objectToMove != null)
         {

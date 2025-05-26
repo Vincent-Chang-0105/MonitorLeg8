@@ -9,6 +9,7 @@ public class PlayerInteraction : MonoBehaviour
     [SerializeField] private TextMeshProUGUI interactionName;
     [SerializeField] private Camera playerCamera;
     [SerializeField] private GameObject interactionIcon;
+    [SerializeField] private LayerMask interactionLayerMask = -1;
 
     private Outline lastOutlinedObject;
 
@@ -18,7 +19,7 @@ public class PlayerInteraction : MonoBehaviour
         RaycastHit hit;
 
         bool successfulHit = false;
-        Outline newOutline = null; 
+        Outline newOutline = null;
 
         if (Physics.Raycast(ray, out hit, interactionDistance))
         {
@@ -31,7 +32,7 @@ public class PlayerInteraction : MonoBehaviour
                 interactionText.text = interactable.GetDescription();
                 interactionName.text = interactable.GetName();
                 interactionIcon.SetActive(true);
-                
+
                 // ➕ NEW: Make interactionName follow the object in screen space
                 Vector3 screenPosition = playerCamera.WorldToScreenPoint(hit.collider.bounds.center);
 
@@ -50,6 +51,8 @@ public class PlayerInteraction : MonoBehaviour
                 successfulHit = true;
             }
         }
+
+
 
         if (!successfulHit)
         {
@@ -98,5 +101,12 @@ public class PlayerInteraction : MonoBehaviour
         }
 
         lastOutlinedObject = newOutline;
+    }
+    
+    private void OnDisable()
+    {
+        interactionText.text = "";
+        interactionName.text = "";
+        interactionIcon.SetActive(false);
     }
 }

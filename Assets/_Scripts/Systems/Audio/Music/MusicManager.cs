@@ -6,12 +6,39 @@ namespace AudioSystem {
     public class MusicManager : PersistentSingleton<MusicManager> {
         const float crossFadeTime = 1.0f;
         float fading;
+        
+        // Use two persistent AudioSources instead of creating/destroying
+        AudioSource audioSourceA;
+        AudioSource audioSourceB;
         AudioSource current;
         AudioSource previous;
+        
         readonly Queue<AudioClip> playlist = new();
 
         [SerializeField] List<AudioClip> initialPlaylist;
         [SerializeField] AudioMixerGroup musicMixerGroup;
+
+        protected override void Awake() {
+            base.Awake();
+            
+            // Create two persistent AudioSources
+            audioSourceA = gameObject.AddComponent<AudioSource>();
+            audioSourceB = gameObject.AddComponent<AudioSource>();
+            
+            // Configure both AudioSources
+            SetupAudioSource(audioSourceA);
+            SetupAudioSource(audioSourceB);
+            
+            current = audioSourceA;
+        }
+
+        void SetupAudioSource(AudioSource source) {
+            source.outputAudioMixerGroup = musicMixerGroup;
+            source.loop = false;
+            source.volume = 0;
+            source.bypassListenerEffects = true;
+            source.playOnAwake = false;
+        }
 
         void Start() {
             foreach (var clip in initialPlaylist) {
@@ -35,23 +62,15 @@ namespace AudioSystem {
         }
 
         public void Play(AudioClip clip) {
-            HandleCrossFade();
-
             if (current && current.clip == clip) return;
 
-            if (previous) {
-                Destroy(previous);
-                previous = null;
-            }
-
+            // Swap the AudioSources
             previous = current;
+            current = (current == audioSourceA) ? audioSourceB : audioSourceA;
 
-            current = gameObject.GetOrAdd<AudioSource>();
+            // Setup the new current AudioSource
             current.clip = clip;
-            current.outputAudioMixerGroup = musicMixerGroup; // Set mixer group
-            current.loop = false; // For playlist functionality, we want tracks to play once
             current.volume = 0;
-            current.bypassListenerEffects = true;
             current.Play();
 
             fading = 0.001f;
@@ -60,6 +79,7 @@ namespace AudioSystem {
         void Update() {
             HandleCrossFade();
 
+            // Check if current track finished and play next
             // if (current && !current.isPlaying && playlist.Count > 0) {
             //     PlayNextTrack();
             // }
@@ -81,9 +101,10 @@ namespace AudioSystem {
             if (fraction >= 1) {
                 fading = 0.0f;
                 if (previous) {
-                    Destroy(previous);
-                    previous = null;
+                    previous.Stop(); // Stop the previous track instead of destroying
+                    previous.clip = null; // Clear the clip reference
                 }
+                previous = null;
             }
         }
     }

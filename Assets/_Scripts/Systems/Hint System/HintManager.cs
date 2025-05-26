@@ -112,12 +112,12 @@ public class HintManager : PersistentSingleton<HintManager>
     public void ShowHint(Hint hint)
     {
         if (hint == null) return;
-        
+
         currentHint = hint;
-        
+
         if (hintText != null)
             hintText.text = hint.hintText;
-            
+
         StartCoroutine(ShowHintCoroutine(hint));
     }
     
@@ -183,33 +183,27 @@ public class HintManager : PersistentSingleton<HintManager>
     
     public void CompleteHint(int hintId)
     {
-        Debug.Log($"CompleteHint called with ID: {hintId}");
-        
         if (currentLevelHints == null) 
         {
-            Debug.Log("No current level hints!");
+            Debug.LogError("No current level hints!");
             return;
         }
         
         Hint hint = currentLevelHints.GetHint(hintId);
         if (hint != null)
         {
-            Debug.Log($"Found hint: {hint.hintText}");
             hint.isCompleted = true;
             
             // If this is the currently displayed hint, hide it
             if (currentHint == hint)
             {
-                Debug.Log("Hiding current hint");
                 HideCurrentHint();
                 currentHint = null;
             }
-            
-            Debug.Log($"Hint completed: {hintId}");
         }
         else
         {
-            Debug.Log($"Hint not found: {hintId}");
+            Debug.LogError($"Hint not found: {hintId}");
         }
     }
     

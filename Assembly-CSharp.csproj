@@ -66,6 +66,7 @@
   <ItemGroup>
     <Compile Include="Assets\_Scripts\Core\Utilities\Helpers.cs" />
     <Compile Include="Assets\_Scripts\Core\Utilities\FPSCounter.cs" />
+    <Compile Include="Assets\_Scripts\Systems\Hint System\HintTrigger.cs" />
     <Compile Include="Assets\_Scripts\Systems\Tutorial\TutorialStep.cs" />
     <Compile Include="Assets\_Scripts\Systems\GameCore\GameManager.cs" />
     <Compile Include="Assets\_Scripts\UI\Menu\RobotMenuController.cs" />
@@ -91,6 +92,7 @@
     <Compile Include="Assets\_Scripts\Systems\Tutorial\TutorialData.cs" />
     <Compile Include="Assets\_Scripts\Systems\Management\PauseManager.cs" />
     <Compile Include="Assets\_Scripts\UI\Menu\MainMenuCameraEventHandler.cs" />
+    <Compile Include="Assets\_Scripts\Player\JumpScare\JumpscareMechanic.cs" />
     <Compile Include="Assets\_Scripts\Systems\InterAction\MovingObjectInteractable.cs" />
     <Compile Include="Assets\_Scripts\Systems\Audio\AudioExtensions.cs" />
     <Compile Include="Assets\_Scripts\Systems\MonsterSpawner\MonsterSpawnManager.cs" />
@@ -98,7 +100,9 @@
     <Compile Include="Assets\_Scripts\Systems\Audio\Sound\SoundBuilder.cs" />
     <Compile Include="Assets\_Scripts\Systems\Hint System\HintManager.cs" />
     <Compile Include="Assets\_Scripts\UI\Menu\ScaleChangeMenuHandler.cs" />
+    <Compile Include="Assets\_Scripts\Systems\Management\CameraManager.cs" />
     <Compile Include="Assets\_Scripts\Systems\Input\InputSystem.cs" />
+    <Compile Include="Assets\_Scripts\Core\Pattern\ImpersistentSingleton.cs" />
     <Compile Include="Assets\_Scripts\Systems\MonsterSpawner\MonsterCleanup.cs" />
     <Compile Include="Assets\_Scripts\Systems\Tutorial\TutorialManager.cs" />
     <Compile Include="Assets\_Scripts\UI\Menu\VerticalLetterCarousel.cs" />
@@ -108,6 +112,7 @@
     <Compile Include="Assets\_Scripts\Systems\Tutorial\ITutorialStep.cs" />
     <Compile Include="Assets\_Scripts\Systems\Hint System\HintData.cs" />
     <Compile Include="Assets\_Scripts\Systems\Audio\Music\MusicSelector.cs" />
+    <Compile Include="Assets\_Scripts\Systems\MonsterSpawner\MonsterCameraRoot.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
