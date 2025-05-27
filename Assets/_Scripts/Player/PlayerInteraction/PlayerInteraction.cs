@@ -32,7 +32,7 @@ public class PlayerInteraction : MonoBehaviour
                 interactionText.text = interactable.GetDescription();
                 interactionName.text = interactable.GetName();
                 interactionIcon.SetActive(true);
-                
+
                 // ➕ NEW: Make interactionName follow the object in screen space
                 Vector3 screenPosition = playerCamera.WorldToScreenPoint(hit.collider.bounds.center);
 
@@ -45,16 +45,6 @@ public class PlayerInteraction : MonoBehaviour
                 {
                     interactionIcon.GetComponent<RectTransform>().position = actualScreenPos;
                     interactionName.rectTransform.position = new Vector3(actualScreenPos.x, actualScreenPos.y + 70f, 0); // optional offset
-
-                // ➕ NEW: Make interactionName follow the object in screen space
-                Vector3 screenPosition = playerCamera.WorldToScreenPoint(hit.collider.bounds.center);
-
-                // Optional: Check if it's in front of the camera
-                if (screenPosition.z > 0)
-                {
-                    interactionIcon.GetComponent<RectTransform>().position = new Vector3(screenPosition.x, screenPosition.y, 0);
-                    interactionName.rectTransform.position = new Vector3(screenPosition.x, screenPosition.y + 70f, 0); // optional offset
-
                 }
                 else
                 {
@@ -62,10 +52,10 @@ public class PlayerInteraction : MonoBehaviour
                     interactionName.text = "";
                 }
 
-                successfulHit = true;
+                    successfulHit = true;
             }
         }
-
+        
 
 
         if (!successfulHit)
