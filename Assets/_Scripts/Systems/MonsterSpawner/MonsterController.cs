@@ -4,6 +4,7 @@ using Cinemachine;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.Events;
+using AudioSystem;
 
 public class MonsterController : MonoBehaviour
 {
@@ -31,11 +32,17 @@ public class MonsterController : MonoBehaviour
     [Header("Debug")]
     [SerializeField] protected MonsterState currentState = MonsterState.Chase;
 
+    [Header("Sounds")]
+    [SerializeField] SoundData monsterFootstep;
+    [SerializeField] SoundData jumpscareSound;
+    private SoundBuilder soundBuilder;
+    [SerializeField] private float footstepRate = 0.3f;
+    private float footstepTimer = 0f;
+
     protected Vector3 startPosition;
     protected float moveSpeed;
     protected float distanceToPlayer;
     private CinemachineVirtualCamera jumpscareCamera;
-
 
     void Awake()
     {
@@ -44,7 +51,7 @@ public class MonsterController : MonoBehaviour
 
         // Randomize move speed
         moveSpeed = Random.Range(minMoveSpeed, maxMoveSpeed);
-        
+
         // Configure NavMeshAgent
         if (navAgent != null)
         {
@@ -54,11 +61,13 @@ public class MonsterController : MonoBehaviour
 
         // Find player
         playerTransform = GameObject.FindGameObjectWithTag("Player")?.transform;
-        
+
         startPosition = transform.position;
-        
+
         // Start in idle state
         ChangeState(MonsterState.Chase);
+
+        soundBuilder = SoundManager.Instance.CreateSoundBuilder();
     }
 
     void Update()
@@ -67,14 +76,51 @@ public class MonsterController : MonoBehaviour
         {
             distanceToPlayer = Vector3.Distance(transform.position, playerTransform.position);
         }
-        
+
         // Update current state
         UpdateState();
-        
+
         // Check for state transitions
         CheckStateTransitions();
+
+        // Handle footstep sounds
+        HandleFootstepSounds();
     }
-    
+
+    protected virtual void HandleFootstepSounds()
+    {
+        // Play footstep sounds when chasing and actually moving
+        if (currentState == MonsterState.Chase && navAgent != null && monsterFootstep != null)
+        {
+            // Check if the monster is actually moving (velocity check)
+            float currentSpeed = navAgent.velocity.magnitude;
+
+            if (currentSpeed > 0.1f) // Only play footsteps when moving
+            {
+                // Adjust footstep rate based on speed - faster monsters have faster footsteps
+                float speedMultiplier = currentSpeed / moveSpeed; // Normalize speed
+                float currentFootstepRate = footstepRate / Mathf.Max(speedMultiplier, 0.5f); // Prevent too fast footsteps
+
+                footstepTimer -= Time.deltaTime;
+                if (footstepTimer <= 0)
+                {
+                    soundBuilder.Play(monsterFootstep);
+                    footstepTimer = currentFootstepRate;
+                }
+            }
+            else
+            {
+                // Reset timer when not moving
+                footstepTimer = 0f;
+            }
+        }
+        else
+        {
+            // Reset timer when not in chase state
+            footstepTimer = 0f;
+        }
+    }
+
     protected virtual void UpdateState()
     {
         switch (currentState)
@@ -90,7 +136,7 @@ public class MonsterController : MonoBehaviour
                 break;
         }
     }
-    
+
     protected virtual void CheckStateTransitions()
     {
         switch (currentState)
@@ -102,7 +148,7 @@ public class MonsterController : MonoBehaviour
                     ChangeState(MonsterState.Chase);
                 }
                 break;
-                
+
             case MonsterState.Chase:
                 // Transition from Chase to JumpScare when close enough
                 if (distanceToPlayer <= jumpScareRange)
@@ -115,26 +161,26 @@ public class MonsterController : MonoBehaviour
                     ChangeState(MonsterState.Idle);
                 }
                 break;
-                
+
             case MonsterState.JumpScare:
                 // Transition back to Chase after jumpscare (you can modify this logic)
                 // For now, just go back to chase after a brief moment
                 break;
         }
     }
-    
+
     protected virtual void ChangeState(MonsterState newState)
     {
         // Exit current state
         ExitState(currentState);
-        
+
         // Change state
         currentState = newState;
-        
+
         // Enter new state
         EnterState(currentState);
     }
-    
+
     protected virtual void EnterState(MonsterState state)
     {
         switch (state)
@@ -150,7 +196,7 @@ public class MonsterController : MonoBehaviour
                 break;
         }
     }
-    
+
     protected virtual void ExitState(MonsterState state)
     {
         switch (state)
@@ -166,7 +212,7 @@ public class MonsterController : MonoBehaviour
                 break;
         }
     }
-    
+
     // IDLE STATE
     protected virtual void EnterIdleState()
     {
@@ -175,28 +221,28 @@ public class MonsterController : MonoBehaviour
         {
             navAgent.SetDestination(transform.position);
         }
-        
+
         //Debug.Log($"{gameObject.name}: Entered Idle State");
     }
-    
+
     protected virtual void UpdateIdleState()
     {
         // Monster is idle - not moving, just waiting
         // You can add idle behaviors here later (patrol, random movement, etc.)
     }
-    
+
     protected virtual void ExitIdleState()
     {
         //Debug.Log($"{gameObject.name}: Exited Idle State");
     }
-    
+
     // CHASE STATE
     protected virtual void EnterChaseState()
     {
         // Start chasing player
         //Debug.Log($"{gameObject.name}: Entered Chase State");
     }
-    
+
     protected virtual void UpdateChaseState()
     {
         // Chase the player
@@ -205,7 +251,7 @@ public class MonsterController : MonoBehaviour
             navAgent.SetDestination(playerTransform.position);
         }
     }
-    
+
     protected virtual void ExitChaseState()
     {
         //Debug.Log($"{gameObject.name}: Exited Chase State");
@@ -220,56 +266,69 @@ public class MonsterController : MonoBehaviour
             navAgent.SetDestination(transform.position);
         }
 
+        // Play jumpscare sound
+        if (jumpscareSound != null && soundBuilder != null)
+        {
+            soundBuilder.Play(jumpscareSound);
+        }
+
         //Debug.Log($"{gameObject.name}: Entered JumpScare State");
 
         // You can add jumpscare logic here
         InputSystem.Instance.SetInputState(false);
 
         jumpscareCamera.Priority = 20;
+
         // For now, automatically return to chase after 2 seconds
-        //StartCoroutine(JumpScareRoutine());
+        StartCoroutine(JumpScareRoutine());
     }
-    
+
     protected virtual void UpdateJumpScareState()
     {
         // Monster is performing jumpscare
         // Keep looking at player or play animation
     }
-    
+
     protected virtual void ExitJumpScareState()
     {
+        // Re-enable input when exiting jumpscare
+        InputSystem.Instance.SetInputState(true);
+
+        // Reset camera priority
+        jumpscareCamera.Priority = 0;
+
         //Debug.Log($"{gameObject.name}: Exited JumpScare State");
     }
-    
+
     protected virtual IEnumerator JumpScareRoutine()
     {
         yield return new WaitForSeconds(2f); // Jumpscare duration
-        
+
         // Return to chase state after jumpscare
         if (currentState == MonsterState.JumpScare)
         {
             ChangeState(MonsterState.Chase);
         }
     }
-    
+
     // Public methods for external access
     public MonsterState GetCurrentState()
     {
         return currentState;
     }
-    
+
     public void ForceState(MonsterState state)
     {
         ChangeState(state);
     }
-    
+
     // Gizmos for debugging
     void OnDrawGizmosSelected()
     {
         // Draw detection range
         Gizmos.color = Color.yellow;
         Gizmos.DrawWireSphere(transform.position, detectionRange);
-        
+
         // Draw jumpscare range
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, jumpScareRange);
