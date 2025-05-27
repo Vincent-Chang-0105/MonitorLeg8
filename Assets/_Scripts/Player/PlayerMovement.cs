@@ -239,7 +239,7 @@ public class PlayerMovement : MonoBehaviour
             footstepTimer -= Time.deltaTime;
             if (footstepTimer <= 0)
             {
-                soundBuilder.Play(footStep);
+                soundBuilder.WithRandomPitch().Play(footStep);
                 footstepTimer = currentFootstepRate;
             }
         }

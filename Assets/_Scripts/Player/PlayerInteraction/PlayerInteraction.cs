@@ -26,6 +26,16 @@ public class PlayerInteraction : MonoBehaviour
             Interactable interactable = hit.collider.GetComponent<Interactable>();
             newOutline = hit.collider.GetComponent<Outline>();
 
+            if (newOutline == null)
+            {
+                newOutline = hit.collider.GetComponentInParent<Outline>();
+            }
+
+            if (newOutline == null)
+            {
+                newOutline = hit.collider.GetComponentInChildren<Outline>();
+            }
+
             if (interactable != null)
             {
                 HandleInteraction(interactable);
@@ -52,7 +62,7 @@ public class PlayerInteraction : MonoBehaviour
                     interactionName.text = "";
                 }
 
-                    successfulHit = true;
+                successfulHit = true;
             }
         }
         
@@ -111,6 +121,6 @@ public class PlayerInteraction : MonoBehaviour
     {
         interactionText.text = "";
         interactionName.text = "";
-        interactionIcon.SetActive(false);
+        //interactionIcon.SetActive(false);
     }
 }

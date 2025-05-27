@@ -49,7 +49,7 @@ public class MovingObjectInteractable : Interactable
                 isAtOriginalPosition = !isAtOriginalPosition; // Toggle position state
             });
 
-        soundBuilder.Play(interactMoveObject);
+        soundBuilder.WithPosition(objectToMove.transform.position).Play(interactMoveObject);
         
     }
     
@@ -65,7 +65,7 @@ public class MovingObjectInteractable : Interactable
     public override void Interact()
     {
         MoveObject();
-        soundBuilder.Play(interactButtonClick);
+        soundBuilder.WithPosition(gameObject.transform.position).Play(interactButtonClick);
 
         // Trigger hints if component exists
         if (hintTrigger != null)

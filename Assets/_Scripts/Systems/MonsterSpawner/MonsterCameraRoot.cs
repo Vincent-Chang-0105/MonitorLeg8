@@ -2,17 +2,22 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MonsterCameraRoot : MonoBehaviour
+public class MonsterModeTrigger : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField] private bool setToChaseMode = true;
+    
+    private void OnTriggerEnter(Collider other)
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        if (other.CompareTag("Player"))
+        {
+            MonsterController monster = FindObjectOfType<MonsterController>();
+            if (monster != null)
+            {
+                if (setToChaseMode)
+                    monster.SetChaseMode();
+                else
+                    monster.SetPatrolMode();
+            }
+        }
     }
 }

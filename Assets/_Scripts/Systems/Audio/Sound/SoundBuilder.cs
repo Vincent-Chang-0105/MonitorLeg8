@@ -21,7 +21,8 @@ namespace AudioSystem {
         }
 
         public void Play(SoundData soundData) {
-            if (soundData == null) {
+            if (soundData == null)
+            {
                 Debug.LogError("SoundData is null");
                 return;
             }

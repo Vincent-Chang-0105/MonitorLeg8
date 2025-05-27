@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   levelName: Level1
   hints:
-  - hintText: Get Out
+  - hintText: FIND A WAY OUT.
     hintId: 1
     displayDuration: 0
     isCompleted: 0
