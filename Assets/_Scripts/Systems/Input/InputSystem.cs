@@ -36,7 +36,7 @@ public class InputSystem : PersistentSingleton<InputSystem> {
     
     }
 
-    public void SetCursorState(bool locked)
+    private void SetCursorState(bool locked)
     {
         Cursor.lockState = locked ? CursorLockMode.Locked : CursorLockMode.None;
 
@@ -69,6 +69,19 @@ public class InputSystem : PersistentSingleton<InputSystem> {
         if(value.isPressed)
         {
             OpenMenuEvent?.Invoke();
+        }
+    }
+
+    public void SetInputState(bool value)
+    {
+        SetCursorState(value);
+        enableLookInput = value;
+        enableMoveInput = value;
+
+        // Reset look input to zero when disabling input
+        if (!value)
+        {
+            LookEvent?.Invoke(Vector2.zero);
         }
     }
 

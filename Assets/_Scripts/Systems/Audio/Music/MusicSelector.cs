@@ -56,8 +56,6 @@ public class MusicSelector : PersistentSingleton<MusicSelector>
         {
             currentScene = scene.name;
 
-
-            
             // Only play scene music if no event music is active or events don't override
             if (!eventMusicOverridesSceneMusic || string.IsNullOrEmpty(highestPriorityEvent))
             {

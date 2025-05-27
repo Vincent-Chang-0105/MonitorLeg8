@@ -9,14 +9,11 @@ public abstract class MenuEventSystemHandler : MonoBehaviour
     [Header("References")]
     [SerializeField] protected List<Selectable> Selectables = new List<Selectable>();
     
-    protected Dictionary<Selectable, Vector3> _originalScales = new Dictionary<Selectable, Vector3>();
-    
     public virtual void Awake()
     {
         foreach (var selectable in Selectables)
         {
             AddSelectionListeners(selectable);
-            _originalScales.Add(selectable, selectable.transform.localScale);
         }
     }
 

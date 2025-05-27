@@ -6,8 +6,10 @@ public class PlayerInteraction : MonoBehaviour
 {
     [SerializeField] private float interactionDistance;
     [SerializeField] private TextMeshProUGUI interactionText;
+    [SerializeField] private TextMeshProUGUI interactionName;
     [SerializeField] private Camera playerCamera;
     [SerializeField] private GameObject interactionIcon;
+    [SerializeField] private LayerMask interactionLayerMask = -1;
 
     private Outline lastOutlinedObject;
 
@@ -17,7 +19,7 @@ public class PlayerInteraction : MonoBehaviour
         RaycastHit hit;
 
         bool successfulHit = false;
-        Outline newOutline = null; 
+        Outline newOutline = null;
 
         if (Physics.Raycast(ray, out hit, interactionDistance))
         {
@@ -28,9 +30,8 @@ public class PlayerInteraction : MonoBehaviour
             {
                 HandleInteraction(interactable);
                 interactionText.text = interactable.GetDescription();
+                interactionName.text = interactable.GetName();
                 interactionIcon.SetActive(true);
-<<<<<<< Updated upstream
-=======
                 
                 // ➕ NEW: Make interactionName follow the object in screen space
                 Vector3 screenPosition = playerCamera.WorldToScreenPoint(hit.collider.bounds.center);
@@ -44,6 +45,16 @@ public class PlayerInteraction : MonoBehaviour
                 {
                     interactionIcon.GetComponent<RectTransform>().position = actualScreenPos;
                     interactionName.rectTransform.position = new Vector3(actualScreenPos.x, actualScreenPos.y + 70f, 0); // optional offset
+
+                // ➕ NEW: Make interactionName follow the object in screen space
+                Vector3 screenPosition = playerCamera.WorldToScreenPoint(hit.collider.bounds.center);
+
+                // Optional: Check if it's in front of the camera
+                if (screenPosition.z > 0)
+                {
+                    interactionIcon.GetComponent<RectTransform>().position = new Vector3(screenPosition.x, screenPosition.y, 0);
+                    interactionName.rectTransform.position = new Vector3(screenPosition.x, screenPosition.y + 70f, 0); // optional offset
+
                 }
                 else
                 {
@@ -51,14 +62,16 @@ public class PlayerInteraction : MonoBehaviour
                     interactionName.text = "";
                 }
 
->>>>>>> Stashed changes
                 successfulHit = true;
             }
         }
 
+
+
         if (!successfulHit)
         {
             interactionText.text = "";
+            interactionName.text = "";
             interactionIcon.SetActive(false);
         }
 
@@ -102,5 +115,12 @@ public class PlayerInteraction : MonoBehaviour
         }
 
         lastOutlinedObject = newOutline;
+    }
+    
+    private void OnDisable()
+    {
+        interactionText.text = "";
+        interactionName.text = "";
+        interactionIcon.SetActive(false);
     }
 }

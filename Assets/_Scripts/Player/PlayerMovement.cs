@@ -1,5 +1,7 @@
-using UnityEngine;
+using AudioSystem;
 using System.Collections;
+using UnityEngine;
+using static UnityEngine.Rendering.DebugUI;
 
 [RequireComponent(typeof(CharacterController))]
 public class PlayerMovement : MonoBehaviour
@@ -47,6 +49,12 @@ public class PlayerMovement : MonoBehaviour
     public float flashIntensity = 10.0f;
     public float flashDuration = 0.5f;
 
+    [Header("Sounds")]
+    [SerializeField] SoundData footStep;
+    private SoundBuilder soundBuilder;
+    [SerializeField] private float footstepRate = 0.3f;
+    private float footstepTimer = 0f;
+
     // Private variables
     private float _cinemachineTargetPitch;
     private float _speed;
@@ -73,6 +81,8 @@ public class PlayerMovement : MonoBehaviour
         {
             _mainCamera = GameObject.FindGameObjectWithTag("MainCamera");
         }
+
+        soundBuilder = SoundManager.Instance.CreateSoundBuilder();
     }
 
     private void Start()
@@ -199,6 +209,8 @@ public class PlayerMovement : MonoBehaviour
             // Creates curved result rather than linear one
             _speed = Mathf.Lerp(currentHorizontalSpeed, targetSpeed * inputMagnitude, Time.deltaTime * speedChangeRate);
             _speed = Mathf.Round(_speed * 1000f) / 1000f;
+
+
         }
         else
         {
@@ -217,6 +229,25 @@ public class PlayerMovement : MonoBehaviour
 
         // Move the player
         _controller.Move(inputDirection.normalized * (_speed * Time.deltaTime) + new Vector3(0.0f, _verticalVelocity, 0.0f) * Time.deltaTime);
+
+        // Play footstep sound 
+        if (isGrounded && footStep != null && _speed > 0.3f)
+        {
+            // Adjust footstep rate based on speed - faster when sprinting
+            float currentFootstepRate = _sprintInput ? footstepRate * 0.7f : footstepRate; // Sprint is 40% faster
+
+            footstepTimer -= Time.deltaTime;
+            if (footstepTimer <= 0)
+            {
+                soundBuilder.Play(footStep);
+                footstepTimer = currentFootstepRate;
+            }
+        }
+        else
+        {
+            // Reset timer when not moving so footsteps start immediately when movement begins
+            footstepTimer = 0f;
+        }
     }
 
     private void JumpAndGravity()
