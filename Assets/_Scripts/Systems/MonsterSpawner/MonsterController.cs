@@ -41,6 +41,7 @@ public class MonsterController : MonoBehaviour
     {
         navAgent = GetComponent<NavMeshAgent>();
         jumpscareCamera = GetComponentInChildren<CinemachineVirtualCamera>();
+        animator = GetComponentInChildren<Animator>();
 
         // Randomize move speed
         moveSpeed = Random.Range(minMoveSpeed, maxMoveSpeed);
@@ -226,8 +227,9 @@ public class MonsterController : MonoBehaviour
         InputSystem.Instance.SetInputState(false);
 
         jumpscareCamera.Priority = 20;
+        animator.SetTrigger("JumpScare");
         // For now, automatically return to chase after 2 seconds
-        //StartCoroutine(JumpScareRoutine());
+        StartCoroutine(JumpScareRoutine());
     }
     
     protected virtual void UpdateJumpScareState()
@@ -243,16 +245,12 @@ public class MonsterController : MonoBehaviour
     
     protected virtual IEnumerator JumpScareRoutine()
     {
-        yield return new WaitForSeconds(2f); // Jumpscare duration
+        yield return new WaitForSeconds(1.5f); // Jumpscare duration
         
-        // Return to chase state after jumpscare
-        if (currentState == MonsterState.JumpScare)
-        {
-            ChangeState(MonsterState.Chase);
-        }
+        UIEvents.OpenDeathScreen(); // Trigger death screen
     }
     
-    // Public methods for external access
+    // Public methods for external acc ess
     public MonsterState GetCurrentState()
     {
         return currentState;

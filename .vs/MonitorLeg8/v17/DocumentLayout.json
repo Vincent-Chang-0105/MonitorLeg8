@@ -1,0 +1,106 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "E:\\github\\MonitorLeg8\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{4D58ADCE-1E2C-BC95-1270-4855F6E340C9}|Assembly-CSharp.csproj|E:\\github\\MonitorLeg8\\assets\\_scripts\\systems\\monsterspawner\\monstercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4D58ADCE-1E2C-BC95-1270-4855F6E340C9}|Assembly-CSharp.csproj|solutionrelative:assets\\_scripts\\systems\\monsterspawner\\monstercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4D58ADCE-1E2C-BC95-1270-4855F6E340C9}|Assembly-CSharp.csproj|E:\\github\\MonitorLeg8\\assets\\_scripts\\player\\playerinteraction\\playerinteraction.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4D58ADCE-1E2C-BC95-1270-4855F6E340C9}|Assembly-CSharp.csproj|solutionrelative:assets\\_scripts\\player\\playerinteraction\\playerinteraction.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4D58ADCE-1E2C-BC95-1270-4855F6E340C9}|Assembly-CSharp.csproj|E:\\github\\MonitorLeg8\\assets\\_scripts\\systems\\hint system\\hintevents.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4D58ADCE-1E2C-BC95-1270-4855F6E340C9}|Assembly-CSharp.csproj|solutionrelative:assets\\_scripts\\systems\\hint system\\hintevents.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4D58ADCE-1E2C-BC95-1270-4855F6E340C9}|Assembly-CSharp.csproj|e:\\github\\monitorleg8\\assets\\_scripts\\ui\\menu\\deathscreen.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4D58ADCE-1E2C-BC95-1270-4855F6E340C9}|Assembly-CSharp.csproj|solutionrelative:assets\\_scripts\\ui\\menu\\deathscreen.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4D58ADCE-1E2C-BC95-1270-4855F6E340C9}|Assembly-CSharp.csproj|E:\\github\\MonitorLeg8\\assets\\_scripts\\ui\\menu\\uievents.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4D58ADCE-1E2C-BC95-1270-4855F6E340C9}|Assembly-CSharp.csproj|solutionrelative:assets\\_scripts\\ui\\menu\\uievents.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 4,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "UIEvents.cs",
+              "DocumentMoniker": "E:\\github\\MonitorLeg8\\Assets\\_Scripts\\UI\\Menu\\UIEvents.cs",
+              "RelativeDocumentMoniker": "Assets\\_Scripts\\UI\\Menu\\UIEvents.cs",
+              "ToolTip": "E:\\github\\MonitorLeg8\\Assets\\_Scripts\\UI\\Menu\\UIEvents.cs",
+              "RelativeToolTip": "Assets\\_Scripts\\UI\\Menu\\UIEvents.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAoAAAAdAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-27T02:58:56.883Z",
+              "IsPinned": true,
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "DeathScreen.cs",
+              "DocumentMoniker": "E:\\github\\MonitorLeg8\\Assets\\_Scripts\\UI\\Menu\\DeathScreen.cs",
+              "RelativeDocumentMoniker": "Assets\\_Scripts\\UI\\Menu\\DeathScreen.cs",
+              "ToolTip": "E:\\github\\MonitorLeg8\\Assets\\_Scripts\\UI\\Menu\\DeathScreen.cs",
+              "RelativeToolTip": "Assets\\_Scripts\\UI\\Menu\\DeathScreen.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAB0AAAApAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-27T03:38:52.85Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "HintEvents.cs",
+              "DocumentMoniker": "E:\\github\\MonitorLeg8\\Assets\\_Scripts\\Systems\\Hint System\\HintEvents.cs",
+              "RelativeDocumentMoniker": "Assets\\_Scripts\\Systems\\Hint System\\HintEvents.cs",
+              "ToolTip": "E:\\github\\MonitorLeg8\\Assets\\_Scripts\\Systems\\Hint System\\HintEvents.cs",
+              "RelativeToolTip": "Assets\\_Scripts\\Systems\\Hint System\\HintEvents.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAcAAAAhAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-27T03:00:35.605Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "PlayerInteraction.cs",
+              "DocumentMoniker": "E:\\github\\MonitorLeg8\\Assets\\_Scripts\\Player\\PlayerInteraction\\PlayerInteraction.cs",
+              "RelativeDocumentMoniker": "Assets\\_Scripts\\Player\\PlayerInteraction\\PlayerInteraction.cs",
+              "ToolTip": "E:\\github\\MonitorLeg8\\Assets\\_Scripts\\Player\\PlayerInteraction\\PlayerInteraction.cs",
+              "RelativeToolTip": "Assets\\_Scripts\\Player\\PlayerInteraction\\PlayerInteraction.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAkAAAAxAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-27T02:36:34.975Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "MonsterController.cs",
+              "DocumentMoniker": "E:\\github\\MonitorLeg8\\Assets\\_Scripts\\Systems\\MonsterSpawner\\MonsterController.cs",
+              "RelativeDocumentMoniker": "Assets\\_Scripts\\Systems\\MonsterSpawner\\MonsterController.cs",
+              "ToolTip": "E:\\github\\MonitorLeg8\\Assets\\_Scripts\\Systems\\MonsterSpawner\\MonsterController.cs",
+              "RelativeToolTip": "Assets\\_Scripts\\Systems\\MonsterSpawner\\MonsterController.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA0AAAA6AAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-27T01:29:14.809Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

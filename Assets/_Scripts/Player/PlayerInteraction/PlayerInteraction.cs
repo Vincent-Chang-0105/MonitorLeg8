@@ -107,6 +107,6 @@ public class PlayerInteraction : MonoBehaviour
     {
         interactionText.text = "";
         interactionName.text = "";
-        interactionIcon.SetActive(false);
+        //interactionIcon.SetActive(false);
     }
 }
