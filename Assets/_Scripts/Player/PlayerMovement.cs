@@ -231,7 +231,7 @@ public class PlayerMovement : MonoBehaviour
         _controller.Move(inputDirection.normalized * (_speed * Time.deltaTime) + new Vector3(0.0f, _verticalVelocity, 0.0f) * Time.deltaTime);
 
         // Play footstep sound 
-        if (isGrounded && footStep != null)
+        if (isGrounded && footStep != null && _speed > 0.1f)
         { 
             float actualHorizontalSpeed = new Vector3(_controller.velocity.x, 0.0f, _controller.velocity.z).magnitude;
 
