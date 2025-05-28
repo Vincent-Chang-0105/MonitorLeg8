@@ -231,16 +231,26 @@ public class PlayerMovement : MonoBehaviour
         _controller.Move(inputDirection.normalized * (_speed * Time.deltaTime) + new Vector3(0.0f, _verticalVelocity, 0.0f) * Time.deltaTime);
 
         // Play footstep sound 
-        if (isGrounded && footStep != null && _speed > 0.3f)
-        {
-            // Adjust footstep rate based on speed - faster when sprinting
-            float currentFootstepRate = _sprintInput ? footstepRate * 0.7f : footstepRate; // Sprint is 40% faster
+        if (isGrounded && footStep != null)
+        { 
+            float actualHorizontalSpeed = new Vector3(_controller.velocity.x, 0.0f, _controller.velocity.z).magnitude;
 
-            footstepTimer -= Time.deltaTime;
-            if (footstepTimer <= 0)
+            if (actualHorizontalSpeed > 0.3f)
             {
-                soundBuilder.WithRandomPitch().Play(footStep);
-                footstepTimer = currentFootstepRate;
+                // Adjust footstep rate based on actual speed - faster when sprinting
+                float currentFootstepRate = _sprintInput ? footstepRate * 0.7f : footstepRate;
+
+                footstepTimer -= Time.deltaTime;
+                if (footstepTimer <= 0)
+                {
+                    soundBuilder.WithRandomPitch().Play(footStep);
+                    footstepTimer = currentFootstepRate;
+                }
+            }
+            else
+            {
+                // Reset timer when not moving so footsteps start immediately when movement begins
+                footstepTimer = 0f;
             }
         }
         else
