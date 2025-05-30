@@ -12,6 +12,9 @@ public class PickableInteractable : Interactable
     [SerializeField] private int itemID = 0; // Unique identifier for the item
     [SerializeField] private int quantity = 1; // How many of this item to give
 
+    [Header("Dialogue")]
+    [SerializeField] private Dialogue dialogue;
+
     [Header("Hint")]
     [SerializeField] private int hintIdToComplete;
     [SerializeField] private int hintIdToTrigger;
