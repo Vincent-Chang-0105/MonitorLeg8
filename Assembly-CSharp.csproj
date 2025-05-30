@@ -65,6 +65,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\_Scripts\Core\Utilities\Helpers.cs" />
+    <Compile Include="Assets\_Scripts\Systems\GameCore\VideoManager.cs" />
     <Compile Include="Assets\_Scripts\Systems\InterAction\PickableInteractable.cs" />
     <Compile Include="Assets\_Scripts\UI\Menu\UIEvents.cs" />
     <Compile Include="Assets\_Scripts\Core\Utilities\FPSCounter.cs" />
