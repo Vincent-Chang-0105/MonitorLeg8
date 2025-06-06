@@ -92,7 +92,7 @@ public class VideoManager : Singleton<VideoManager>
 
     private void Start()
     {
-        soundBuilder = SoundManager.Instance?.CreateSoundBuilder();
+        //soundBuilder = SoundManager.Instance?.CreateSoundBuilder();
         
         // Additional validation after Start
         if (debugMode)
