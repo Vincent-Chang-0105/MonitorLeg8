@@ -160,9 +160,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   interactionType: 0
-  objName: ID Scanner
-  lockedDescription: Locked
-  unlockedDescription: '[E] Open Door'
+  objectName: 
+  objectDescription: 
+  hintIdToComplete: 0
+  hintIdToTrigger: 0
+  dialogue:
+    dialogueLines:
+    - character:
+        name: 
+      line: I need a key card...
   requiredKeyID: 1
   consumeKeyOnUse: 0
   doorToMove: {fileID: 0}

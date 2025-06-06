@@ -7,13 +7,6 @@ using AudioSystem;
 public class RotatingObjectInteractable : Interactable
 {
     [SerializeField] private Transform objectToRotate;
-    [SerializeField] private string objName;
-    [SerializeField] private string objDescription;
-
-    [Header("Hint")]
-    [SerializeField] private int hintIdToComplete;
-    [SerializeField] private int hintIdToTrigger;
-    private HintTrigger hintTrigger;
 
     [Header("Rotation Settings")]
     [SerializeField] private Vector3 rotationAxis = Vector3.up; // Default rotation around Y-axis
@@ -31,60 +24,6 @@ public class RotatingObjectInteractable : Interactable
     private Vector3 targetRotation;
     private bool isRotating = false;
     private bool isAtOriginalRotation = true;
-
-    private void RotateObject()
-    {
-        if (isRotating) return; // Prevent multiple interactions while rotating
-
-        isRotating = true;
-
-        // Determine whether to rotate forward or back
-        Vector3 destination = isAtOriginalRotation ? targetRotation : originalRotation;
-
-        // Create the rotation tween
-        if (useLocalRotation)
-        {
-            objectToRotate.DOLocalRotate(destination, rotationDuration)
-                .SetEase(easeType)
-                .OnComplete(() =>
-                {
-                    isRotating = false;
-                    isAtOriginalRotation = !isAtOriginalRotation; // Toggle rotation state
-                });
-        }
-        else
-        {
-            objectToRotate.DORotate(destination, rotationDuration)
-                .SetEase(easeType)
-                .OnComplete(() =>
-                {
-                    isRotating = false;
-                    isAtOriginalRotation = !isAtOriginalRotation; // Toggle rotation state
-                });
-        }
-
-        soundBuilder.Play(interactRotateObject);
-    }
-    
-    public override string GetDescription()
-    {
-        return objDescription;
-    }
-    
-    public override string GetName()
-    {
-        return objName;
-    }
-
-    public override void Interact()
-    {
-        RotateObject();
-        soundBuilder.Play(interactButtonClick);
-
-        // Trigger hints if component exists
-        if (hintTrigger != null)
-            hintTrigger.OnInteract();
-    }
 
     // Start is called before the first frame update
     void Start()
@@ -108,49 +47,36 @@ public class RotatingObjectInteractable : Interactable
         soundBuilder = SoundManager.Instance.CreateSoundBuilder();
     }
 
-    // Optional: You can visualize the rotation path in the editor
-    private void OnDrawGizmosSelected()
+    private void RotateObject()
     {
-        if (objectToRotate == null) return;
-        
-        // Draw rotation axis
-        Gizmos.color = Color.red;
-        Vector3 axisStart = objectToRotate.position - (rotationAxis.normalized * 0.5f);
-        Vector3 axisEnd = objectToRotate.position + (rotationAxis.normalized * 0.5f);
-        Gizmos.DrawLine(axisStart, axisEnd);
-        
-        // Draw rotation arc visualization
-        Gizmos.color = Color.yellow;
-        Vector3 perpendicular = Vector3.Cross(rotationAxis.normalized, Vector3.forward);
-        if (perpendicular.magnitude < 0.1f)
-            perpendicular = Vector3.Cross(rotationAxis.normalized, Vector3.right);
-        
-        perpendicular = perpendicular.normalized * 0.3f;
-        
-        // Draw start and end points of rotation
-        Vector3 startPoint = objectToRotate.position + perpendicular;
-        Quaternion rotation = Quaternion.AngleAxis(rotationAngle, rotationAxis.normalized);
-        Vector3 endPoint = objectToRotate.position + (rotation * perpendicular);
-        
-        Gizmos.DrawSphere(startPoint, 0.05f);
-        Gizmos.color = Color.green;
-        Gizmos.DrawSphere(endPoint, 0.05f);
-        
-        // Draw arc
-        Gizmos.color = Color.cyan;
-        int segments = 20;
-        for (int i = 0; i < segments; i++)
+        if (isRotating) return; // Prevent multiple interactions while rotating
+
+        isRotating = true;
+
+        // Determine whether to rotate forward or back
+        Vector3 destination = isAtOriginalRotation ? targetRotation : originalRotation;
+
+        // Create the rotation tween
+        if (useLocalRotation)
         {
-            float angle1 = (rotationAngle / segments) * i;
-            float angle2 = (rotationAngle / segments) * (i + 1);
-            
-            Quaternion rot1 = Quaternion.AngleAxis(angle1, rotationAxis.normalized);
-            Quaternion rot2 = Quaternion.AngleAxis(angle2, rotationAxis.normalized);
-            
-            Vector3 point1 = objectToRotate.position + (rot1 * perpendicular);
-            Vector3 point2 = objectToRotate.position + (rot2 * perpendicular);
-            
-            Gizmos.DrawLine(point1, point2);
+            objectToRotate.DOLocalRotate(destination, rotationDuration)
+                .SetEase(easeType)
+                .OnComplete(() =>
+                {
+                    isRotating = false;
+                    isAtOriginalRotation = !isAtOriginalRotation; // Toggle rotation state
+                });
         }
+
+        soundBuilder.Play(interactRotateObject);
     }
+    
+    public override void Interact()
+    {
+        RotateObject();
+        soundBuilder.Play(interactButtonClick);
+
+        TriggerHints();
+    }
+
 }

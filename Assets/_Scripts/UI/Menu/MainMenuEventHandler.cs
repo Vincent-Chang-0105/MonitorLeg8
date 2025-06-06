@@ -4,6 +4,7 @@ using AudioSystem;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using UnityEngine.Video;
 
 public class MainMenuEventHandler : ColorChangeMenuHandler
 {
@@ -17,6 +18,12 @@ public class MainMenuEventHandler : ColorChangeMenuHandler
     [SerializeField] SoundData soundDataButtonHover;
     [SerializeField] SoundData soundDataButtonClick;    
     private SoundBuilder soundBuilder;
+
+    [Header("Intro Video")]
+    [SerializeField] private VideoClip introVideo;
+    [SerializeField] private bool skipVideoOnReplay = true;
+
+    private bool hasPlayedIntro = false;
 
     [System.Serializable]
     public class MenuCameraPreset
@@ -84,9 +91,20 @@ public class MainMenuEventHandler : ColorChangeMenuHandler
     // Add game functionality methods
     public void StartGame()
     {
-        SceneManager.LoadScene("Level1");
         Debug.Log("Starting new game...");
-        // Add your game start logic here
+        
+        // Check if we should play the intro video
+        if (introVideo != null && (!hasPlayedIntro || !skipVideoOnReplay))
+        {
+            // Play video then load scene
+            VideoManager.Instance.PlayIntroVideoThenLoadScene(introVideo, "Level1");
+            hasPlayedIntro = true;
+        }
+        else
+        {
+            // Skip video and load scene directly
+            GameManager.Instance.LoadScene("Level1");
+        }
     }
     
     public void ContinueGame()

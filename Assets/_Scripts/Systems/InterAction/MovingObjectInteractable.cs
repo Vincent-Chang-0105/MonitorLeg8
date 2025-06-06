@@ -7,13 +7,6 @@ using AudioSystem;
 public class MovingObjectInteractable : Interactable
 {
     [SerializeField] private Transform objectToMove;
-    [SerializeField] private string objName;
-    [SerializeField] private string objDescription;
-
-    [Header("Hint")]
-    [SerializeField] private int hintIdToComplete;
-    [SerializeField] private int hintIdToTrigger;
-    private HintTrigger hintTrigger;
 
     [Header("Movement Settings")]
     [SerializeField] private Vector3 moveDirection = Vector3.forward; // Default direction is forward
@@ -52,26 +45,12 @@ public class MovingObjectInteractable : Interactable
         soundBuilder.WithPosition(objectToMove.transform.position).Play(interactMoveObject);
         
     }
-    
-    public override string GetDescription()
-    {
-        return objDescription;
-    }
-    public override string GetName()
-    {
-        return objName;
-    }
 
     public override void Interact()
     {
         MoveObject();
         soundBuilder.WithPosition(gameObject.transform.position).Play(interactButtonClick);
-
-        // Trigger hints if component exists
-        if (hintTrigger != null)
-            hintTrigger.OnInteract();
-
-        
+        TriggerHints();
     }
 
     // Start is called before the first frame update
@@ -92,19 +71,4 @@ public class MovingObjectInteractable : Interactable
 
         soundBuilder = SoundManager.Instance.CreateSoundBuilder();
     }
-
-    // Optional: You can visualize the movement path in the editor
-    private void OnDrawGizmosSelected()
-    {
-        if (objectToMove == null) return;
-        
-        Vector3 targetPos = objectToMove.position + moveDirection.normalized * moveDistance;
-        
-        Gizmos.color = Color.blue;
-        Gizmos.DrawLine(objectToMove.position, targetPos);
-        Gizmos.color = Color.green;
-        Gizmos.DrawSphere(targetPos, 0.1f);
-    }
-
-
 }

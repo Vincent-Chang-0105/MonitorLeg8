@@ -29,11 +29,11 @@ public class HintManager : PersistentSingleton<HintManager>
 
     void Start()
     {
-        LoadLevelHints(currentLevelHints);
-        if (currentLevelHints != null && currentLevelHints.autoStartFirstHint)
-        {
-            ShowNextHint();
-        }
+        //LoadLevelHints(currentLevelHints);
+        // if (currentLevelHints != null && currentLevelHints.autoStartFirstHint)
+        // {
+        //     ShowNextHint();
+        // }
     }
 
     // Update is called once per frame
@@ -52,6 +52,7 @@ public class HintManager : PersistentSingleton<HintManager>
         HintEvents.OnTriggerHint += TriggerHint;
         HintEvents.OnCompleteHint += CompleteHint;
         HintEvents.OnShowNextHint += ShowNextHint;
+        HintEvents.OnLoadlevels += LoadLevelHints;
     }
 
     void UnsubscribeFromEvents()
@@ -59,9 +60,11 @@ public class HintManager : PersistentSingleton<HintManager>
         HintEvents.OnTriggerHint -= TriggerHint;
         HintEvents.OnCompleteHint -= CompleteHint;
         HintEvents.OnShowNextHint -= ShowNextHint;
+        HintEvents.OnLoadlevels -= LoadLevelHints;
+
     }
     
-        void SetupUI()
+    void SetupUI()
     {
         if (hintPanel != null)
         {
@@ -101,7 +104,7 @@ public class HintManager : PersistentSingleton<HintManager>
     public void ShowNextHint()
     {
         if (currentLevelHints == null) return;
-        
+
         Hint nextHint = currentLevelHints.GetNextIncompleteHint();
         if (nextHint != null)
         {
@@ -137,6 +140,12 @@ public class HintManager : PersistentSingleton<HintManager>
             }
         }
     }
+
+    private IEnumerator ShowNextHintAfterDelay(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        ShowNextHint();
+    }
     
     public void HideCurrentHint()
     {
@@ -145,7 +154,7 @@ public class HintManager : PersistentSingleton<HintManager>
             StopCoroutine(hideHintCoroutine);
             hideHintCoroutine = null;
         }
-        
+
         StartCoroutine(HideHintCoroutine());
     }
     
@@ -180,31 +189,34 @@ public class HintManager : PersistentSingleton<HintManager>
         
         canvasGroup.alpha = to;
     }
-    
+
     public void CompleteHint(int hintId)
     {
-        if (currentLevelHints == null) 
+        if (currentLevelHints == null)
         {
             Debug.LogError("No current level hints!");
             return;
         }
-        
+
         Hint hint = currentLevelHints.GetHint(hintId);
         if (hint != null)
         {
             hint.isCompleted = true;
-            
+
             // If this is the currently displayed hint, hide it
             if (currentHint == hint)
             {
                 HideCurrentHint();
                 currentHint = null;
+
+                StartCoroutine(ShowNextHintAfterDelay(fadeOutDuration + 0.1f));
             }
         }
         else
         {
             Debug.LogError($"Hint not found: {hintId}");
         }
+
     }
     
     // Debug methods

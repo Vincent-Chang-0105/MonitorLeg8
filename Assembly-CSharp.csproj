@@ -65,6 +65,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\_Scripts\Core\Utilities\Helpers.cs" />
+    <Compile Include="Assets\_Scripts\Systems\GameCore\VideoManager.cs" />
     <Compile Include="Assets\_Scripts\Systems\InterAction\PickableInteractable.cs" />
     <Compile Include="Assets\_Scripts\UI\Menu\UIEvents.cs" />
     <Compile Include="Assets\_Scripts\Core\Utilities\FPSCounter.cs" />
@@ -82,6 +83,7 @@
     <Compile Include="Assets\QuickOutline\Scripts\Outline.cs" />
     <Compile Include="Assets\_Scripts\Systems\Hint System\HintEvents.cs" />
     <Compile Include="Assets\_Scripts\UI\Menu\MenuEventSystemHandler.cs" />
+    <Compile Include="Assets\_Scripts\Systems\InterAction\DialogueInteractable.cs" />
     <Compile Include="Assets\_Scripts\Systems\MonsterSpawner\MonsterController.cs" />
     <Compile Include="Assets\_Scripts\Core\Pattern\PersistentSingleton.cs" />
     <Compile Include="Assets\_Scripts\Systems\Scriptables\MusicConfiiguration.cs" />
@@ -89,6 +91,8 @@
     <Compile Include="Assets\_Scripts\Player\PlayerInteraction\Interactable.cs" />
     <Compile Include="Assets\_Scripts\Systems\GameCore\LeveManager.cs" />
     <Compile Include="Assets\_Scripts\Systems\MonsterSpawner\MonsterActivationManager.cs" />
+    <Compile Include="Assets\_Scripts\Systems\Dialogue\DialogueTrigger.cs" />
+    <Compile Include="Assets\_Scripts\Systems\Dialogue\DialogueManager.cs" />
     <Compile Include="Assets\_Scripts\Systems\Audio\Sound\SoundData.cs" />
     <Compile Include="Assets\_Scripts\Player\PlayerInteraction\PlayerInteraction.cs" />
     <Compile Include="Assets\_Scripts\Systems\Audio\Sound\SoundEmitter.cs" />
@@ -100,9 +104,11 @@
     <Compile Include="Assets\IgniteCoders\Simple Water Shader\Resources\WaterReflection.cs" />
     <Compile Include="Assets\_Scripts\Player\JumpScare\JumpscareMechanic.cs" />
     <Compile Include="Assets\_Scripts\Systems\InterAction\MovingObjectInteractable.cs" />
+    <Compile Include="Assets\_Scripts\Systems\Scriptables\SceneConfiguration.cs" />
     <Compile Include="Assets\_Scripts\Systems\Audio\AudioExtensions.cs" />
     <Compile Include="Assets\_Scripts\Systems\MonsterSpawner\MonsterSpawnManager.cs" />
     <Compile Include="Assets\_Scripts\UI\Menu\MainMenuEventHandler.cs" />
+    <Compile Include="Assets\_Scripts\Systems\MonsterSpawner\MonsterModeTrigger.cs" />
     <Compile Include="Assets\_Scripts\Systems\Audio\Sound\SoundBuilder.cs" />
     <Compile Include="Assets\_Scripts\Systems\Hint System\HintManager.cs" />
     <Compile Include="Assets\_Scripts\UI\Menu\ScaleChangeMenuHandler.cs" />
@@ -122,7 +128,6 @@
     <Compile Include="Assets\_Scripts\Systems\Audio\Music\MusicSelector.cs" />
     <Compile Include="Assets\_Scripts\Systems\MonsterSpawner\MonsterActivationTrigger.cs" />
     <Compile Include="Assets\_Scripts\UI\Menu\DeathScreen.cs" />
-    <Compile Include="Assets\_Scripts\Systems\MonsterSpawner\MonsterCameraRoot.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
