@@ -11,6 +11,7 @@ public class SceneConfiguration : ScriptableObject
         public string sceneName;
         public AudioClip musicClip;
         public bool hideCursorAtStart;
+        public HintData hintData;
     }
 
     [Header("Scene Settings")]

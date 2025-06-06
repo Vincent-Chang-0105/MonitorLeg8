@@ -100,6 +100,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 3453458515313227766}
+    - targetCorrespondingSourceObject: {fileID: -5794188704588266463, guid: 0ecfda2810478fb4cb0aa5b0cab7eeb4,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 839873819830589900}
     - targetCorrespondingSourceObject: {fileID: -516098083770646512, guid: 0ecfda2810478fb4cb0aa5b0cab7eeb4,
         type: 3}
       insertIndex: -1
@@ -270,15 +274,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   interactionType: 0
-  objName: Table
-  objDescription: '[E] Interact'
+  objectName: Table
+  objectDescription: Interact
   dialogue:
     dialogueLines:
     - character:
-        name: Plume
+        name: 
       line: "I\u2019m never touching one of these ever again."
-  hintIdToComplete: 0
-  hintIdToTrigger: 0
   interactButtonClick:
     clip: {fileID: 0}
     mixerGroup: {fileID: 0}
@@ -302,3 +304,21 @@ MonoBehaviour:
     ignoreListenerVolume: 0
     ignoreListenerPause: 0
     rolloffMode: 0
+--- !u!114 &839873819830589900
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8205663296020768553}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  outlineMode: 1
+  outlineColor: {r: 1, g: 1, b: 1, a: 1}
+  outlineWidth: 2
+  precomputeOutline: 0
+  bakeKeys: []
+  bakeValues: []

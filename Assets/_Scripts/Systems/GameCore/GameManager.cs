@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using AudioSystem;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.Events;
 
 public class GameManager : PersistentSingleton<GameManager>
 {
@@ -11,8 +12,8 @@ public class GameManager : PersistentSingleton<GameManager>
     [SerializeField] private SceneConfiguration sceneConfig;
 
     [Header("Events")]
-    public UnityEngine.Events.UnityEvent OnLevelLoadStart;
-    public UnityEngine.Events.UnityEvent OnLevelLoadComplete;
+    public UnityEvent OnLevelLoadStart;
+    public UnityEvent OnLevelLoadComplete;
 
     private SceneConfiguration.SceneSettings currentSceneSettings;
     protected override void Awake()
@@ -88,7 +89,6 @@ public class GameManager : PersistentSingleton<GameManager>
 
     private void ApplyPreLoadSettings(SceneConfiguration.SceneSettings settings)
     {
-        if (InputSystem.Instance != null) InputSystem.Instance.SetInputState(settings.hideCursorAtStart);
     }
 
     private void ApplyPostLoadSettings(SceneConfiguration.SceneSettings settings)
@@ -98,6 +98,10 @@ public class GameManager : PersistentSingleton<GameManager>
         {
             MusicManager.Instance.Play(settings.musicClip);
         }
+
+        if (InputSystem.Instance != null) InputSystem.Instance.SetInputState(settings.hideCursorAtStart);
+
+        if (settings.hintData != null) HintEvents.LoadLevels(settings.hintData);
     }
 
     // Utility methods for scene navigation

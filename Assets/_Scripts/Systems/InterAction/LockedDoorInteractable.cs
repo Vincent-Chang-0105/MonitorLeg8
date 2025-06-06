@@ -3,11 +3,10 @@ using DG.Tweening;
 using AudioSystem;
 
 public class LockedDoorInteractable : Interactable
-{
-    [SerializeField] private string objName;
-    [SerializeField] private string lockedDescription;
-    [SerializeField] private string unlockedDescription;
-    
+{   
+    [Header("Dialogue")]
+    [SerializeField] private Dialogue dialogue;
+
     [Header("Key Requirements")]
     [SerializeField] private int requiredKeyID = 1;
     [SerializeField] private bool consumeKeyOnUse = false; // Should the key be removed after use?
@@ -31,50 +30,21 @@ public class LockedDoorInteractable : Interactable
     private Vector3 originalPosition;
     private Vector3 targetPosition;
     
-    public override string GetDescription()
-    {
-        if (isUnlocked)
-            return unlockedDescription;
-        else
-            return lockedDescription;
-    }
-    
-    public override string GetName()
-    {
-        return objName;
-    }
-    
     public override void Interact()
     {
-        soundBuilder.Play(interactButtonClick);
-        
-        if (!isUnlocked)
+        // Check if player has the required key
+        if (Inventory.Instance.HasItem(requiredKeyID))
         {
-            // Check if player has the required key
-            if (Inventory.Instance.HasItem(requiredKeyID))
-            {
-                UnlockDoor();
-            }
-            else
-            {
-                // Door is locked and player doesn't have key
-                soundBuilder.Play(doorLockedSound);
-                Debug.Log($"Door is locked! You need key ID: {requiredKeyID}");
-            }
+            soundBuilder.WithPosition(gameObject.transform.position).Play(interactButtonClick);
+            ToggleDoor();
         }
         else
         {
-            // Door is unlocked, open/close it
-            ToggleDoor();
+            soundBuilder.WithPosition(gameObject.transform.position).PlaySequence(interactButtonClick, doorLockedSound);
+            DialogueManager.Instance.StartDialogue(dialogue);
+            TriggerHints();
+            Debug.Log($"Door is locked! You need key ID: {requiredKeyID}");
         }
-    }
-    
-    private void UnlockDoor()
-    {
-        isUnlocked = true;
-        
-        // Automatically open the door after unlocking
-        ToggleDoor();
     }
 
     private void ToggleDoor()
@@ -83,7 +53,7 @@ public class LockedDoorInteractable : Interactable
 
         isMoving = true;
 
-        Vector3 destination = isOpen ? targetPosition : originalPosition;
+        Vector3 destination = isOpen ? originalPosition : targetPosition;
 
         doorToMove.DOMove(destination, moveDuration)
             .SetEase(easeType)

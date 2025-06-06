@@ -146,15 +146,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   interactionType: 0
-  objName: Bed
-  objDescription: '[E] Interact'
+  objectName: Bed
+  objectDescription: Interact
+  hintIdToComplete: 0
+  hintIdToTrigger: 0
   dialogue:
     dialogueLines:
     - character:
-        name: Plume
+        name: 
       line: looks comfy, but not right now.
-  hintIdToComplete: 0
-  hintIdToTrigger: 0
   interactButtonClick:
     clip: {fileID: 0}
     mixerGroup: {fileID: 0}

@@ -5,30 +5,12 @@ using AudioSystem;
 
 public class DialogueInteractable : Interactable
 {
-    [SerializeField] private string objName;
-    [SerializeField] private string objDescription;
-    
     [Header("Dialogue")]
     [SerializeField] private Dialogue dialogue;
-
-    [Header("Hint")]
-    [SerializeField] private int hintIdToComplete;
-    [SerializeField] private int hintIdToTrigger;
-    private HintTrigger hintTrigger;
 
     [Header("Sounds")]
     [SerializeField] SoundData interactButtonClick;
     private SoundBuilder soundBuilder;
-
-    public override string GetDescription()
-    {
-        return objDescription;
-    }
-
-    public override string GetName()
-    {
-        return objName;
-    }
 
     public override void Interact()
     {
@@ -45,9 +27,7 @@ public class DialogueInteractable : Interactable
             Debug.LogWarning("No dialogue assigned or dialogue is empty in " + gameObject.name);
         }
 
-        // Trigger hints if component exists
-        if (hintTrigger != null)
-            hintTrigger.OnInteract();
+        TriggerHints();
     }
 
     void Start()
@@ -55,4 +35,5 @@ public class DialogueInteractable : Interactable
         hintTrigger = GetComponent<HintTrigger>();
         soundBuilder = SoundManager.Instance.CreateSoundBuilder();
     }
+    
 }

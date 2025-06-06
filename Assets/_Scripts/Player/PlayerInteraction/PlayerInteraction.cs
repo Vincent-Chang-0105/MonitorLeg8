@@ -39,7 +39,7 @@ public class PlayerInteraction : MonoBehaviour
             if (interactable != null)
             {
                 HandleInteraction(interactable);
-                interactionText.text = interactable.GetDescription();
+                interactionText.text = "[E] " + interactable.GetDescription();
                 interactionName.text = interactable.GetName();
                 interactionIcon.SetActive(true);
 

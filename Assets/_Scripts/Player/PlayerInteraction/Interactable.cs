@@ -8,8 +8,26 @@ public abstract class Interactable : MonoBehaviour
         Minigame
     }
 
+    [Header("Interaction Settings")]
     public InteractionType interactionType;
-    public abstract string GetDescription();
-    public abstract string GetName();
+    
+    [Header("Base Settings")]
+    [SerializeField] protected string objectName;
+    [SerializeField] protected string objectDescription;
+    
+    protected HintTrigger hintTrigger;
+
+    protected void  Awake()
+    {
+        hintTrigger = GetComponent<HintTrigger>();
+    }
+    protected void TriggerHints()
+    {
+        Debug.Log("Triggering Hint");
+        hintTrigger?.OnInteract();
+    }
+
+    public virtual string GetDescription() => objectDescription;
+    public virtual string GetName() => objectName;
     public abstract void Interact();
 }

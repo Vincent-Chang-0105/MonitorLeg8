@@ -190,15 +190,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   interactionType: 0
-  objName: Locker
-  objDescription: '[E] Interact'
+  objectName: 
+  objectDescription: 
+  hintIdToComplete: 0
+  hintIdToTrigger: 0
   dialogue:
     dialogueLines:
     - character:
-        name: Plume
+        name: 
       line: "There\u2019s nothing in here."
-  hintIdToComplete: 0
-  hintIdToTrigger: 0
   interactButtonClick:
     clip: {fileID: 0}
     mixerGroup: {fileID: 0}

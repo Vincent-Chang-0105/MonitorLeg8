@@ -49,13 +49,13 @@ namespace AudioSystem {
 
         void SetupAudioSource(AudioSource source) {
             source.outputAudioMixerGroup = musicMixerGroup;
-            source.loop = false;
+            source.loop = true;
             source.volume = 0;
             source.bypassListenerEffects = true;
             source.playOnAwake = false;
         }
 
-        void Start() {
+        void Start() { 
             foreach (var clip in initialPlaylist) {
                 AddToPlaylist(clip);
             }

@@ -6,19 +6,12 @@ using AudioSystem;
 
 public class PickableInteractable : Interactable
 {
-    [SerializeField] private string objName;
-    [SerializeField] private string objDescription;
     [SerializeField] private Sprite itemIcon; // Icon for inventory display
     [SerializeField] private int itemID = 0; // Unique identifier for the item
     [SerializeField] private int quantity = 1; // How many of this item to give
 
     [Header("Dialogue")]
     [SerializeField] private Dialogue dialogue;
-
-    [Header("Hint")]
-    [SerializeField] private int hintIdToComplete;
-    [SerializeField] private int hintIdToTrigger;
-    private HintTrigger hintTrigger;
 
     [Header("Pickup Animation")]
     [SerializeField] private bool usePickupAnimation = true;
@@ -32,20 +25,14 @@ public class PickableInteractable : Interactable
     [SerializeField] private bool destroyAfterPickup = true; // Should the object be destroyed after pickup
 
     [Header("Sounds")]
-    [SerializeField] SoundData interactButtonClick;
     [SerializeField] SoundData interactPickupObject;
     private SoundBuilder soundBuilder;
 
-    private bool hasBeenPickedUp = false;
     private Renderer objectRenderer;
     private Collider objectCollider;
 
     private void PickupObject()
     {
-        if (hasBeenPickedUp) return; // Prevent multiple pickups
-
-        hasBeenPickedUp = true;
-
         // Add item to inventory (you'll need to implement your inventory system)
         AddToInventory();
 
@@ -118,7 +105,6 @@ public class PickableInteractable : Interactable
         if (Inventory.Instance != null)
         {
             Inventory.Instance.AddItem(itemID);
-            Debug.Log($"Picked up {objName} (ID: {itemID})");
         }
         else
         {
@@ -126,55 +112,15 @@ public class PickableInteractable : Interactable
         }
     }
 
-    public override string GetDescription()
-    {
-        if (hasBeenPickedUp)
-            return "Already picked up";
-        
-        return objDescription + (quantity > 1 ? $" (x{quantity})" : "");
-    }
-
-    public override string GetName()
-    {
-        return objName;
-    }
-
     public override void Interact()
     {
-        if (hasBeenPickedUp) return;
-
         PickupObject();
-        soundBuilder.Play(interactButtonClick);
-
-        // Trigger hints if component exists
-        if (hintTrigger != null)
-            hintTrigger.OnInteract();
-    }
-
-    // Public methods for external access
-    public int GetItemID() => itemID;
-    public int GetQuantity() => quantity;
-    public Sprite GetItemIcon() => itemIcon;
-    public bool IsPickedUp() => hasBeenPickedUp;
-
-    // Method to manually set pickup state (useful for save/load systems)
-    public void SetPickedUpState(bool pickedUp)
-    {
-        hasBeenPickedUp = pickedUp;
-        if (pickedUp)
-        {
-            if (objectCollider != null)
-                objectCollider.enabled = false;
-            
-            if (destroyAfterPickup)
-                gameObject.SetActive(false);
-        }
+        TriggerHints();
     }
 
     // Start is called before the first frame update
     void Start()
     {
-        hintTrigger = GetComponent<HintTrigger>();
         objectRenderer = GetComponent<Renderer>();
         objectCollider = GetComponent<Collider>();
         
@@ -186,16 +132,11 @@ public class PickableInteractable : Interactable
 
         soundBuilder = SoundManager.Instance.CreateSoundBuilder();
         
-        // Validate setup
-        if (itemID == 0)
-            Debug.LogWarning($"Item ID is 0 for {objName}. Consider setting a unique ID.");
     }
 
     // Optional: Visualize pickup area in editor
     private void OnDrawGizmosSelected()
     {
-        if (hasBeenPickedUp) return;
-        
         // Draw pickup indicator
         Gizmos.color = Color.green;
         Gizmos.DrawWireSphere(transform.position, 0.2f);

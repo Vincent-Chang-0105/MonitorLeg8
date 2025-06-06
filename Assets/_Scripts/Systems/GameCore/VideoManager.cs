@@ -3,6 +3,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.Video;
 using AudioSystem;
+using UnityEngine.Events;
 
 public class VideoManager : Singleton<VideoManager>
 {
@@ -16,15 +17,10 @@ public class VideoManager : Singleton<VideoManager>
     [SerializeField] private KeyCode[] skipKeys = { KeyCode.Escape, KeyCode.Space };
     [SerializeField] private bool debugMode = true; // Add debug toggle
 
-    [Header("Audio")]
-    [SerializeField] private SoundData videoStartSound;
-    [SerializeField] private SoundData videoSkipSound;
-    private SoundBuilder soundBuilder;
-
     [Header("Events")]
-    public UnityEngine.Events.UnityEvent OnVideoStart;
-    public UnityEngine.Events.UnityEvent OnVideoComplete;
-    public UnityEngine.Events.UnityEvent OnVideoSkipped;
+    public UnityEvent OnVideoStart;
+    public UnityEvent OnVideoComplete;
+    public UnityEvent OnVideoSkipped;
 
     private bool isPlayingVideo = false;
     private Action onVideoCompleteCallback;
@@ -156,10 +152,6 @@ public class VideoManager : Singleton<VideoManager>
         // Wait a frame to ensure UI is shown
         yield return null;
 
-        // Play start sound
-        if (soundBuilder != null && videoStartSound != null)
-            soundBuilder.Play(videoStartSound);
-
         // Setup and play video
         videoPlayer.clip = videoClip;
         videoPlayer.isLooping = false;
@@ -267,10 +259,6 @@ public class VideoManager : Singleton<VideoManager>
         if (!isPlayingVideo) return;
 
         if (debugMode) Debug.Log("Video skipped by user");
-
-        // Play skip sound
-        if (soundBuilder != null && videoSkipSound != null)
-            soundBuilder.Play(videoSkipSound);
 
         videoPlayer.Stop();
         CompleteVideo(true);
