@@ -14,6 +14,10 @@ public class MonsterController : MonoBehaviour
     [SerializeField] protected float jumpScareRange = 2f;
     [SerializeField] protected float detectionRange = 10f;
 
+    [Header("Vision Settings")]
+    [SerializeField] private LayerMask visionObstacleLayers;  // Layers that block vision
+    [SerializeField] private bool drawVisionRay = true;  
+
     [Header("Patrol Settings")]
     [SerializeField] protected Transform[] patrolPoints;
     [SerializeField] protected float patrolWaitTime = 2f;
@@ -44,7 +48,7 @@ public class MonsterController : MonoBehaviour
     }
 
     [Header("Debug")]
-    [SerializeField] protected MonsterState currentState = MonsterState.Chase;
+    [SerializeField] protected MonsterState currentState;
 
     [Header("Sounds")]
     [SerializeField] SoundData monsterFootstep;
@@ -91,6 +95,8 @@ public class MonsterController : MonoBehaviour
         startPosition = transform.position;
 
         soundBuilder = SoundManager.Instance.CreateSoundBuilder();
+
+        ChangeState(MonsterState.Patrol); // Start in Patrol state
     }
 
     private void InitializeAnimationHashes()
@@ -223,58 +229,40 @@ public class MonsterController : MonoBehaviour
 
     protected virtual void CheckStateTransitions()
     {
+        // Cast ray to check line of sight
+        Vector3 directionToPlayer = (playerTransform.position - transform.position).normalized;
+        Ray ray = new Ray(transform.position + Vector3.up, directionToPlayer);
+        bool hasLineOfSight = !Physics.Raycast(ray, distanceToPlayer, visionObstacleLayers);
         switch (currentState)
         {
             case MonsterState.Idle:
-                // Transition from Idle based on shouldChase flag
-                if (distanceToPlayer <= detectionRange)
+            case MonsterState.Patrol:
+                if (hasLineOfSight && distanceToPlayer <= detectionRange)
                 {
-                    if (shouldChase)
-                    {
-                        ChangeState(MonsterState.Chase);
-                    }
-                    else
-                    {
-                        ChangeState(MonsterState.Patrol);
-                    }
+                    ChangeState(MonsterState.Chase);
+                    Debug.Log($"{gameObject.name}: Player detected, switching to Chase State");
                 }
-                break;
+                // Transition from Patrol to JumpScare when close enough (if player gets too close during patrol)
+                if (distanceToPlayer <= jumpScareRange)
+                {
+                    ChangeState(MonsterState.JumpScare);
+                }
 
+                break;
             case MonsterState.Chase:
                 // Transition from Chase to JumpScare when close enough
                 if (distanceToPlayer <= jumpScareRange)
                 {
                     ChangeState(MonsterState.JumpScare);
                 }
-                // // Transition back to Idle if player gets too far away
-                // else if (distanceToPlayer > detectionRange * 1.5f) // Add some hysteresis
-                // {
-                //     ChangeState(MonsterState.Idle);
-                // }
-                // // Check if should switch to patrol (controlled by collider triggers)
-                // else if (!shouldChase)
-                // {
-                //     ChangeState(MonsterState.Patrol);
-                // }
+                else if (!hasLineOfSight)
+                {
+                    ChangeState(MonsterState.Patrol);
+                    Debug.Log($"{gameObject.name}: Lost sight of player, switching to Patrol State");
+                }
+
                 break;
 
-            case MonsterState.Patrol:
-                // Transition from Patrol to JumpScare when close enough (if player gets too close during patrol)
-                if (distanceToPlayer <= jumpScareRange)
-                {
-                    ChangeState(MonsterState.JumpScare);
-                }
-                // // Transition back to Idle if player gets too far away
-                // else if (distanceToPlayer > detectionRange * 1.5f)
-                // {
-                //     ChangeState(MonsterState.Idle);
-                // }
-                // // Check if should switch back to chase (controlled by collider triggers)
-                // else if (shouldChase)
-                // {
-                //     ChangeState(MonsterState.Chase);
-                // }
-                break;
 
             case MonsterState.JumpScare:
                 // Transition back to appropriate state after jumpscare
@@ -578,7 +566,6 @@ public class MonsterController : MonoBehaviour
     public void SetPatrolMode()
     {
         ChangeState(MonsterState.Patrol);
-        
     }
     
     // Public methods for external access
@@ -617,7 +604,7 @@ public class MonsterController : MonoBehaviour
                 if (patrolPoints[i] != null)
                 {
                     Gizmos.DrawWireSphere(patrolPoints[i].position, 1f);
-                    
+
                     // Draw lines between patrol points
                     int nextIndex = (i + 1) % patrolPoints.Length;
                     if (patrolPoints[nextIndex] != null)
@@ -625,6 +612,26 @@ public class MonsterController : MonoBehaviour
                         Gizmos.DrawLine(patrolPoints[i].position, patrolPoints[nextIndex].position);
                     }
                 }
+            }
+        }
+        
+        // Draw vision ray if player exists
+        if (drawVisionRay && playerTransform != null)
+        {
+            Vector3 directionToPlayer = (playerTransform.position - transform.position).normalized;
+            Ray ray = new Ray(transform.position + Vector3.up, directionToPlayer);
+            
+            if (Physics.Raycast(ray, out RaycastHit hit, detectionRange, visionObstacleLayers))
+            {
+                // Ray hits obstacle - draw in red
+                Gizmos.color = Color.red;
+                Gizmos.DrawLine(ray.origin, hit.point);
+            }
+            else
+            {
+                // Clear line of sight - draw in green
+                Gizmos.color = Color.green;
+                Gizmos.DrawLine(ray.origin, ray.origin + directionToPlayer * detectionRange);
             }
         }
     }

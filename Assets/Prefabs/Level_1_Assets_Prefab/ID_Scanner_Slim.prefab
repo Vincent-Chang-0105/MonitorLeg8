@@ -160,10 +160,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   interactionType: 0
-  objectName: 
-  objectDescription: 
-  hintIdToComplete: 0
-  hintIdToTrigger: 0
+  objectName: Scanner
+  objectDescription: Open Door
   dialogue:
     dialogueLines:
     - character:

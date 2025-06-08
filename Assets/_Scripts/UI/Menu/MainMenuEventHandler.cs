@@ -92,19 +92,21 @@ public class MainMenuEventHandler : ColorChangeMenuHandler
     public void StartGame()
     {
         Debug.Log("Starting new game...");
+
+        GameManager.Instance.LoadScene("Level1");
         
         // Check if we should play the intro video
-        if (introVideo != null && (!hasPlayedIntro || !skipVideoOnReplay))
-        {
-            // Play video then load scene
-            VideoManager.Instance.PlayIntroVideoThenLoadScene(introVideo, "Level1");
-            hasPlayedIntro = true;
-        }
-        else
-        {
-            // Skip video and load scene directly
-            GameManager.Instance.LoadScene("Level1");
-        }
+        // if (introVideo != null && (!hasPlayedIntro || !skipVideoOnReplay))
+        // {
+        //     // Play video then load scene
+        //     VideoManager.Instance.PlayIntroVideoThenLoadScene(introVideo, "Level1");
+        //     hasPlayedIntro = true;
+        // }
+        // else
+        // {
+        //     // Skip video and load scene directly
+        //     GameManager.Instance.LoadScene("Level1");
+        // }
     }
     
     public void ContinueGame()

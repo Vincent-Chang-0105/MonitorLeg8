@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 7636317302255728072}
   - component: {fileID: 2784793124940887203}
   - component: {fileID: 2117057980582627861}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: 3Lock.002
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -115,7 +115,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7766323893438531192}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Lock
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -148,7 +148,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5740198677397952120}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: RotatingDoor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -186,7 +186,7 @@ GameObject:
   - component: {fileID: 6788472077359766546}
   - component: {fileID: 4854992070528662203}
   - component: {fileID: 4794439529258442326}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Storage Handle.002
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -310,7 +310,7 @@ GameObject:
   - component: {fileID: 6313658487001899520}
   - component: {fileID: 403717616324481613}
   - component: {fileID: 6151041297848068913}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Main.002
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -417,7 +417,7 @@ GameObject:
   - component: {fileID: 1361282455725309603}
   - component: {fileID: 3284760305280009345}
   - component: {fileID: 1381077795704826192}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Storage Handle.002
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -541,7 +541,7 @@ GameObject:
   - component: {fileID: 6495373411249542148}
   - component: {fileID: 4531323498790245207}
   - component: {fileID: 2884523713811687928}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: 3Lock.002
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -646,7 +646,7 @@ GameObject:
   - component: {fileID: 2583852433857082160}
   - component: {fileID: 6520048726898226579}
   - component: {fileID: 4874162888740370405}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Handle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -683,11 +683,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   interactionType: 0
+  objectName: 
+  objectDescription: 
   objectToRotate: {fileID: 0}
-  objName: Handle
-  objDescription: '[E]Open Door'
-  hintIdToComplete: 0
-  hintIdToTrigger: 0
   rotationAxis: {x: 0, y: 1, z: 0}
   rotationAngle: 90
   rotationDuration: 0.7

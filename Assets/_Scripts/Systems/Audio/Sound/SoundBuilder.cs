@@ -76,10 +76,10 @@ namespace AudioSystem {
                 
                 // Wait for the sound to finish
                 if (soundData.clip != null) {
-                    yield return new WaitForSeconds(soundData.clip.length);
+                    yield return new WaitForSeconds(soundData.clip.length - soundData.clip.length * 0.5f);
                 } else {
                     // Fallback delay if clip is null
-                    yield return new WaitForSeconds(0.5f);
+                    yield return new WaitForSeconds(0.1f);
                 }
             }
         }

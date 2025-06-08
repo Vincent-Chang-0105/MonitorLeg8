@@ -17,13 +17,21 @@ MonoBehaviour:
   - hintText: Find the exit.
     hintId: 1
     displayDuration: 0
-    isCompleted: 0
+    isCompleted: 1
   - hintText: Find the keycard.
     hintId: 2
     displayDuration: 0
-    isCompleted: 0
+    isCompleted: 1
   - hintText: Get Out.
     hintId: 3
+    displayDuration: 0
+    isCompleted: 1
+  - hintText: Find the last keycard.
+    hintId: 4
+    displayDuration: 0
+    isCompleted: 1
+  - hintText: Get Out.
+    hintId: 5
     displayDuration: 0
     isCompleted: 0
   autoStartFirstHint: 1

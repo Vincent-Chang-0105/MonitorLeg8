@@ -179,7 +179,12 @@ MonoBehaviour:
   moveSpeed: 4
   jumpScareRange: 2
   detectionRange: 10
+  visionObstacleLayers:
+    serializedVersion: 2
+    m_Bits: 256
+  drawVisionRay: 1
   patrolPoints:
+  - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
@@ -187,7 +192,7 @@ MonoBehaviour:
   patrolSpeed: 2
   animationTransitionTime: 0.1
   movementThreshold: 0.1
-  currentState: 0
+  currentState: 2
   monsterFootstep:
     clip: {fileID: 8300000, guid: d58cae831092fe242aad32ad0cc9a7e5, type: 3}
     mixerGroup: {fileID: 7142711898134432833, guid: 63090d78504b5da43bed8f06cca39817,
