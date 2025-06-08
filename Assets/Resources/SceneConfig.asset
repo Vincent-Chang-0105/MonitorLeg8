@@ -18,22 +18,22 @@ MonoBehaviour:
     hideCursorAtStart: 0
     hintData: {fileID: 0}
   - sceneName: Level1
-    musicClip: {fileID: 8300000, guid: 04903c577033f214faa90af8daf62f57, type: 3}
+    musicClip: {fileID: 8300000, guid: ab05a299a744eb041ab7b1ed36098546, type: 3}
     hideCursorAtStart: 1
     hintData: {fileID: 11400000, guid: d9e961ab625c3064f8cc197c10de6a06, type: 2}
   - sceneName: Level2
-    musicClip: {fileID: 8300000, guid: ab05a299a744eb041ab7b1ed36098546, type: 3}
-    hideCursorAtStart: 1
-    hintData: {fileID: 0}
-  - sceneName: Level3
     musicClip: {fileID: 8300000, guid: d2c2760f01e2b3a418a96accf0b2c3ad, type: 3}
     hideCursorAtStart: 1
     hintData: {fileID: 0}
-  - sceneName: Level4
+  - sceneName: Level3
     musicClip: {fileID: 8300000, guid: ee747b0e999a7f9458b5c21b9d6944a1, type: 3}
     hideCursorAtStart: 1
     hintData: {fileID: 0}
-  - sceneName: Level5
+  - sceneName: Level4
     musicClip: {fileID: 8300000, guid: e255cbab04fe00042b316bfa24b7ada4, type: 3}
+    hideCursorAtStart: 1
+    hintData: {fileID: 0}
+  - sceneName: Level5
+    musicClip: {fileID: 8300000, guid: 04903c577033f214faa90af8daf62f57, type: 3}
     hideCursorAtStart: 1
     hintData: {fileID: 0}
