@@ -18,9 +18,15 @@ Logs/AssetImportWorker0.log
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 49927
 Successfully changed project path to: E:/github/MonitorLeg8
 E:/github/MonitorLeg8
+=======
+49305
+Successfully changed project path to: D:/Unity Projects/MonitorLeg8
+D:/Unity Projects/MonitorLeg8
+>>>>>>> Stashed changes
 =======
 49305
 Successfully changed project path to: D:/Unity Projects/MonitorLeg8
@@ -70,12 +76,21 @@ D:/Unity Projects/MonitorLeg8
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 Player connection [3736] Host "[IP] 10.30.50.49 [Port] 0 [Flags] 2 [Guid] 233788651 [EditorId] 233788651 [Version] 1048832 [Id] WindowsEditor(7,MSI) [Debug] 1 [PackageName] WindowsEditor [ProjectName] Editor" joined multi-casting on [225.0.0.222:54997]...
 
 Player connection [3736] Host "[IP] 10.30.50.49 [Port] 0 [Flags] 2 [Guid] 233788651 [EditorId] 233788651 [Version] 1048832 [Id] WindowsEditor(7,MSI) [Debug] 1 [PackageName] WindowsEditor [ProjectName] Editor" joined alternative multi-casting on [225.0.0.222:34997]...
 
 [Physics::Module] Initialized MultithreadedJobDispatcher with 11 workers.
 Refreshing native plugins compatible for Editor in 16.29 ms, found 3 plugins.
+=======
+Player connection [10352] Host "[IP] 192.168.1.10 [Port] 0 [Flags] 2 [Guid] 1863732223 [EditorId] 1863732223 [Version] 1048832 [Id] WindowsEditor(7,DESKTOP-NB18T0M) [Debug] 1 [PackageName] WindowsEditor [ProjectName] Editor" joined multi-casting on [225.0.0.222:54997]...
+
+Player connection [10352] Host "[IP] 192.168.1.10 [Port] 0 [Flags] 2 [Guid] 1863732223 [EditorId] 1863732223 [Version] 1048832 [Id] WindowsEditor(7,DESKTOP-NB18T0M) [Debug] 1 [PackageName] WindowsEditor [ProjectName] Editor" joined alternative multi-casting on [225.0.0.222:34997]...
+
+[Physics::Module] Initialized MultithreadedJobDispatcher with 15 workers.
+Refreshing native plugins compatible for Editor in 14.16 ms, found 3 plugins.
+>>>>>>> Stashed changes
 =======
 Player connection [10352] Host "[IP] 192.168.1.10 [Port] 0 [Flags] 2 [Guid] 1863732223 [EditorId] 1863732223 [Version] 1048832 [Id] WindowsEditor(7,DESKTOP-NB18T0M) [Debug] 1 [PackageName] WindowsEditor [ProjectName] Editor" joined multi-casting on [225.0.0.222:54997]...
 
@@ -115,6 +130,7 @@ Initialize mono
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 Mono path[0] = 'D:/Unity/Hub/Editor/2022.3.22f1/Editor/Data/Managed'
 Mono path[1] = 'D:/Unity/Hub/Editor/2022.3.22f1/Editor/Data/MonoBleedingEdge/lib/mono/unityjit-win32'
 Mono config path = 'D:/Unity/Hub/Editor/2022.3.22f1/Editor/Data/MonoBleedingEdge/etc'
@@ -147,6 +163,14 @@ Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,susp
 Begin MonoManager ReloadAssembly
 Registering precompiled unity dll's ...
 >>>>>>> Stashed changes
+=======
+Mono path[0] = 'C:/Program Files/Unity/Hub/Editor/2022.3.22f1/Editor/Data/Managed'
+Mono path[1] = 'C:/Program Files/Unity/Hub/Editor/2022.3.22f1/Editor/Data/MonoBleedingEdge/lib/mono/unityjit-win32'
+Mono config path = 'C:/Program Files/Unity/Hub/Editor/2022.3.22f1/Editor/Data/MonoBleedingEdge/etc'
+Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56252
+Begin MonoManager ReloadAssembly
+Registering precompiled unity dll's ...
+>>>>>>> Stashed changes
 Register platform support module: C:/Program Files/Unity/Hub/Editor/2022.3.22f1/Editor/Data/PlaybackEngines/WebGLSupport/UnityEditor.WebGL.Extensions.dll
 Register platform support module: C:/Program Files/Unity/Hub/Editor/2022.3.22f1/Editor/Data/PlaybackEngines/AndroidPlayer/UnityEditor.Android.Extensions.dll
 Register platform support module: C:/Program Files/Unity/Hub/Editor/2022.3.22f1/Editor/Data/PlaybackEngines/WindowsStandaloneSupport/UnityEditor.WindowsStandalone.Extensions.dll
@@ -154,6 +178,9 @@ Registered in 0.014934 seconds.
 - Loaded All Assemblies, in  0.411 seconds
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
 =======
 >>>>>>> Stashed changes
@@ -164,6 +191,7 @@ Native extension for Android target not found
 Android Extension - Scanning For ADB Devices 868 ms
 Native extension for WebGL target not found
 Mono: successfully reloaded assembly
+<<<<<<< Updated upstream
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
@@ -185,12 +213,18 @@ Domain Reload Profiling: 1666ms
 Domain Reload Profiling: 1666ms
 	BeginReloadAssembly (125ms)
 >>>>>>> Stashed changes
+=======
+- Finished resetting the current domain, in  1.257 seconds
+Domain Reload Profiling: 1666ms
+	BeginReloadAssembly (125ms)
+>>>>>>> Stashed changes
 		ExecutionOrderSort (0ms)
 		DisableScriptedObjects (0ms)
 		BackupInstance (0ms)
 		ReleaseScriptingObjects (0ms)
 		CreateAndSetChildDomain (1ms)
 	RebuildCommonClasses (39ms)
+<<<<<<< Updated upstream
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
@@ -284,6 +318,29 @@ Domain Reload Profiling: 1666ms
 			ProcessInitializeOnLoadAttributes (136ms)
 			ProcessInitializeOnLoadMethodAttributes (58ms)
 >>>>>>> Stashed changes
+=======
+	RebuildNativeTypeToScriptingClass (12ms)
+	initialDomainReloadingComplete (72ms)
+	LoadAllAssembliesAndSetupDomain (161ms)
+		LoadAssemblies (123ms)
+		RebuildTransferFunctionScriptingTraits (0ms)
+		AnalyzeDomain (158ms)
+			TypeCache.Refresh (156ms)
+				TypeCache.ScanAssembly (143ms)
+			ScanForSourceGeneratedMonoScriptInfo (0ms)
+			ResolveRequiredComponents (0ms)
+	FinalizeReload (1257ms)
+		ReleaseScriptCaches (0ms)
+		RebuildScriptCaches (0ms)
+		SetupLoadedEditorAssemblies (1191ms)
+			LogAssemblyErrors (0ms)
+			InitializePlatformSupportModulesInManaged (990ms)
+			SetLoadedEditorAssemblies (4ms)
+			RefreshPlugins (0ms)
+			BeforeProcessingInitializeOnLoad (2ms)
+			ProcessInitializeOnLoadAttributes (136ms)
+			ProcessInitializeOnLoadMethodAttributes (58ms)
+>>>>>>> Stashed changes
 			AfterProcessingInitializeOnLoad (0ms)
 			EditorAssembliesLoaded (0ms)
 		ExecutionOrderSort2 (0ms)
@@ -299,6 +356,9 @@ Refreshing native plugins compatible for Editor in 5.47 ms, found 3 plugins.
 Refreshing native plugins compatible for Editor in 5.10 ms, found 3 plugins.
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
 =======
 >>>>>>> Stashed changes
@@ -327,9 +387,15 @@ Mono: successfully reloaded assembly
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 - Finished resetting the current domain, in  0.965 seconds
 Domain Reload Profiling: 1857ms
 	BeginReloadAssembly (185ms)
+=======
+- Finished resetting the current domain, in  0.913 seconds
+Domain Reload Profiling: 1803ms
+	BeginReloadAssembly (168ms)
+>>>>>>> Stashed changes
 =======
 - Finished resetting the current domain, in  0.913 seconds
 Domain Reload Profiling: 1803ms
@@ -349,6 +415,7 @@ Domain Reload Profiling: 1803ms
 		DisableScriptedObjects (7ms)
 		BackupInstance (0ms)
 		ReleaseScriptingObjects (0ms)
+<<<<<<< Updated upstream
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
@@ -391,6 +458,8 @@ Total: 4.326700 ms (FindLiveObjects: 0.454600 ms CreateObjectMapping: 0.490700 m
 >>>>>>> Stashed changes
 =======
 >>>>>>> Stashed changes
+=======
+>>>>>>> Stashed changes
 		CreateAndSetChildDomain (26ms)
 	RebuildCommonClasses (40ms)
 	RebuildNativeTypeToScriptingClass (13ms)
@@ -427,6 +496,9 @@ Memory consumption went from 263.6 MB to 261.5 MB.
 Total: 5.507400 ms (FindLiveObjects: 0.592200 ms CreateObjectMapping: 0.423800 ms MarkObjects: 3.946500 ms  DeleteObjects: 0.544400 ms)
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
 =======
 >>>>>>> Stashed changes
@@ -451,6 +523,7 @@ Received Import Request.
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
   Time since last request: 397.693490 seconds.
   path: Assets/Scenes/MainMenu.unity
   artifactKey: Guid(d11c73a63885dcf4a82a20db81ebf585) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
@@ -470,6 +543,8 @@ Number of asset objects unloaded after import = 0
 >>>>>>> Stashed changes
 =======
 >>>>>>> Stashed changes
+=======
+>>>>>>> Stashed changes
   Time since last request: 106147.783531 seconds.
   path: Assets/Prefabs/DeathScreen 1.prefab
   artifactKey: Guid(a96814092ed9b1446b7dea03d4ce13bc) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
@@ -478,6 +553,9 @@ Number of updated asset objects reloaded before import = 0
 Number of asset objects unloaded after import = 55
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
 =======
 >>>>>>> Stashed changes

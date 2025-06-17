@@ -8,6 +8,9 @@ using AudioSystem;
 using Cinemachine; // Required for Cinemachine virtual cameras
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
 =======
 >>>>>>> Stashed changes
@@ -67,6 +70,7 @@ public class MovingObjectInteractable : Interactable
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
         // Determine whether to move forward or back
         Vector3 destination = isAtOriginalPosition ? targetPosition : originalPosition;
 
@@ -83,6 +87,8 @@ public class MovingObjectInteractable : Interactable
     
     public override string GetDescription()
 =======
+=======
+>>>>>>> Stashed changes
 =======
 >>>>>>> Stashed changes
 =======
@@ -151,8 +157,37 @@ public class MovingObjectInteractable : Interactable
     private void SwitchToVirtualCamera()
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 =======
 =======
+=======
+    {
+        if (cameraIsActive) return;
+
+        // Set up the virtual camera to follow/look at the moving object if enabled
+        if (followMovingObject && objectToMove != null)
+        {
+            virtualCamera.Follow = objectToMove;
+            virtualCamera.LookAt = objectToMove;
+        }
+
+        // Activate the virtual camera
+        virtualCamera.Priority = 20; // Higher priority than default cameras (usually 10)
+        cameraIsActive = true;
+    }
+
+    private void ReturnToOriginalCamera()
+    {
+        // Return to original camera after movement completes
+        if (useCameraSwitch && virtualCamera != null && cameraIsActive)
+        {
+            virtualCamera.Priority = 0;
+            cameraIsActive = false;
+        }
+    }
+
+    private void OnDrawGizmos()
+>>>>>>> Stashed changes
     {
         if (cameraIsActive) return;
 
@@ -278,8 +313,20 @@ public class MovingObjectInteractable : Interactable
         }
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 =======
 =======
+=======
+    }
+
+    private void OnDestroy()
+    {
+        // Ensure camera is returned to original state if object is destroyed
+        if (cameraIsActive && virtualCamera != null)
+        {
+            virtualCamera.Priority = 0;
+        }
+>>>>>>> Stashed changes
     }
 
     private void OnDestroy()
