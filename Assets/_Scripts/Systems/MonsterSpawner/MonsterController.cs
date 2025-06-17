@@ -248,6 +248,16 @@ public class MonsterController : MonoBehaviour
         // Get the animation length for the jumpscare
         AnimatorStateInfo stateInfo = animator.GetCurrentAnimatorStateInfo(0);
         float jumpscareAnimationLength = stateInfo.length;
+<<<<<<< Updated upstream
+=======
+
+        // Wait for animation to complete
+        yield return new WaitForSeconds(jumpscareAnimationLength);
+    
+        // Trigger death screen
+        UIEvents.OpenDeathScreen();
+    }
+>>>>>>> Stashed changes
 
         // Wait for animation to complete
         yield return new WaitForSeconds(jumpscareAnimationLength);
