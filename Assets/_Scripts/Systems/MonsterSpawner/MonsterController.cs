@@ -251,9 +251,19 @@ public class MonsterController : MonoBehaviour
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 =======
 =======
 =======
+=======
+
+        // Wait for animation to complete
+        yield return new WaitForSeconds(jumpscareAnimationLength);
+    
+        // Trigger death screen
+        UIEvents.OpenDeathScreen();
+    }
+>>>>>>> Stashed changes
 
         // Wait for animation to complete
         yield return new WaitForSeconds(jumpscareAnimationLength);

@@ -4,12 +4,15 @@ Built from '2022.3/staging' branch; Version is '2022.3.22f1 (887be4894c44) revis
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 OS: 'Windows 10  (10.0.19045) 64bit Professional' Language: 'en' Physical Memory: 32609 MB
 BatchMode: 1, IsHumanControllingUs: 0, StartBugReporterOnCrash: 0, Is64bit: 1, IsPro: 1
 
 COMMAND LINE ARGUMENTS:
 D:\Unity\Hub\Editor\2022.3.22f1\Editor\Unity.exe
 =======
+=======
+>>>>>>> Stashed changes
 =======
 >>>>>>> Stashed changes
 =======
@@ -24,6 +27,9 @@ C:\Program Files\Unity\Hub\Editor\2022.3.22f1\Editor\Unity.exe
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
 =======
 >>>>>>> Stashed changes
@@ -37,6 +43,7 @@ C:\Program Files\Unity\Hub\Editor\2022.3.22f1\Editor\Unity.exe
 -name
 AssetImportWorker2
 -projectPath
+<<<<<<< Updated upstream
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
@@ -55,6 +62,8 @@ E:/github/MonitorLeg8
 >>>>>>> Stashed changes
 =======
 >>>>>>> Stashed changes
+=======
+>>>>>>> Stashed changes
 D:/Unity Projects/MonitorLeg8
 -logFile
 Logs/AssetImportWorker2.log
@@ -65,6 +74,9 @@ D:/Unity Projects/MonitorLeg8
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
 =======
 >>>>>>> Stashed changes
@@ -107,6 +119,7 @@ D:/Unity Projects/MonitorLeg8
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 Player connection [14912] Host "[IP] 10.30.50.49 [Port] 0 [Flags] 2 [Guid] 863028263 [EditorId] 863028263 [Version] 1048832 [Id] WindowsEditor(7,MSI) [Debug] 1 [PackageName] WindowsEditor [ProjectName] Editor" joined multi-casting on [225.0.0.222:54997]...
 
 Player connection [14912] Host "[IP] 10.30.50.49 [Port] 0 [Flags] 2 [Guid] 863028263 [EditorId] 863028263 [Version] 1048832 [Id] WindowsEditor(7,MSI) [Debug] 1 [PackageName] WindowsEditor [ProjectName] Editor" joined alternative multi-casting on [225.0.0.222:34997]...
@@ -140,6 +153,8 @@ Mono: successfully reloaded assembly
 Domain Reload Profiling: 10703ms
 	BeginReloadAssembly (8028ms)
 =======
+=======
+>>>>>>> Stashed changes
 =======
 >>>>>>> Stashed changes
 =======
@@ -186,6 +201,9 @@ Domain Reload Profiling: 2003ms
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
 =======
 >>>>>>> Stashed changes
@@ -198,6 +216,7 @@ Domain Reload Profiling: 2003ms
 		BackupInstance (0ms)
 		ReleaseScriptingObjects (0ms)
 		CreateAndSetChildDomain (1ms)
+<<<<<<< Updated upstream
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
@@ -231,6 +250,8 @@ Domain Reload Profiling: 2003ms
 >>>>>>> Stashed changes
 =======
 >>>>>>> Stashed changes
+=======
+>>>>>>> Stashed changes
 	RebuildCommonClasses (181ms)
 	RebuildNativeTypeToScriptingClass (15ms)
 	initialDomainReloadingComplete (71ms)
@@ -256,6 +277,9 @@ Domain Reload Profiling: 2003ms
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
 =======
 >>>>>>> Stashed changes
@@ -274,10 +298,13 @@ Begin MonoManager ReloadAssembly
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 - Loaded All Assemblies, in 10.605 seconds
 Refreshing native plugins compatible for Editor in 4.96 ms, found 3 plugins.
 Native extension for WindowsStandalone target not found
 =======
+=======
+>>>>>>> Stashed changes
 =======
 >>>>>>> Stashed changes
 =======
@@ -292,6 +319,9 @@ Native extension for WebGL target not found
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
 =======
 >>>>>>> Stashed changes
@@ -320,9 +350,15 @@ Mono: successfully reloaded assembly
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 - Finished resetting the current domain, in  0.838 seconds
 Domain Reload Profiling: 11443ms
 	BeginReloadAssembly (165ms)
+=======
+- Finished resetting the current domain, in  1.144 seconds
+Domain Reload Profiling: 1986ms
+	BeginReloadAssembly (156ms)
+>>>>>>> Stashed changes
 =======
 - Finished resetting the current domain, in  1.144 seconds
 Domain Reload Profiling: 1986ms
@@ -347,6 +383,7 @@ Domain Reload Profiling: 1986ms
 		DisableScriptedObjects (6ms)
 		BackupInstance (0ms)
 		ReleaseScriptingObjects (0ms)
+<<<<<<< Updated upstream
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
@@ -392,6 +429,8 @@ Total: 4.831700 ms (FindLiveObjects: 0.493300 ms CreateObjectMapping: 0.459600 m
 >>>>>>> Stashed changes
 =======
 >>>>>>> Stashed changes
+=======
+>>>>>>> Stashed changes
 		CreateAndSetChildDomain (24ms)
 	RebuildCommonClasses (32ms)
 	RebuildNativeTypeToScriptingClass (11ms)
@@ -429,6 +468,9 @@ Total: 4.349000 ms (FindLiveObjects: 0.412100 ms CreateObjectMapping: 0.307700 m
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
 =======
 >>>>>>> Stashed changes
@@ -451,6 +493,7 @@ AssetImportParameters requested are different than current active one (requested
   custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
   custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
 ========================================================================
+<<<<<<< Updated upstream
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
@@ -1751,6 +1794,8 @@ Domain Reload Profiling: 2145ms
 >>>>>>> Stashed changes
 =======
 >>>>>>> Stashed changes
+=======
+>>>>>>> Stashed changes
 Received Prepare
 Begin MonoManager ReloadAssembly
 - Loaded All Assemblies, in  0.525 seconds
@@ -1765,6 +1810,9 @@ Domain Reload Profiling: 1784ms
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
 =======
 >>>>>>> Stashed changes
@@ -1776,6 +1824,7 @@ Domain Reload Profiling: 1784ms
 		DisableScriptedObjects (5ms)
 		BackupInstance (0ms)
 		ReleaseScriptingObjects (0ms)
+<<<<<<< Updated upstream
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
@@ -1820,6 +1869,8 @@ Total: 4.983400 ms (FindLiveObjects: 0.567900 ms CreateObjectMapping: 0.546800 m
 >>>>>>> Stashed changes
 =======
 >>>>>>> Stashed changes
+=======
+>>>>>>> Stashed changes
 		CreateAndSetChildDomain (39ms)
 	RebuildCommonClasses (38ms)
 	RebuildNativeTypeToScriptingClass (12ms)
@@ -1856,6 +1907,9 @@ Total: 4.135300 ms (FindLiveObjects: 0.435100 ms CreateObjectMapping: 0.379900 m
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
 =======
 >>>>>>> Stashed changes
@@ -1881,6 +1935,7 @@ AssetImportParameters requested are different than current active one (requested
 ========================================================================
 Received Prepare
 Begin MonoManager ReloadAssembly
+<<<<<<< Updated upstream
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
@@ -1992,6 +2047,8 @@ Unloading 57 unused Assets / (2.1 MB). Loaded Objects now: 6959.
 Memory consumption went from 253.8 MB to 251.7 MB.
 Total: 5.606500 ms (FindLiveObjects: 0.561600 ms CreateObjectMapping: 0.571700 ms MarkObjects: 4.072900 ms  DeleteObjects: 0.399200 ms)
 =======
+=======
+>>>>>>> Stashed changes
 =======
 >>>>>>> Stashed changes
 =======
@@ -2271,6 +2328,9 @@ Total: 4.240000 ms (FindLiveObjects: 0.423400 ms CreateObjectMapping: 0.361800 m
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
 =======
 >>>>>>> Stashed changes
@@ -2297,6 +2357,7 @@ AssetImportParameters requested are different than current active one (requested
 Received Prepare
 Begin MonoManager ReloadAssembly
 - Loaded All Assemblies, in  0.581 seconds
+<<<<<<< Updated upstream
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
@@ -2413,6 +2474,8 @@ Total: 5.186000 ms (FindLiveObjects: 0.670200 ms CreateObjectMapping: 0.566800 m
 >>>>>>> Stashed changes
 =======
 >>>>>>> Stashed changes
+=======
+>>>>>>> Stashed changes
 Refreshing native plugins compatible for Editor in 3.19 ms, found 3 plugins.
 Native extension for WindowsStandalone target not found
 Native extension for Android target not found
@@ -2461,6 +2524,9 @@ Total: 4.071700 ms (FindLiveObjects: 0.429800 ms CreateObjectMapping: 0.329800 m
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
 =======
 >>>>>>> Stashed changes
@@ -2486,6 +2552,7 @@ AssetImportParameters requested are different than current active one (requested
 ========================================================================
 Received Prepare
 Begin MonoManager ReloadAssembly
+<<<<<<< Updated upstream
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
@@ -2541,6 +2608,8 @@ Total: 5.490000 ms (FindLiveObjects: 0.610500 ms CreateObjectMapping: 0.621600 m
 >>>>>>> Stashed changes
 =======
 >>>>>>> Stashed changes
+=======
+>>>>>>> Stashed changes
 - Loaded All Assemblies, in  0.551 seconds
 Refreshing native plugins compatible for Editor in 3.32 ms, found 3 plugins.
 Native extension for WindowsStandalone target not found
@@ -2590,6 +2659,9 @@ Total: 5.853100 ms (FindLiveObjects: 0.434800 ms CreateObjectMapping: 0.401500 m
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
 =======
 >>>>>>> Stashed changes
@@ -2615,6 +2687,7 @@ AssetImportParameters requested are different than current active one (requested
 ========================================================================
 Received Prepare
 Begin MonoManager ReloadAssembly
+<<<<<<< Updated upstream
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
@@ -2670,6 +2743,8 @@ Total: 4.777400 ms (FindLiveObjects: 0.582300 ms CreateObjectMapping: 0.562800 m
 >>>>>>> Stashed changes
 =======
 >>>>>>> Stashed changes
+=======
+>>>>>>> Stashed changes
 - Loaded All Assemblies, in  0.593 seconds
 Refreshing native plugins compatible for Editor in 3.32 ms, found 3 plugins.
 Native extension for WindowsStandalone target not found
@@ -2719,6 +2794,9 @@ Total: 5.922900 ms (FindLiveObjects: 0.480800 ms CreateObjectMapping: 0.325100 m
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
 =======
 >>>>>>> Stashed changes
@@ -2748,6 +2826,7 @@ Begin MonoManager ReloadAssembly
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 - Loaded All Assemblies, in  0.590 seconds
 Refreshing native plugins compatible for Editor in 5.29 ms, found 3 plugins.
 Native extension for WindowsStandalone target not found
@@ -2756,6 +2835,8 @@ Mono: successfully reloaded assembly
 Domain Reload Profiling: 2504ms
 	BeginReloadAssembly (194ms)
 =======
+=======
+>>>>>>> Stashed changes
 =======
 >>>>>>> Stashed changes
 =======
@@ -2838,6 +2919,9 @@ Domain Reload Profiling: 1882ms
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
 =======
 >>>>>>> Stashed changes
@@ -2850,6 +2934,7 @@ Domain Reload Profiling: 1882ms
 		BackupInstance (0ms)
 		ReleaseScriptingObjects (0ms)
 		CreateAndSetChildDomain (45ms)
+<<<<<<< Updated upstream
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
@@ -3011,6 +3096,8 @@ Unloading 57 unused Assets / (2.1 MB). Loaded Objects now: 7099.
 Memory consumption went from 267.3 MB to 265.1 MB.
 Total: 5.521400 ms (FindLiveObjects: 0.646400 ms CreateObjectMapping: 0.598800 ms MarkObjects: 3.748500 ms  DeleteObjects: 0.526800 ms)
 =======
+=======
+>>>>>>> Stashed changes
 =======
 >>>>>>> Stashed changes
 =======
@@ -3244,6 +3331,9 @@ Total: 6.605800 ms (FindLiveObjects: 0.634800 ms CreateObjectMapping: 0.497000 m
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
 =======
 >>>>>>> Stashed changes
@@ -3270,6 +3360,7 @@ AssetImportParameters requested are different than current active one (requested
 Received Prepare
 Begin MonoManager ReloadAssembly
 - Loaded All Assemblies, in  0.793 seconds
+<<<<<<< Updated upstream
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
@@ -3304,6 +3395,8 @@ Domain Reload Profiling: 2481ms
 >>>>>>> Stashed changes
 =======
 >>>>>>> Stashed changes
+=======
+>>>>>>> Stashed changes
 Refreshing native plugins compatible for Editor in 4.58 ms, found 3 plugins.
 Native extension for WindowsStandalone target not found
 Native extension for Android target not found
@@ -3332,6 +3425,9 @@ Domain Reload Profiling: 2178ms
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
 =======
 >>>>>>> Stashed changes
@@ -3343,6 +3439,7 @@ Domain Reload Profiling: 2178ms
 		RebuildScriptCaches (0ms)
 		SetupLoadedEditorAssemblies (647ms)
 			LogAssemblyErrors (0ms)
+<<<<<<< Updated upstream
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
@@ -3370,6 +3467,8 @@ Total: 4.927800 ms (FindLiveObjects: 0.614700 ms CreateObjectMapping: 0.555600 m
 >>>>>>> Stashed changes
 =======
 >>>>>>> Stashed changes
+=======
+>>>>>>> Stashed changes
 			InitializePlatformSupportModulesInManaged (32ms)
 			SetLoadedEditorAssemblies (3ms)
 			RefreshPlugins (0ms)
@@ -3389,6 +3488,9 @@ Total: 4.506600 ms (FindLiveObjects: 0.488100 ms CreateObjectMapping: 0.430100 m
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
 =======
 >>>>>>> Stashed changes
@@ -3414,6 +3516,7 @@ AssetImportParameters requested are different than current active one (requested
 ========================================================================
 Received Prepare
 Begin MonoManager ReloadAssembly
+<<<<<<< Updated upstream
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
@@ -3841,6 +3944,8 @@ Total: 5.048800 ms (FindLiveObjects: 0.619700 ms CreateObjectMapping: 0.566900 m
 >>>>>>> Stashed changes
 =======
 >>>>>>> Stashed changes
+=======
+>>>>>>> Stashed changes
 - Loaded All Assemblies, in  0.551 seconds
 Refreshing native plugins compatible for Editor in 2.91 ms, found 3 plugins.
 Native extension for WindowsStandalone target not found
@@ -3890,6 +3995,9 @@ Total: 4.444200 ms (FindLiveObjects: 0.465000 ms CreateObjectMapping: 0.192100 m
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
 =======
 >>>>>>> Stashed changes
@@ -3913,6 +4021,7 @@ AssetImportParameters requested are different than current active one (requested
   custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
   custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
 ========================================================================
+<<<<<<< Updated upstream
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
@@ -4366,6 +4475,8 @@ Domain Reload Profiling: 2219ms
 >>>>>>> Stashed changes
 =======
 >>>>>>> Stashed changes
+=======
+>>>>>>> Stashed changes
 Received Import Request.
   Time since last request: 6155.109122 seconds.
   path: Assets/GameInput.inputactions
@@ -4403,6 +4514,9 @@ Domain Reload Profiling: 2018ms
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
 =======
 >>>>>>> Stashed changes
@@ -4415,6 +4529,7 @@ Domain Reload Profiling: 2018ms
 		DisableScriptedObjects (5ms)
 		BackupInstance (0ms)
 		ReleaseScriptingObjects (0ms)
+<<<<<<< Updated upstream
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
@@ -4521,6 +4636,8 @@ Total: 4.774000 ms (FindLiveObjects: 0.611400 ms CreateObjectMapping: 0.482500 m
 >>>>>>> Stashed changes
 =======
 >>>>>>> Stashed changes
+=======
+>>>>>>> Stashed changes
 		CreateAndSetChildDomain (43ms)
 	RebuildCommonClasses (40ms)
 	RebuildNativeTypeToScriptingClass (15ms)
@@ -4557,6 +4674,9 @@ Total: 4.442400 ms (FindLiveObjects: 0.488000 ms CreateObjectMapping: 0.383100 m
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
 =======
 >>>>>>> Stashed changes
@@ -4580,6 +4700,7 @@ AssetImportParameters requested are different than current active one (requested
   custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
   custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
 ========================================================================
+<<<<<<< Updated upstream
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
@@ -4640,6 +4761,8 @@ Domain Reload Profiling: 2480ms
 >>>>>>> Stashed changes
 =======
 >>>>>>> Stashed changes
+=======
+>>>>>>> Stashed changes
 Received Prepare
 Begin MonoManager ReloadAssembly
 - Loaded All Assemblies, in  0.536 seconds
@@ -4654,6 +4777,9 @@ Domain Reload Profiling: 1818ms
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
 =======
 >>>>>>> Stashed changes
@@ -4665,6 +4791,7 @@ Domain Reload Profiling: 1818ms
 		DisableScriptedObjects (5ms)
 		BackupInstance (0ms)
 		ReleaseScriptingObjects (0ms)
+<<<<<<< Updated upstream
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
@@ -5107,6 +5234,8 @@ Total: 7.630200 ms (FindLiveObjects: 0.781500 ms CreateObjectMapping: 0.706800 m
 >>>>>>> Stashed changes
 =======
 >>>>>>> Stashed changes
+=======
+>>>>>>> Stashed changes
 		CreateAndSetChildDomain (39ms)
 	RebuildCommonClasses (34ms)
 	RebuildNativeTypeToScriptingClass (12ms)
@@ -5143,6 +5272,9 @@ Total: 4.835400 ms (FindLiveObjects: 0.470900 ms CreateObjectMapping: 0.406300 m
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
 =======
 >>>>>>> Stashed changes
@@ -5168,6 +5300,7 @@ AssetImportParameters requested are different than current active one (requested
 ========================================================================
 Received Prepare
 Begin MonoManager ReloadAssembly
+<<<<<<< Updated upstream
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
@@ -7008,6 +7141,8 @@ Total: 8.287400 ms (FindLiveObjects: 1.334900 ms CreateObjectMapping: 0.993200 m
 >>>>>>> Stashed changes
 =======
 >>>>>>> Stashed changes
+=======
+>>>>>>> Stashed changes
 - Loaded All Assemblies, in  0.514 seconds
 Refreshing native plugins compatible for Editor in 2.94 ms, found 3 plugins.
 Native extension for WindowsStandalone target not found
@@ -7057,6 +7192,9 @@ Total: 4.386700 ms (FindLiveObjects: 0.515400 ms CreateObjectMapping: 0.371700 m
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
 =======
 >>>>>>> Stashed changes
@@ -7082,6 +7220,7 @@ AssetImportParameters requested are different than current active one (requested
 ========================================================================
 Received Prepare
 Begin MonoManager ReloadAssembly
+<<<<<<< Updated upstream
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
@@ -7199,6 +7338,8 @@ Total: 8.444200 ms (FindLiveObjects: 1.025200 ms CreateObjectMapping: 0.807900 m
 >>>>>>> Stashed changes
 =======
 >>>>>>> Stashed changes
+=======
+>>>>>>> Stashed changes
 - Loaded All Assemblies, in  0.516 seconds
 Refreshing native plugins compatible for Editor in 3.14 ms, found 3 plugins.
 Native extension for WindowsStandalone target not found
@@ -7248,6 +7389,9 @@ Total: 4.887800 ms (FindLiveObjects: 0.466100 ms CreateObjectMapping: 0.333400 m
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
 =======
 >>>>>>> Stashed changes
@@ -7273,6 +7417,7 @@ AssetImportParameters requested are different than current active one (requested
 ========================================================================
 Received Prepare
 Begin MonoManager ReloadAssembly
+<<<<<<< Updated upstream
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
@@ -7452,6 +7597,8 @@ Total: 10.242200 ms (FindLiveObjects: 0.783300 ms CreateObjectMapping: 0.759600 
 >>>>>>> Stashed changes
 =======
 >>>>>>> Stashed changes
+=======
+>>>>>>> Stashed changes
 - Loaded All Assemblies, in  0.533 seconds
 Refreshing native plugins compatible for Editor in 3.96 ms, found 3 plugins.
 Native extension for WindowsStandalone target not found
@@ -7501,6 +7648,9 @@ Total: 4.300600 ms (FindLiveObjects: 0.445800 ms CreateObjectMapping: 0.371200 m
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
 =======
 >>>>>>> Stashed changes
