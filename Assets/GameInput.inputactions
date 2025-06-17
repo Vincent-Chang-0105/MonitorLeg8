@@ -33,7 +33,7 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "OpenMenu",
+                    "name": "EscapeKey",
                     "type": "PassThrough",
                     "id": "8e5e4ec7-bed6-4002-ba01-87281242feb6",
                     "expectedControlType": "",
@@ -204,7 +204,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "KeyboardMouse",
-                    "action": "OpenMenu",
+                    "action": "EscapeKey",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

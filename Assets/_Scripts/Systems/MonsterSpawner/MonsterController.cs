@@ -245,9 +245,15 @@ public class MonsterController : MonoBehaviour
     
     protected virtual IEnumerator JumpScareRoutine()
     {
-        yield return new WaitForSeconds(1.5f); // Jumpscare duration
-        
-        UIEvents.OpenDeathScreen(); // Trigger death screen
+        // Get the animation length for the jumpscare
+        AnimatorStateInfo stateInfo = animator.GetCurrentAnimatorStateInfo(0);
+        float jumpscareAnimationLength = stateInfo.length;
+
+        // Wait for animation to complete
+        yield return new WaitForSeconds(jumpscareAnimationLength);
+    
+        // Trigger death screen
+        UIEvents.OpenDeathScreen();
     }
     
     // Public methods for external acc ess
