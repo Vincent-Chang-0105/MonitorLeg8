@@ -1,18 +1,27 @@
 {
   "Version": 1,
-<<<<<<< HEAD
-  "WorkspaceRootPath": "C:\\Users\\enama\\Documents\\GitHub\\MonitorLeg8\\",
-  "Documents": [
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\enama\\Documents\\GitHub\\MonitorLeg8\\Library\\PackageCache\\com.unity.render-pipelines.universal@14.0.10\\Shaders\\Lit.shader||{3B902123-F8A7-4915-9F01-361F908088D0}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Library\\PackageCache\\com.unity.render-pipelines.universal@14.0.10\\Shaders\\Lit.shader||{3B902123-F8A7-4915-9F01-361F908088D0}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{4D58ADCE-1E2C-BC95-1270-4855F6E340C9}|Assembly-CSharp.csproj|c:\\users\\enama\\documents\\github\\monitorleg8\\assets\\_scripts\\player\\playerinteraction\\playerinteraction.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{4D58ADCE-1E2C-BC95-1270-4855F6E340C9}|Assembly-CSharp.csproj|solutionrelative:assets\\_scripts\\player\\playerinteraction\\playerinteraction.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-=======
   "WorkspaceRootPath": "E:\\github\\MonitorLeg8\\",
   "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{4D58ADCE-1E2C-BC95-1270-4855F6E340C9}|Assembly-CSharp.csproj|e:\\github\\monitorleg8\\assets\\_scripts\\systems\\interaction\\movingobjectinteractable.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4D58ADCE-1E2C-BC95-1270-4855F6E340C9}|Assembly-CSharp.csproj|solutionrelative:assets\\_scripts\\systems\\interaction\\movingobjectinteractable.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4D58ADCE-1E2C-BC95-1270-4855F6E340C9}|Assembly-CSharp.csproj|e:\\github\\monitorleg8\\assets\\_scripts\\systems\\input\\inputsystem.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4D58ADCE-1E2C-BC95-1270-4855F6E340C9}|Assembly-CSharp.csproj|solutionrelative:assets\\_scripts\\systems\\input\\inputsystem.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4D58ADCE-1E2C-BC95-1270-4855F6E340C9}|Assembly-CSharp.csproj|E:\\github\\MonitorLeg8\\assets\\_scripts\\systems\\audio\\music\\musicmanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4D58ADCE-1E2C-BC95-1270-4855F6E340C9}|Assembly-CSharp.csproj|solutionrelative:assets\\_scripts\\systems\\audio\\music\\musicmanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4D58ADCE-1E2C-BC95-1270-4855F6E340C9}|Assembly-CSharp.csproj|E:\\github\\MonitorLeg8\\assets\\_scripts\\systems\\audio\\sound\\soundmanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4D58ADCE-1E2C-BC95-1270-4855F6E340C9}|Assembly-CSharp.csproj|solutionrelative:assets\\_scripts\\systems\\audio\\sound\\soundmanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4D58ADCE-1E2C-BC95-1270-4855F6E340C9}|Assembly-CSharp.csproj|E:\\github\\MonitorLeg8\\assets\\_scripts\\systems\\audio\\sound\\sounddata.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4D58ADCE-1E2C-BC95-1270-4855F6E340C9}|Assembly-CSharp.csproj|solutionrelative:assets\\_scripts\\systems\\audio\\sound\\sounddata.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
     {
       "AbsoluteMoniker": "D:0:0:{4D58ADCE-1E2C-BC95-1270-4855F6E340C9}|Assembly-CSharp.csproj|E:\\github\\MonitorLeg8\\assets\\_scripts\\systems\\monsterspawner\\monstercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{4D58ADCE-1E2C-BC95-1270-4855F6E340C9}|Assembly-CSharp.csproj|solutionrelative:assets\\_scripts\\systems\\monsterspawner\\monstercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
@@ -22,17 +31,16 @@
       "RelativeMoniker": "D:0:0:{4D58ADCE-1E2C-BC95-1270-4855F6E340C9}|Assembly-CSharp.csproj|solutionrelative:assets\\_scripts\\player\\playerinteraction\\playerinteraction.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{4D58ADCE-1E2C-BC95-1270-4855F6E340C9}|Assembly-CSharp.csproj|E:\\github\\MonitorLeg8\\assets\\_scripts\\systems\\hint system\\hintevents.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{4D58ADCE-1E2C-BC95-1270-4855F6E340C9}|Assembly-CSharp.csproj|solutionrelative:assets\\_scripts\\systems\\hint system\\hintevents.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{4D58ADCE-1E2C-BC95-1270-4855F6E340C9}|Assembly-CSharp.csproj|E:\\github\\MonitorLeg8\\assets\\_scripts\\systems\\gamecore\\gamemanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4D58ADCE-1E2C-BC95-1270-4855F6E340C9}|Assembly-CSharp.csproj|solutionrelative:assets\\_scripts\\systems\\gamecore\\gamemanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{4D58ADCE-1E2C-BC95-1270-4855F6E340C9}|Assembly-CSharp.csproj|e:\\github\\monitorleg8\\assets\\_scripts\\ui\\menu\\deathscreen.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{4D58ADCE-1E2C-BC95-1270-4855F6E340C9}|Assembly-CSharp.csproj|solutionrelative:assets\\_scripts\\ui\\menu\\deathscreen.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{4D58ADCE-1E2C-BC95-1270-4855F6E340C9}|Assembly-CSharp.csproj|E:\\github\\MonitorLeg8\\assets\\_scripts\\ui\\menu\\mainmenueventhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4D58ADCE-1E2C-BC95-1270-4855F6E340C9}|Assembly-CSharp.csproj|solutionrelative:assets\\_scripts\\ui\\menu\\mainmenueventhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{4D58ADCE-1E2C-BC95-1270-4855F6E340C9}|Assembly-CSharp.csproj|E:\\github\\MonitorLeg8\\assets\\_scripts\\ui\\menu\\uievents.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{4D58ADCE-1E2C-BC95-1270-4855F6E340C9}|Assembly-CSharp.csproj|solutionrelative:assets\\_scripts\\ui\\menu\\uievents.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
->>>>>>> Vince
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|E:\\github\\MonitorLeg8\\Library\\PackageCache\\com.unity.render-pipelines.universal@14.0.10\\Shaders\\Lit.shader||{3B902123-F8A7-4915-9F01-361F908088D0}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Library\\PackageCache\\com.unity.render-pipelines.universal@14.0.10\\Shaders\\Lit.shader||{3B902123-F8A7-4915-9F01-361F908088D0}"
     }
   ],
   "DocumentGroupContainers": [
@@ -42,99 +50,129 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-<<<<<<< HEAD
           "SelectedChildIndex": 0,
           "Children": [
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "Lit.shader",
-              "DocumentMoniker": "C:\\Users\\enama\\Documents\\GitHub\\MonitorLeg8\\Library\\PackageCache\\com.unity.render-pipelines.universal@14.0.10\\Shaders\\Lit.shader",
-              "RelativeDocumentMoniker": "Library\\PackageCache\\com.unity.render-pipelines.universal@14.0.10\\Shaders\\Lit.shader",
-              "ToolTip": "C:\\Users\\enama\\Documents\\GitHub\\MonitorLeg8\\Library\\PackageCache\\com.unity.render-pipelines.universal@14.0.10\\Shaders\\Lit.shader",
-              "RelativeToolTip": "Library\\PackageCache\\com.unity.render-pipelines.universal@14.0.10\\Shaders\\Lit.shader",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002777|",
-              "WhenOpened": "2025-05-26T15:39:43.07Z",
-=======
-          "SelectedChildIndex": 4,
-          "Children": [
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "UIEvents.cs",
-              "DocumentMoniker": "E:\\github\\MonitorLeg8\\Assets\\_Scripts\\UI\\Menu\\UIEvents.cs",
-              "RelativeDocumentMoniker": "Assets\\_Scripts\\UI\\Menu\\UIEvents.cs",
-              "ToolTip": "E:\\github\\MonitorLeg8\\Assets\\_Scripts\\UI\\Menu\\UIEvents.cs",
-              "RelativeToolTip": "Assets\\_Scripts\\UI\\Menu\\UIEvents.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAoAAAAdAAAA",
+              "Title": "MovingObjectInteractable.cs",
+              "DocumentMoniker": "E:\\github\\MonitorLeg8\\Assets\\_Scripts\\Systems\\InterAction\\MovingObjectInteractable.cs",
+              "RelativeDocumentMoniker": "Assets\\_Scripts\\Systems\\InterAction\\MovingObjectInteractable.cs",
+              "ToolTip": "E:\\github\\MonitorLeg8\\Assets\\_Scripts\\Systems\\InterAction\\MovingObjectInteractable.cs",
+              "RelativeToolTip": "Assets\\_Scripts\\Systems\\InterAction\\MovingObjectInteractable.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-27T02:58:56.883Z",
-              "IsPinned": true,
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "DeathScreen.cs",
-              "DocumentMoniker": "E:\\github\\MonitorLeg8\\Assets\\_Scripts\\UI\\Menu\\DeathScreen.cs",
-              "RelativeDocumentMoniker": "Assets\\_Scripts\\UI\\Menu\\DeathScreen.cs",
-              "ToolTip": "E:\\github\\MonitorLeg8\\Assets\\_Scripts\\UI\\Menu\\DeathScreen.cs",
-              "RelativeToolTip": "Assets\\_Scripts\\UI\\Menu\\DeathScreen.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAB0AAAApAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-27T03:38:52.85Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "HintEvents.cs",
-              "DocumentMoniker": "E:\\github\\MonitorLeg8\\Assets\\_Scripts\\Systems\\Hint System\\HintEvents.cs",
-              "RelativeDocumentMoniker": "Assets\\_Scripts\\Systems\\Hint System\\HintEvents.cs",
-              "ToolTip": "E:\\github\\MonitorLeg8\\Assets\\_Scripts\\Systems\\Hint System\\HintEvents.cs",
-              "RelativeToolTip": "Assets\\_Scripts\\Systems\\Hint System\\HintEvents.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAcAAAAhAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-27T03:00:35.605Z",
->>>>>>> Vince
+              "WhenOpened": "2025-06-17T01:22:47.69Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "PlayerInteraction.cs",
-<<<<<<< HEAD
-              "DocumentMoniker": "C:\\Users\\enama\\Documents\\GitHub\\MonitorLeg8\\Assets\\_Scripts\\Player\\PlayerInteraction\\PlayerInteraction.cs",
-              "RelativeDocumentMoniker": "Assets\\_Scripts\\Player\\PlayerInteraction\\PlayerInteraction.cs",
-              "ToolTip": "C:\\Users\\enama\\Documents\\GitHub\\MonitorLeg8\\Assets\\_Scripts\\Player\\PlayerInteraction\\PlayerInteraction.cs",
-              "RelativeToolTip": "Assets\\_Scripts\\Player\\PlayerInteraction\\PlayerInteraction.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABUAAAAAAAAAAAAAAA==",
+              "Title": "InputSystem.cs",
+              "DocumentMoniker": "E:\\github\\MonitorLeg8\\Assets\\_Scripts\\Systems\\Input\\InputSystem.cs",
+              "RelativeDocumentMoniker": "Assets\\_Scripts\\Systems\\Input\\InputSystem.cs",
+              "ToolTip": "E:\\github\\MonitorLeg8\\Assets\\_Scripts\\Systems\\Input\\InputSystem.cs",
+              "RelativeToolTip": "Assets\\_Scripts\\Systems\\Input\\InputSystem.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAxwAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-26T14:28:28.034Z",
-=======
-              "DocumentMoniker": "E:\\github\\MonitorLeg8\\Assets\\_Scripts\\Player\\PlayerInteraction\\PlayerInteraction.cs",
-              "RelativeDocumentMoniker": "Assets\\_Scripts\\Player\\PlayerInteraction\\PlayerInteraction.cs",
-              "ToolTip": "E:\\github\\MonitorLeg8\\Assets\\_Scripts\\Player\\PlayerInteraction\\PlayerInteraction.cs",
-              "RelativeToolTip": "Assets\\_Scripts\\Player\\PlayerInteraction\\PlayerInteraction.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAkAAAAxAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-27T02:36:34.975Z",
+              "WhenOpened": "2025-06-11T03:10:45.559Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 2,
+              "Title": "MusicManager.cs",
+              "DocumentMoniker": "E:\\github\\MonitorLeg8\\Assets\\_Scripts\\Systems\\Audio\\Music\\MusicManager.cs",
+              "RelativeDocumentMoniker": "Assets\\_Scripts\\Systems\\Audio\\Music\\MusicManager.cs",
+              "ToolTip": "E:\\github\\MonitorLeg8\\Assets\\_Scripts\\Systems\\Audio\\Music\\MusicManager.cs",
+              "RelativeToolTip": "Assets\\_Scripts\\Systems\\Audio\\Music\\MusicManager.cs",
+              "ViewState": "AQIAAD4AAAAAAAAAAAAswAwAAAAgAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-11T03:09:31.83Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
               "Title": "MonsterController.cs",
               "DocumentMoniker": "E:\\github\\MonitorLeg8\\Assets\\_Scripts\\Systems\\MonsterSpawner\\MonsterController.cs",
               "RelativeDocumentMoniker": "Assets\\_Scripts\\Systems\\MonsterSpawner\\MonsterController.cs",
-              "ToolTip": "E:\\github\\MonitorLeg8\\Assets\\_Scripts\\Systems\\MonsterSpawner\\MonsterController.cs",
-              "RelativeToolTip": "Assets\\_Scripts\\Systems\\MonsterSpawner\\MonsterController.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA0AAAA6AAAA",
+              "ToolTip": "E:\\github\\MonitorLeg8\\Assets\\_Scripts\\Systems\\MonsterSpawner\\MonsterController.cs*",
+              "RelativeToolTip": "Assets\\_Scripts\\Systems\\MonsterSpawner\\MonsterController.cs*",
+              "ViewState": "AQIAALMAAAAAAAAAAAAswMQAAAANAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-27T01:29:14.809Z",
->>>>>>> Vince
-              "EditorCaption": ""
+              "WhenOpened": "2025-06-11T03:00:41.203Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "SoundData.cs",
+              "DocumentMoniker": "E:\\github\\MonitorLeg8\\Assets\\_Scripts\\Systems\\Audio\\Sound\\SoundData.cs",
+              "RelativeDocumentMoniker": "Assets\\_Scripts\\Systems\\Audio\\Sound\\SoundData.cs",
+              "ToolTip": "E:\\github\\MonitorLeg8\\Assets\\_Scripts\\Systems\\Audio\\Sound\\SoundData.cs",
+              "RelativeToolTip": "Assets\\_Scripts\\Systems\\Audio\\Sound\\SoundData.cs",
+              "ViewState": "AQIAAAYAAAAAAAAAAAAAAA0AAAAZAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-11T02:55:08.18Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "SoundManager.cs",
+              "DocumentMoniker": "E:\\github\\MonitorLeg8\\Assets\\_Scripts\\Systems\\Audio\\Sound\\SoundManager.cs",
+              "RelativeDocumentMoniker": "Assets\\_Scripts\\Systems\\Audio\\Sound\\SoundManager.cs",
+              "ToolTip": "E:\\github\\MonitorLeg8\\Assets\\_Scripts\\Systems\\Audio\\Sound\\SoundManager.cs",
+              "RelativeToolTip": "Assets\\_Scripts\\Systems\\Audio\\Sound\\SoundManager.cs",
+              "ViewState": "AQIAACMAAAAAAAAAAAAgwC0AAAAfAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-11T02:53:37.486Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "MainMenuEventHandler.cs",
+              "DocumentMoniker": "E:\\github\\MonitorLeg8\\Assets\\_Scripts\\UI\\Menu\\MainMenuEventHandler.cs",
+              "RelativeDocumentMoniker": "Assets\\_Scripts\\UI\\Menu\\MainMenuEventHandler.cs",
+              "ToolTip": "E:\\github\\MonitorLeg8\\Assets\\_Scripts\\UI\\Menu\\MainMenuEventHandler.cs",
+              "RelativeToolTip": "Assets\\_Scripts\\UI\\Menu\\MainMenuEventHandler.cs",
+              "ViewState": "AQIAAFcAAAAAAAAAAAAowF8AAAAmAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-11T02:46:23.598Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "GameManager.cs",
+              "DocumentMoniker": "E:\\github\\MonitorLeg8\\Assets\\_Scripts\\Systems\\GameCore\\GameManager.cs",
+              "RelativeDocumentMoniker": "Assets\\_Scripts\\Systems\\GameCore\\GameManager.cs",
+              "ToolTip": "E:\\github\\MonitorLeg8\\Assets\\_Scripts\\Systems\\GameCore\\GameManager.cs",
+              "RelativeToolTip": "Assets\\_Scripts\\Systems\\GameCore\\GameManager.cs",
+              "ViewState": "AQIAACkAAAAAAAAAAAAkwKQAAAAEAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-11T02:28:07.069Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "Lit.shader",
+              "DocumentMoniker": "E:\\github\\MonitorLeg8\\Library\\PackageCache\\com.unity.render-pipelines.universal@14.0.10\\Shaders\\Lit.shader",
+              "RelativeDocumentMoniker": "Library\\PackageCache\\com.unity.render-pipelines.universal@14.0.10\\Shaders\\Lit.shader",
+              "ToolTip": "E:\\github\\MonitorLeg8\\Library\\PackageCache\\com.unity.render-pipelines.universal@14.0.10\\Shaders\\Lit.shader",
+              "RelativeToolTip": "Library\\PackageCache\\com.unity.render-pipelines.universal@14.0.10\\Shaders\\Lit.shader",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002777|",
+              "WhenOpened": "2025-06-11T02:28:06.582Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "PlayerInteraction.cs",
+              "DocumentMoniker": "E:\\github\\MonitorLeg8\\Assets\\_Scripts\\Player\\PlayerInteraction\\PlayerInteraction.cs",
+              "RelativeDocumentMoniker": "Assets\\_Scripts\\Player\\PlayerInteraction\\PlayerInteraction.cs",
+              "ToolTip": "E:\\github\\MonitorLeg8\\Assets\\_Scripts\\Player\\PlayerInteraction\\PlayerInteraction.cs",
+              "RelativeToolTip": "Assets\\_Scripts\\Player\\PlayerInteraction\\PlayerInteraction.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-11T02:28:06.614Z"
             }
           ]
         }
