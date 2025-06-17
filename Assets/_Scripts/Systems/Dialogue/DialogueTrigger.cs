@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Xml.Serialization;
 using UnityEngine;
 
 [System.Serializable]
@@ -26,9 +27,33 @@ public class DialogueTrigger : MonoBehaviour
 {
     public Dialogue dialogue;
 
+    [Header("Trigger Settings")]
+    public bool canTriggerMultipleTimes = false;
+    public bool disableColliderAfterUse = true;
+
+    private bool hasTriggered = false;
+    private Collider triggerCollider;
+
+    private void Start()
+    {
+        triggerCollider = GetComponent<Collider>();
+    }
+
     public void TriggerDialogue()
     {
+        if (hasTriggered && !canTriggerMultipleTimes)
+        {
+            return;
+        }
+
         DialogueManager.Instance.StartDialogue(dialogue);
+        hasTriggered = true;
+
+        if (disableColliderAfterUse && triggerCollider != null)
+        {
+            triggerCollider.enabled = false;
+            Debug.Log("DialogueTrigger has been disabled after first use.");
+        }
     }
 
     private void OnTriggerEnter(Collider collision)
@@ -38,5 +63,15 @@ public class DialogueTrigger : MonoBehaviour
             TriggerDialogue();
             Debug.Log("Player has collided with the DialogueTrigger.");
         }
+    }
+
+    public void ResetTrigger()
+    {
+        hasTriggered = false;
+        if (triggerCollider != null)
+        {
+            triggerCollider.enabled = true;
+        }
+        Debug.Log("DialogueTrigger has been reset.");
     }
 }
