@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using AudioSystem;
+using Cinemachine;
 
 public class MovingObjectInteractable : Interactable
 {
@@ -19,10 +20,21 @@ public class MovingObjectInteractable : Interactable
     [SerializeField] private Ease easeType = Ease.InOutQuad; // Easing function
 
     [Header("Coordinate-Based Movement")]
-    [SerializeField] private Vector3 targetCoordinates = Vector3.zero; 
+    [SerializeField] private Vector3 targetCoordinates = Vector3.zero;
 
     [Header("Waypoint Movement")]
     [SerializeField] private Vector3 waypointCoordinates = Vector3.zero;
+
+    [Header("Lever Animation")]
+    [SerializeField] private Animator leverAnimator; // Reference to the lever's animator
+    [SerializeField] private string leverOnTrigger = "Lever_Switch_On_Animation"; // Name of the "on" trigger
+    [SerializeField] private string leverOffTrigger = "Lever_Switch_Off_Animation"; // Name of the "off" trigger
+
+    [Header("Virtual Camera")]
+    [SerializeField] private bool useCameraSwitch = false; // Toggle for camera switching
+    [SerializeField] private CinemachineVirtualCamera virtualCamera; // Reference to the virtual camera
+    [SerializeField] private bool followMovingObject = true; // Whether the camera should follow the moving object
+    [SerializeField] private bool onlyDuringMovement = true; // Switch camera only during movement duration
 
     [Header("Sounds")]
     [SerializeField] SoundData interactButtonClick;
@@ -34,12 +46,40 @@ public class MovingObjectInteractable : Interactable
     private Vector3 waypointPosition;
     private bool isMoving = false;
     private bool isAtOriginalPosition = true;
+    private bool cameraIsActive = false;
+
+    private void TriggerLeverAnimation(bool isOn)
+    {
+        if (leverAnimator != null)
+        {
+            if (isOn)
+            {
+                leverAnimator.SetTrigger(leverOnTrigger);
+            }
+            else
+            {
+                leverAnimator.SetTrigger(leverOffTrigger);
+            }
+        }
+    }
 
     private void MoveObject()
     {
         if (isMoving) return; // Prevent multiple interactions while moving
 
         isMoving = true;
+
+        // Trigger lever animation based on current state
+        // If at original position, we're moving to target (turn on)
+        // If at target position, we're returning to original (turn off)
+        bool shouldTurnOn = isAtOriginalPosition;
+        TriggerLeverAnimation(shouldTurnOn);
+
+        // Switch to virtual camera if enabled
+        if (useCameraSwitch && virtualCamera != null)
+        {
+            SwitchToVirtualCamera();
+        }
 
         if (useWaypoint && isAtOriginalPosition)
         {
@@ -55,6 +95,7 @@ public class MovingObjectInteractable : Interactable
                         {
                             isMoving = false;
                             isAtOriginalPosition = false;
+                            ReturnToOriginalCamera();
                         });
                 });
         }
@@ -72,6 +113,7 @@ public class MovingObjectInteractable : Interactable
                         {
                             isMoving = false;
                             isAtOriginalPosition = true;
+                            ReturnToOriginalCamera();
                         });
                 });
         }
@@ -87,15 +129,42 @@ public class MovingObjectInteractable : Interactable
                 {
                     isMoving = false;
                     isAtOriginalPosition = !isAtOriginalPosition; // Toggle position state
+                    ReturnToOriginalCamera();
                 });
 
             soundBuilder.WithPosition(objectToMove.transform.position).Play(interactMoveObject);
         }
     }
 
+    private void SwitchToVirtualCamera()
+    {
+        if (cameraIsActive) return;
+
+        // Set up the virtual camera to follow/look at the moving object if enabled
+        if (followMovingObject && objectToMove != null)
+        {
+            virtualCamera.Follow = objectToMove;
+            virtualCamera.LookAt = objectToMove;
+        }
+
+        // Activate the virtual camera
+        virtualCamera.Priority = 20; // Higher priority than default cameras (usually 10)
+        cameraIsActive = true;
+    }
+
+    private void ReturnToOriginalCamera()
+    {
+        // Return to original camera after movement completes
+        if (useCameraSwitch && virtualCamera != null && cameraIsActive && onlyDuringMovement)
+        {
+            virtualCamera.Priority = 0;
+            cameraIsActive = false;
+        }
+    }
+
     private void OnDrawGizmos()
     {
-       if (objectToMove == null) return;
+        if (objectToMove == null) return;
 
         Vector3 startPos = Application.isPlaying ? originalPosition : objectToMove.position;
         Vector3 endPos;
@@ -152,7 +221,7 @@ public class MovingObjectInteractable : Interactable
             Vector3 direction = (endPos - startPos).normalized;
             Vector3 arrowHead1 = endPos - direction * 0.2f + Vector3.Cross(direction, Vector3.up) * 0.1f;
             Vector3 arrowHead2 = endPos - direction * 0.2f - Vector3.Cross(direction, Vector3.up) * 0.1f;
-            
+
             Gizmos.DrawLine(endPos, arrowHead1);
             Gizmos.DrawLine(endPos, arrowHead2);
         }
@@ -174,7 +243,7 @@ public class MovingObjectInteractable : Interactable
         {
             originalPosition = objectToMove.position;
             waypointPosition = waypointCoordinates;
-            
+
             if (useCoordinates)
             {
                 targetPosition = targetCoordinates;
@@ -182,11 +251,16 @@ public class MovingObjectInteractable : Interactable
             else
             {
                 targetPosition = originalPosition + (moveDirection.normalized * moveDistance);
-            } 
+            }
+
+            // Validate lever animator setup
+            if (leverAnimator == null)
+            {
+                Debug.LogWarning("Lever Animator is not assigned in " + gameObject.name);
+            }
         }
         else
         {
-
             Debug.LogError("Object to move is not assigned in " + gameObject.name);
         }
 

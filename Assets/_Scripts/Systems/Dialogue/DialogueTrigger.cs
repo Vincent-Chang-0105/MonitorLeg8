@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Xml.Serialization;
 using UnityEngine;
+using UnityEngine.Events;
 
 [System.Serializable]
 public class DialogueCharacter
@@ -15,12 +16,15 @@ public class DialogueLine
     public DialogueCharacter character;
     [TextArea(3, 10)]
     public string line;
+
 }
 
 [System.Serializable]
 public class Dialogue
 {
     public List<DialogueLine> dialogueLines = new List<DialogueLine>();
+    public UnityEvent OnDialogueStart;
+    public UnityEvent OnDialogueEnd;
 }
 
 public class DialogueTrigger : MonoBehaviour

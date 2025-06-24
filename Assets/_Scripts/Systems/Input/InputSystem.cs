@@ -15,7 +15,7 @@ public class InputSystem : PersistentSingleton<InputSystem> {
     public event UnityAction<Vector2> MoveEvent;
     public event UnityAction<Vector2> LookEvent;
     public event UnityAction<bool> SprintEvent;
-    public event UnityAction OpenMenuEvent;
+    public event UnityAction EscapeKeyEvent;
 
     private ActionMap _currentActionMap = ActionMap.Player;
     public ActionMap CurrentActionMap => _currentActionMap;
@@ -62,11 +62,11 @@ public class InputSystem : PersistentSingleton<InputSystem> {
         SprintEvent?.Invoke(value.isPressed);
     }
 
-    public void OnOpenMenu(InputValue value)
+    public void OnEscapeKey(InputValue value)
     {
         if(value.isPressed)
         {
-            OpenMenuEvent?.Invoke();
+            EscapeKeyEvent?.Invoke();
         }
     }
 
@@ -80,6 +80,12 @@ public class InputSystem : PersistentSingleton<InputSystem> {
         if (!value)
         {
             LookEvent?.Invoke(Vector2.zero);
+        }
+
+        // Reset move input to zero when disabling input
+        if (!value)
+        {
+            MoveEvent?.Invoke(Vector2.zero);
         }
     }
 

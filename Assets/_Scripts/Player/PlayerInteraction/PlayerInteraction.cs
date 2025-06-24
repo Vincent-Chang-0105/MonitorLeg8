@@ -36,6 +36,17 @@ public class PlayerInteraction : MonoBehaviour
                 newOutline = hit.collider.GetComponentInChildren<Outline>();
             }
 
+            if (interactable == null)
+            {
+                // Check if the object has an Interactable component in its parent or children
+                interactable = hit.collider.GetComponentInParent<Interactable>();
+            }
+
+            if (interactable == null)
+            {
+                interactable = hit.collider.GetComponentInChildren<Interactable>();
+            }
+
             if (interactable != null)
             {
                 HandleInteraction(interactable);
