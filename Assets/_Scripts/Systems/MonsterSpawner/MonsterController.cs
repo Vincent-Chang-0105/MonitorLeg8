@@ -4,38 +4,74 @@ using Cinemachine;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.Events;
+using AudioSystem;
+using Unity.VisualScripting;
 
 public class MonsterController : MonoBehaviour
 {
     [Header("Monster Stats")]
-    [SerializeField] protected float minMoveSpeed = 2.5f;
-    [SerializeField] protected float maxMoveSpeed = 5.0f;
+    [SerializeField] protected float moveSpeed = 4f;
     [SerializeField] protected float jumpScareRange = 2f;
     [SerializeField] protected float detectionRange = 10f;
 
-    [SerializeField] UnityEvent preJumpscare;
+    [Header("Vision Settings")]
+    [SerializeField] private LayerMask visionObstacleLayers;  // Layers that block vision
+    [SerializeField] private bool drawVisionRay = true;  
+
+    [Header("Patrol Settings")]
+    [SerializeField] protected Transform[] patrolPoints;
+    [SerializeField] protected float patrolWaitTime = 2f;
+    [SerializeField] protected float patrolSpeed = 2f;
+
+    [Header("Animation Settings")]
+    [SerializeField] protected float animationTransitionTime = 0.1f;
+    [SerializeField] protected float movementThreshold = 0.1f; // Minimum speed to trigger movement animations
+
     // References
     protected Transform playerTransform;
     protected NavMeshAgent navAgent;
     protected Animator animator;
-    protected AudioSource audioSource;
+
+    // Animation parameter hashes (for performance)
+    private int speedHash;
+    private int isMovingHash;
+    private int stateHash;
+    private int jumpScareHash;
 
     // State Management
     public enum MonsterState
     {
         Idle,
         Chase,
+        Patrol,
         JumpScare
     }
 
     [Header("Debug")]
-    [SerializeField] protected MonsterState currentState = MonsterState.Chase;
+    [SerializeField] protected MonsterState currentState;
+
+    [Header("Sounds")]
+    [SerializeField] SoundData monsterFootstep;
+    [SerializeField] SoundData jumpscareSound;
+    private SoundBuilder soundBuilder;
+    [SerializeField] private float footstepRate = 0.3f;
+    private float footstepTimer = 0f;
 
     protected Vector3 startPosition;
-    protected float moveSpeed;
     protected float distanceToPlayer;
     private CinemachineVirtualCamera jumpscareCamera;
 
+    // Patrol state variables
+    private int currentPatrolIndex = 0;
+    private float patrolWaitTimer = 0f;
+    private bool waitingAtPatrolPoint = false;
+
+    // State control flags
+    private bool shouldChase = true; // Controls whether monster should chase or patrol
+
+    // Animation variables
+    private float currentAnimationSpeed = 0f;
+    private float targetAnimationSpeed = 0f;
 
     void Awake()
     {
@@ -43,9 +79,9 @@ public class MonsterController : MonoBehaviour
         jumpscareCamera = GetComponentInChildren<CinemachineVirtualCamera>();
         animator = GetComponentInChildren<Animator>();
 
-        // Randomize move speed
-        moveSpeed = Random.Range(minMoveSpeed, maxMoveSpeed);
-        
+        // Initialize animation parameter hashes
+        InitializeAnimationHashes();
+
         // Configure NavMeshAgent
         if (navAgent != null)
         {
@@ -55,11 +91,24 @@ public class MonsterController : MonoBehaviour
 
         // Find player
         playerTransform = GameObject.FindGameObjectWithTag("Player")?.transform;
-        
+
         startPosition = transform.position;
-        
-        // Start in idle state
-        ChangeState(MonsterState.Chase);
+
+        soundBuilder = SoundManager.Instance.CreateSoundBuilder();
+
+        ChangeState(MonsterState.Patrol); // Start in Patrol state
+    }
+
+    private void InitializeAnimationHashes()
+    {
+        if (animator != null)
+        {
+            // Cache animation parameter hashes for better performance
+            speedHash = Animator.StringToHash("Speed");
+            isMovingHash = Animator.StringToHash("IsMoving");
+            stateHash = Animator.StringToHash("State");
+            jumpScareHash = Animator.StringToHash("JumpScare");
+        }
     }
 
     void Update()
@@ -68,14 +117,97 @@ public class MonsterController : MonoBehaviour
         {
             distanceToPlayer = Vector3.Distance(transform.position, playerTransform.position);
         }
-        
+
         // Update current state
         UpdateState();
-        
+
         // Check for state transitions
         CheckStateTransitions();
+
+        // Handle footstep sounds
+        HandleFootstepSounds();
+
+        UpdateAnimations();
     }
-    
+
+    protected virtual void UpdateAnimations()
+    {
+        if (animator == null) return;
+
+        // Calculate current movement speed
+        float currentSpeed = navAgent != null ? navAgent.velocity.magnitude : 0f;
+        
+        // Determine target animation speed based on state and movement
+        switch (currentState)
+        {
+            case MonsterState.Idle:
+                targetAnimationSpeed = 0f;
+                break;
+            case MonsterState.Chase:
+                targetAnimationSpeed = currentSpeed > movementThreshold ? 1f : 0f;
+                break;
+            case MonsterState.Patrol:
+                targetAnimationSpeed = currentSpeed > movementThreshold ? 0.5f : 0f; // Patrol is slower
+                break;
+            case MonsterState.JumpScare:
+                targetAnimationSpeed = 0f;
+                break;
+        }
+
+        // Smooth animation speed transitions
+        currentAnimationSpeed = Mathf.Lerp(currentAnimationSpeed, targetAnimationSpeed, Time.deltaTime / animationTransitionTime);
+
+        // Update animator parameters
+        animator.SetFloat(speedHash, navAgent.speed);
+        animator.SetBool(isMovingHash, currentSpeed > movementThreshold);
+        animator.SetInteger(stateHash, (int)currentState);
+
+        // Optional: Sync animation speed with actual movement speed for more realistic animation
+        if (currentSpeed > movementThreshold)
+        {
+            float normalizedSpeed = currentSpeed / moveSpeed;
+            animator.speed = Mathf.Clamp(normalizedSpeed, 0.5f, 2f); // Prevent too slow/fast animations
+        }
+        else
+        {
+            animator.speed = 1f; // Normal speed for idle animations
+        }
+    }
+
+    protected virtual void HandleFootstepSounds()
+    {
+        // Play footstep sounds when chasing/patrolling and actually moving
+        if ((currentState == MonsterState.Chase || currentState == MonsterState.Patrol) && navAgent != null && monsterFootstep != null)
+        {
+            // Check if the monster is actually moving (velocity check)
+            float currentSpeed = navAgent.velocity.magnitude;
+
+            if (currentSpeed > 0.1f) // Only play footsteps when moving
+            {
+                // Adjust footstep rate based on speed - faster monsters have faster footsteps
+                float speedMultiplier = currentSpeed / moveSpeed; // Normalize speed
+                float currentFootstepRate = footstepRate / Mathf.Max(speedMultiplier, 0.5f); // Prevent too fast footsteps
+
+                footstepTimer -= Time.deltaTime;
+                if (footstepTimer <= 0)
+                {
+                    soundBuilder.WithPosition(transform.position).Play(monsterFootstep);
+                    footstepTimer = currentFootstepRate;
+                }
+            }
+            else
+            {
+                // Reset timer when not moving
+                footstepTimer = 0f;
+            }
+        }
+        else
+        {
+            // Reset timer when not in chase/patrol state
+            footstepTimer = 0f;
+        }
+    }
+
     protected virtual void UpdateState()
     {
         switch (currentState)
@@ -86,56 +218,99 @@ public class MonsterController : MonoBehaviour
             case MonsterState.Chase:
                 UpdateChaseState();
                 break;
+            case MonsterState.Patrol:
+                UpdatePatrolState();
+                break;
             case MonsterState.JumpScare:
                 UpdateJumpScareState();
                 break;
         }
     }
-    
+
     protected virtual void CheckStateTransitions()
     {
+        // Cast ray to check line of sight
+        Vector3 directionToPlayer = (playerTransform.position - transform.position).normalized;
+        Ray ray = new Ray(transform.position + Vector3.up, directionToPlayer);
+        bool hasLineOfSight = !Physics.Raycast(ray, distanceToPlayer, visionObstacleLayers);
         switch (currentState)
         {
             case MonsterState.Idle:
-                // Transition from Idle to Chase when player is in detection range
-                if (distanceToPlayer <= detectionRange)
+            case MonsterState.Patrol:
+                if (hasLineOfSight && distanceToPlayer <= detectionRange)
                 {
                     ChangeState(MonsterState.Chase);
+                    Debug.Log($"{gameObject.name}: Player detected, switching to Chase State");
                 }
+                // Transition from Patrol to JumpScare when close enough (if player gets too close during patrol)
+                if (distanceToPlayer <= jumpScareRange)
+                {
+                    ChangeState(MonsterState.JumpScare);
+                }
+
                 break;
-                
             case MonsterState.Chase:
                 // Transition from Chase to JumpScare when close enough
                 if (distanceToPlayer <= jumpScareRange)
                 {
                     ChangeState(MonsterState.JumpScare);
                 }
-                // Transition back to Idle if player gets too far away
-                else if (distanceToPlayer > detectionRange * 1.5f) // Add some hysteresis
+                else if (!hasLineOfSight)
                 {
-                    ChangeState(MonsterState.Idle);
+                    ChangeState(MonsterState.Patrol);
+                    Debug.Log($"{gameObject.name}: Lost sight of player, switching to Patrol State");
                 }
+
                 break;
-                
+
+
             case MonsterState.JumpScare:
-                // Transition back to Chase after jumpscare (you can modify this logic)
-                // For now, just go back to chase after a brief moment
+                // Transition back to appropriate state after jumpscare
                 break;
         }
     }
-    
+
     protected virtual void ChangeState(MonsterState newState)
     {
         // Exit current state
         ExitState(currentState);
-        
+
         // Change state
+        MonsterState previousState = currentState;
         currentState = newState;
-        
+
         // Enter new state
         EnterState(currentState);
+
+        // Trigger animation state change
+        OnStateChanged(previousState, newState);
     }
-    
+
+    protected virtual void OnStateChanged(MonsterState previousState, MonsterState newState)
+    {
+        if (animator == null) return;
+
+        // Handle specific animation transitions
+        switch (newState)
+        {
+            case MonsterState.Idle:
+                // Trigger idle animation
+                animator.SetTrigger("ToIdle");
+                break;
+            case MonsterState.Chase:
+                // Trigger chase/run animation
+                animator.SetTrigger("ToChase");
+                break;
+            case MonsterState.Patrol:
+                // Trigger walk/patrol animation
+                animator.SetTrigger("ToPatrol");
+                break;
+            case MonsterState.JumpScare:
+                // Trigger jumpscare animation
+                animator.CrossFadeInFixedTime("JumpScare", 0f); // 0f = instant transition
+                break;
+        }
+    }
     protected virtual void EnterState(MonsterState state)
     {
         switch (state)
@@ -146,12 +321,15 @@ public class MonsterController : MonoBehaviour
             case MonsterState.Chase:
                 EnterChaseState();
                 break;
+            case MonsterState.Patrol:
+                EnterPatrolState();
+                break;
             case MonsterState.JumpScare:
                 EnterJumpScareState();
                 break;
         }
     }
-    
+
     protected virtual void ExitState(MonsterState state)
     {
         switch (state)
@@ -162,12 +340,15 @@ public class MonsterController : MonoBehaviour
             case MonsterState.Chase:
                 ExitChaseState();
                 break;
+            case MonsterState.Patrol:
+                ExitPatrolState();
+                break;
             case MonsterState.JumpScare:
                 ExitJumpScareState();
                 break;
         }
     }
-    
+
     // IDLE STATE
     protected virtual void EnterIdleState()
     {
@@ -176,28 +357,36 @@ public class MonsterController : MonoBehaviour
         {
             navAgent.SetDestination(transform.position);
         }
-        
-        //Debug.Log($"{gameObject.name}: Entered Idle State");
+
+        // Set idle animation speed
+        if (animator != null)
+        {
+            animator.speed = 1f; // Normal speed for idle
+        }
     }
-    
+
     protected virtual void UpdateIdleState()
     {
         // Monster is idle - not moving, just waiting
         // You can add idle behaviors here later (patrol, random movement, etc.)
     }
-    
+
     protected virtual void ExitIdleState()
     {
         //Debug.Log($"{gameObject.name}: Exited Idle State");
     }
-    
+
     // CHASE STATE
     protected virtual void EnterChaseState()
     {
-        // Start chasing player
+        // Set chase speed
+        if (navAgent != null)
+        {
+            navAgent.speed = moveSpeed;
+        }
         //Debug.Log($"{gameObject.name}: Entered Chase State");
     }
-    
+
     protected virtual void UpdateChaseState()
     {
         // Chase the player
@@ -206,10 +395,114 @@ public class MonsterController : MonoBehaviour
             navAgent.SetDestination(playerTransform.position);
         }
     }
-    
+
     protected virtual void ExitChaseState()
     {
         //Debug.Log($"{gameObject.name}: Exited Chase State");
+    }
+
+    // PATROL STATE
+    protected virtual void EnterPatrolState()
+    {
+        // Set patrol speed (usually slower than chase)
+        if (navAgent != null)
+        {
+            navAgent.speed = patrolSpeed;
+        }
+
+        // Reset patrol variables
+        waitingAtPatrolPoint = false;
+        patrolWaitTimer = 0f;
+
+        // If no patrol points set, create some default ones or use start position
+        if (patrolPoints == null || patrolPoints.Length == 0)
+        {
+            // Create a simple back-and-forth patrol around start position
+            SetDefaultPatrolPoints();
+        }
+
+        // Start moving to the first patrol point
+        MoveToCurrentPatrolPoint();
+
+        //Debug.Log($"{gameObject.name}: Entered Patrol State");
+    }
+
+    protected virtual void UpdatePatrolState()
+    {
+        // If no patrol points, just stay idle
+        if (patrolPoints == null || patrolPoints.Length == 0)
+            return;
+
+        if (waitingAtPatrolPoint)
+        {
+            // Countdown at patrol point
+            patrolWaitTimer -= Time.deltaTime;
+            
+            if (patrolWaitTimer <= 0f)
+            {
+                // Finished waiting, move to next patrol point
+                waitingAtPatrolPoint = false;
+                currentPatrolIndex = (currentPatrolIndex + 1) % patrolPoints.Length;
+                MoveToCurrentPatrolPoint();
+            }
+        }
+        else
+        {
+            // Check if we've reached the current patrol point
+            if (navAgent != null && !navAgent.pathPending)
+            {
+                // Check if we're close enough to the destination
+                if (navAgent.remainingDistance <= navAgent.stoppingDistance + 0.1f)
+                {
+                    // Reached patrol point, start countdown
+                    waitingAtPatrolPoint = true;
+                    patrolWaitTimer = patrolWaitTime;
+                    
+                    // Stop moving
+                    navAgent.SetDestination(transform.position);
+                    
+                    //Debug.Log($"{gameObject.name}: Reached patrol point {currentPatrolIndex}, waiting for {patrolWaitTime} seconds");
+                }
+            }
+        }
+    }
+
+    protected virtual void ExitPatrolState()
+    {
+        //Debug.Log($"{gameObject.name}: Exited Patrol State");
+    }
+
+    private void MoveToCurrentPatrolPoint()
+    {
+        if (navAgent != null && patrolPoints != null && currentPatrolIndex < patrolPoints.Length)
+        {
+            if (patrolPoints[currentPatrolIndex] != null)
+            {
+                navAgent.SetDestination(patrolPoints[currentPatrolIndex].position);
+            }
+        }
+    }
+
+    private void SetDefaultPatrolPoints()
+    {
+        // Create simple patrol points around the start position if none are assigned
+        GameObject patrolParent = new GameObject($"{gameObject.name}_PatrolPoints");
+        patrolPoints = new Transform[4];
+
+        Vector3[] positions = {
+            startPosition + Vector3.forward * 5f,
+            startPosition + Vector3.right * 5f,
+            startPosition + Vector3.back * 5f,
+            startPosition + Vector3.left * 5f
+        };
+
+        for (int i = 0; i < positions.Length; i++)
+        {
+            GameObject patrolPoint = new GameObject($"PatrolPoint_{i}");
+            patrolPoint.transform.parent = patrolParent.transform;
+            patrolPoint.transform.position = positions[i];
+            patrolPoints[i] = patrolPoint.transform;
+        }
     }
 
     // JUMPSCARE STATE
@@ -225,24 +518,37 @@ public class MonsterController : MonoBehaviour
 
         // You can add jumpscare logic here
         InputSystem.Instance.SetInputState(false);
-
         jumpscareCamera.Priority = 20;
-        animator.SetTrigger("JumpScare");
+
+        // Trigger jumpscare animation
+        if (animator != null)
+        {
+            animator.SetTrigger(jumpScareHash);
+            animator.speed = 1f; // Ensure normal speed for jumpscare
+        }
+
+        soundBuilder.Play(jumpscareSound);
         // For now, automatically return to chase after 2 seconds
         StartCoroutine(JumpScareRoutine());
     }
-    
+
     protected virtual void UpdateJumpScareState()
     {
         // Monster is performing jumpscare
         // Keep looking at player or play animation
     }
-    
+
     protected virtual void ExitJumpScareState()
     {
+        // Re-enable input when exiting jumpscare
+        InputSystem.Instance.SetInputState(true);
+
+        // Reset camera priority
+        jumpscareCamera.Priority = 0;
+
         //Debug.Log($"{gameObject.name}: Exited JumpScare State");
     }
-    
+
     protected virtual IEnumerator JumpScareRoutine()
     {
         // Get the animation length for the jumpscare
@@ -295,27 +601,84 @@ public class MonsterController : MonoBehaviour
         // Trigger death screen
         UIEvents.OpenDeathScreen();
     }
+
+    // Methods to be called by collider triggers
+    public void SetChaseMode()
+    {
+        ChangeState(MonsterState.Chase);
+        //Debug.Log($"{gameObject.name}: Switched to Chase Mode");
+    }
+
+    public void SetPatrolMode()
+    {
+        ChangeState(MonsterState.Patrol);
+    }
     
-    // Public methods for external acc ess
+    // Public methods for external access
     public MonsterState GetCurrentState()
     {
         return currentState;
     }
-    
+
     public void ForceState(MonsterState state)
     {
         ChangeState(state);
     }
-    
+
+    public bool IsInChaseMode()
+    {
+        return shouldChase;
+    }
+
     // Gizmos for debugging
     void OnDrawGizmosSelected()
     {
         // Draw detection range
         Gizmos.color = Color.yellow;
         Gizmos.DrawWireSphere(transform.position, detectionRange);
-        
+
         // Draw jumpscare range
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, jumpScareRange);
+
+        // Draw patrol points
+        if (patrolPoints != null && patrolPoints.Length > 0)
+        {
+            Gizmos.color = Color.blue;
+            for (int i = 0; i < patrolPoints.Length; i++)
+            {
+                if (patrolPoints[i] != null)
+                {
+                    Gizmos.DrawWireSphere(patrolPoints[i].position, 1f);
+
+                    // Draw lines between patrol points
+                    int nextIndex = (i + 1) % patrolPoints.Length;
+                    if (patrolPoints[nextIndex] != null)
+                    {
+                        Gizmos.DrawLine(patrolPoints[i].position, patrolPoints[nextIndex].position);
+                    }
+                }
+            }
+        }
+        
+        // Draw vision ray if player exists
+        if (drawVisionRay && playerTransform != null)
+        {
+            Vector3 directionToPlayer = (playerTransform.position - transform.position).normalized;
+            Ray ray = new Ray(transform.position + Vector3.up, directionToPlayer);
+            
+            if (Physics.Raycast(ray, out RaycastHit hit, detectionRange, visionObstacleLayers))
+            {
+                // Ray hits obstacle - draw in red
+                Gizmos.color = Color.red;
+                Gizmos.DrawLine(ray.origin, hit.point);
+            }
+            else
+            {
+                // Clear line of sight - draw in green
+                Gizmos.color = Color.green;
+                Gizmos.DrawLine(ray.origin, ray.origin + directionToPlayer * detectionRange);
+            }
+        }
     }
 }

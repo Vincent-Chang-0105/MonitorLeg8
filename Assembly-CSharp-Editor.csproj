@@ -1,21 +1,26 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+﻿<Project ToolsVersion="Current">
   <!-- Generated file, do not modify, your changes will be overwritten (use AssetPostprocessor.OnGeneratedCSProject) -->
   <PropertyGroup>
-    <LangVersion>9.0</LangVersion>
+    <BaseIntermediateOutputPath>Temp\obj\$(Configuration)\$(MSBuildProjectName)</BaseIntermediateOutputPath>
+    <IntermediateOutputPath>$(BaseIntermediateOutputPath)</IntermediateOutputPath>
   </PropertyGroup>
+  <Import Project="Sdk.props" Sdk="Microsoft.NET.Sdk" />
+  <ItemGroup>
+    <ProjectCapability Include="Unity" />
+  </ItemGroup>
   <PropertyGroup>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <EnableDefaultItems>false</EnableDefaultItems>
+    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+    <LangVersion>9.0</LangVersion>
+    <Configurations>Debug;Release</Configurations>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>10.0.20506</ProductVersion>
-    <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace></RootNamespace>
-    <ProjectGuid>{DAB134D7-9A12-D30C-A4B0-CCE35A5CCDF8}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <AssemblyName>Assembly-CSharp-Editor</AssemblyName>
-    <TargetFrameworkVersion>v4.7.1</TargetFrameworkVersion>
-    <FileAlignment>512</FileAlignment>
+    <TargetFramework>netstandard2.1</TargetFramework>
     <BaseDirectory>.</BaseDirectory>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -39,55 +44,24 @@
     <AllowUnsafeBlocks>False</AllowUnsafeBlocks>
   </PropertyGroup>
   <PropertyGroup>
-    <NoConfig>true</NoConfig>
+    <NoStandardLibraries>true</NoStandardLibraries>
     <NoStdLib>true</NoStdLib>
-    <AddAdditionalExplicitAssemblyReferences>false</AddAdditionalExplicitAssemblyReferences>
-    <ImplicitlyExpandNETStandardFacades>false</ImplicitlyExpandNETStandardFacades>
-    <ImplicitlyExpandDesignTimeFacades>false</ImplicitlyExpandDesignTimeFacades>
+    <NoConfig>true</NoConfig>
+    <DisableImplicitFrameworkReferences>true</DisableImplicitFrameworkReferences>
+    <MSBuildWarningsAsMessages>MSB3277</MSBuildWarningsAsMessages>
   </PropertyGroup>
   <PropertyGroup>
-    <ProjectTypeGuids>{E097FAD1-6243-4DAD-9C02-E9B9EFC3FFC1};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <UnityProjectGenerator>Package</UnityProjectGenerator>
     <UnityProjectGeneratorVersion>2.0.22</UnityProjectGeneratorVersion>
-    <UnityProjectGeneratorStyle>Legacy</UnityProjectGeneratorStyle>
+    <UnityProjectGeneratorStyle>SDK</UnityProjectGeneratorStyle>
     <UnityProjectType>Editor:5</UnityProjectType>
     <UnityBuildTarget>StandaloneWindows64:19</UnityBuildTarget>
     <UnityVersion>2022.3.22f1</UnityVersion>
   </PropertyGroup>
   <ItemGroup>
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-    <Analyzer Include="D:\VS Community\Common7\IDE\Extensions\Microsoft\Visual Studio Tools for Unity\Analyzers\Microsoft.Unity.Analyzers.dll" />
-    <Analyzer Include="D:\Unity\Hub\Editor\2022.3.22f1\Editor\Data\Tools\Unity.SourceGenerators\Unity.SourceGenerators.dll" />
-    <Analyzer Include="D:\Unity\Hub\Editor\2022.3.22f1\Editor\Data\Tools\Unity.SourceGenerators\Unity.Properties.SourceGenerator.dll" />
-=======
     <Analyzer Include="C:\Users\Chang\.vscode\extensions\visualstudiotoolsforunity.vstuc-1.1.2\Analyzers\Microsoft.Unity.Analyzers.dll" />
     <Analyzer Include="C:\Program Files\Unity\Hub\Editor\2022.3.22f1\Editor\Data\Tools\Unity.SourceGenerators\Unity.SourceGenerators.dll" />
     <Analyzer Include="C:\Program Files\Unity\Hub\Editor\2022.3.22f1\Editor\Data\Tools\Unity.SourceGenerators\Unity.Properties.SourceGenerator.dll" />
->>>>>>> Stashed changes
-=======
-    <Analyzer Include="C:\Users\Chang\.vscode\extensions\visualstudiotoolsforunity.vstuc-1.1.2\Analyzers\Microsoft.Unity.Analyzers.dll" />
-    <Analyzer Include="C:\Program Files\Unity\Hub\Editor\2022.3.22f1\Editor\Data\Tools\Unity.SourceGenerators\Unity.SourceGenerators.dll" />
-    <Analyzer Include="C:\Program Files\Unity\Hub\Editor\2022.3.22f1\Editor\Data\Tools\Unity.SourceGenerators\Unity.Properties.SourceGenerator.dll" />
->>>>>>> Stashed changes
-=======
-    <Analyzer Include="C:\Users\Chang\.vscode\extensions\visualstudiotoolsforunity.vstuc-1.1.2\Analyzers\Microsoft.Unity.Analyzers.dll" />
-    <Analyzer Include="C:\Program Files\Unity\Hub\Editor\2022.3.22f1\Editor\Data\Tools\Unity.SourceGenerators\Unity.SourceGenerators.dll" />
-    <Analyzer Include="C:\Program Files\Unity\Hub\Editor\2022.3.22f1\Editor\Data\Tools\Unity.SourceGenerators\Unity.Properties.SourceGenerator.dll" />
->>>>>>> Stashed changes
-=======
-    <Analyzer Include="C:\Users\Chang\.vscode\extensions\visualstudiotoolsforunity.vstuc-1.1.2\Analyzers\Microsoft.Unity.Analyzers.dll" />
-    <Analyzer Include="C:\Program Files\Unity\Hub\Editor\2022.3.22f1\Editor\Data\Tools\Unity.SourceGenerators\Unity.SourceGenerators.dll" />
-    <Analyzer Include="C:\Program Files\Unity\Hub\Editor\2022.3.22f1\Editor\Data\Tools\Unity.SourceGenerators\Unity.Properties.SourceGenerator.dll" />
->>>>>>> Stashed changes
-=======
-    <Analyzer Include="C:\Users\Chang\.vscode\extensions\visualstudiotoolsforunity.vstuc-1.1.2\Analyzers\Microsoft.Unity.Analyzers.dll" />
-    <Analyzer Include="C:\Program Files\Unity\Hub\Editor\2022.3.22f1\Editor\Data\Tools\Unity.SourceGenerators\Unity.SourceGenerators.dll" />
-    <Analyzer Include="C:\Program Files\Unity\Hub\Editor\2022.3.22f1\Editor\Data\Tools\Unity.SourceGenerators\Unity.Properties.SourceGenerator.dll" />
->>>>>>> Stashed changes
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\TutorialInfo\Scripts\Editor\ReadmeEditor.cs" />
@@ -1173,16 +1147,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-<<<<<<< Updated upstream
-    <ProjectReference Include="Assembly-CSharp-firstpass.csproj">
-      <Project>{E58F9303-081D-F923-A7F6-73601FE9D129}</Project>
-      <Name>Assembly-CSharp-firstpass</Name>
-    </ProjectReference>
-    <ProjectReference Include="Assembly-CSharp.csproj">
-      <Project>{4D58ADCE-1E2C-BC95-1270-4855F6E340C9}</Project>
-      <Name>Assembly-CSharp</Name>
-    </ProjectReference>
-=======
     <ProjectReference Include="Assembly-CSharp-firstpass.csproj" />
     <ProjectReference Include="Assembly-CSharp.csproj" />
     <ProjectReference Include="UnityEditor.TestRunner.csproj" />
@@ -1230,15 +1194,5 @@
     <ProjectCapability Remove="ReferenceManagerCOM" />
     <ProjectCapability Remove="AssemblyReferences" />
     <ProjectCapability Remove="ReferenceManagerAssemblies" />
->>>>>>> Stashed changes
   </ItemGroup>
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <Target Name="GenerateTargetFrameworkMonikerAttribute" />
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
-       Other similar extension points exist, see Microsoft.Common.targets.
-  <Target Name="BeforeBuild">
-  </Target>
-  <Target Name="AfterBuild">
-  </Target>
-  -->
 </Project>

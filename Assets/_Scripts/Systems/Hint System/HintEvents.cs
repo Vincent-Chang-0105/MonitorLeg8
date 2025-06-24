@@ -13,6 +13,8 @@ public static class HintEvents
     
     // Event for progressing to next hint
     public static event Action OnShowNextHint;
+
+    public static event Action<HintData> OnLoadlevels;
     
     // Generic game events that can trigger hints
     public static event Action<string> OnDoorInteracted;
@@ -35,6 +37,11 @@ public static class HintEvents
     public static void ShowNextHint()
     {
         OnShowNextHint?.Invoke();
+    }
+
+    public static void LoadLevels(HintData hintdata)
+    {
+        OnLoadlevels?.Invoke(hintdata);
     }
     
     // Game-specific event triggers

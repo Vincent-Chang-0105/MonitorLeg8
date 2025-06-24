@@ -15,7 +15,7 @@ public class PlayerInteraction : MonoBehaviour
 
     private void Update()
     {
-        Ray ray = playerCamera.ScreenPointToRay(new Vector3(Screen.width / 2f, Screen.height / 2f, 0f));
+        Ray ray = playerCamera.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0.0f));
         RaycastHit hit;
 
         bool successfulHit = false;
@@ -26,21 +26,35 @@ public class PlayerInteraction : MonoBehaviour
             Interactable interactable = hit.collider.GetComponent<Interactable>();
             newOutline = hit.collider.GetComponent<Outline>();
 
+            if (newOutline == null)
+            {
+                newOutline = hit.collider.GetComponentInParent<Outline>();
+            }
+
+            if (newOutline == null)
+            {
+                newOutline = hit.collider.GetComponentInChildren<Outline>();
+            }
+
             if (interactable != null)
             {
                 HandleInteraction(interactable);
-                interactionText.text = interactable.GetDescription();
+                interactionText.text = "[E] " + interactable.GetDescription();
                 interactionName.text = interactable.GetName();
                 interactionIcon.SetActive(true);
 
                 // ➕ NEW: Make interactionName follow the object in screen space
                 Vector3 screenPosition = playerCamera.WorldToScreenPoint(hit.collider.bounds.center);
 
+                float scaleX = Screen.width / (float)playerCamera.targetTexture.width;
+                float scaleY = Screen.height / (float)playerCamera.targetTexture.height;
+
+                Vector3 actualScreenPos = new Vector3(screenPosition.x * scaleX, screenPosition.y * scaleY, 0);
                 // Optional: Check if it's in front of the camera
                 if (screenPosition.z > 0)
                 {
-                    interactionIcon.GetComponent<RectTransform>().position = new Vector3(screenPosition.x, screenPosition.y, 0);
-                    interactionName.rectTransform.position = new Vector3(screenPosition.x, screenPosition.y + 70f, 0); // optional offset
+                    interactionIcon.GetComponent<RectTransform>().position = actualScreenPos;
+                    interactionName.rectTransform.position = new Vector3(actualScreenPos.x, actualScreenPos.y + 70f, 0); // optional offset
                 }
                 else
                 {
@@ -51,7 +65,7 @@ public class PlayerInteraction : MonoBehaviour
                 successfulHit = true;
             }
         }
-
+        
 
 
         if (!successfulHit)

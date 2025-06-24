@@ -1,21 +1,26 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+﻿<Project ToolsVersion="Current">
   <!-- Generated file, do not modify, your changes will be overwritten (use AssetPostprocessor.OnGeneratedCSProject) -->
   <PropertyGroup>
-    <LangVersion>9.0</LangVersion>
+    <BaseIntermediateOutputPath>Temp\obj\$(Configuration)\$(MSBuildProjectName)</BaseIntermediateOutputPath>
+    <IntermediateOutputPath>$(BaseIntermediateOutputPath)</IntermediateOutputPath>
   </PropertyGroup>
+  <Import Project="Sdk.props" Sdk="Microsoft.NET.Sdk" />
+  <ItemGroup>
+    <ProjectCapability Include="Unity" />
+  </ItemGroup>
   <PropertyGroup>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <EnableDefaultItems>false</EnableDefaultItems>
+    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+    <LangVersion>9.0</LangVersion>
+    <Configurations>Debug;Release</Configurations>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>10.0.20506</ProductVersion>
-    <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace></RootNamespace>
-    <ProjectGuid>{4D58ADCE-1E2C-BC95-1270-4855F6E340C9}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <AssemblyName>Assembly-CSharp</AssemblyName>
-    <TargetFrameworkVersion>v4.7.1</TargetFrameworkVersion>
-    <FileAlignment>512</FileAlignment>
+    <TargetFramework>netstandard2.1</TargetFramework>
     <BaseDirectory>.</BaseDirectory>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -39,58 +44,29 @@
     <AllowUnsafeBlocks>False</AllowUnsafeBlocks>
   </PropertyGroup>
   <PropertyGroup>
-    <NoConfig>true</NoConfig>
+    <NoStandardLibraries>true</NoStandardLibraries>
     <NoStdLib>true</NoStdLib>
-    <AddAdditionalExplicitAssemblyReferences>false</AddAdditionalExplicitAssemblyReferences>
-    <ImplicitlyExpandNETStandardFacades>false</ImplicitlyExpandNETStandardFacades>
-    <ImplicitlyExpandDesignTimeFacades>false</ImplicitlyExpandDesignTimeFacades>
+    <NoConfig>true</NoConfig>
+    <DisableImplicitFrameworkReferences>true</DisableImplicitFrameworkReferences>
+    <MSBuildWarningsAsMessages>MSB3277</MSBuildWarningsAsMessages>
   </PropertyGroup>
   <PropertyGroup>
-    <ProjectTypeGuids>{E097FAD1-6243-4DAD-9C02-E9B9EFC3FFC1};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <UnityProjectGenerator>Package</UnityProjectGenerator>
     <UnityProjectGeneratorVersion>2.0.22</UnityProjectGeneratorVersion>
-    <UnityProjectGeneratorStyle>Legacy</UnityProjectGeneratorStyle>
+    <UnityProjectGeneratorStyle>SDK</UnityProjectGeneratorStyle>
     <UnityProjectType>Game:1</UnityProjectType>
     <UnityBuildTarget>StandaloneWindows64:19</UnityBuildTarget>
     <UnityVersion>2022.3.22f1</UnityVersion>
   </PropertyGroup>
   <ItemGroup>
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-    <Analyzer Include="D:\VS Community\Common7\IDE\Extensions\Microsoft\Visual Studio Tools for Unity\Analyzers\Microsoft.Unity.Analyzers.dll" />
-    <Analyzer Include="D:\Unity\Hub\Editor\2022.3.22f1\Editor\Data\Tools\Unity.SourceGenerators\Unity.SourceGenerators.dll" />
-    <Analyzer Include="D:\Unity\Hub\Editor\2022.3.22f1\Editor\Data\Tools\Unity.SourceGenerators\Unity.Properties.SourceGenerator.dll" />
-=======
     <Analyzer Include="C:\Users\Chang\.vscode\extensions\visualstudiotoolsforunity.vstuc-1.1.2\Analyzers\Microsoft.Unity.Analyzers.dll" />
     <Analyzer Include="C:\Program Files\Unity\Hub\Editor\2022.3.22f1\Editor\Data\Tools\Unity.SourceGenerators\Unity.SourceGenerators.dll" />
     <Analyzer Include="C:\Program Files\Unity\Hub\Editor\2022.3.22f1\Editor\Data\Tools\Unity.SourceGenerators\Unity.Properties.SourceGenerator.dll" />
->>>>>>> Stashed changes
-=======
-    <Analyzer Include="C:\Users\Chang\.vscode\extensions\visualstudiotoolsforunity.vstuc-1.1.2\Analyzers\Microsoft.Unity.Analyzers.dll" />
-    <Analyzer Include="C:\Program Files\Unity\Hub\Editor\2022.3.22f1\Editor\Data\Tools\Unity.SourceGenerators\Unity.SourceGenerators.dll" />
-    <Analyzer Include="C:\Program Files\Unity\Hub\Editor\2022.3.22f1\Editor\Data\Tools\Unity.SourceGenerators\Unity.Properties.SourceGenerator.dll" />
->>>>>>> Stashed changes
-=======
-    <Analyzer Include="C:\Users\Chang\.vscode\extensions\visualstudiotoolsforunity.vstuc-1.1.2\Analyzers\Microsoft.Unity.Analyzers.dll" />
-    <Analyzer Include="C:\Program Files\Unity\Hub\Editor\2022.3.22f1\Editor\Data\Tools\Unity.SourceGenerators\Unity.SourceGenerators.dll" />
-    <Analyzer Include="C:\Program Files\Unity\Hub\Editor\2022.3.22f1\Editor\Data\Tools\Unity.SourceGenerators\Unity.Properties.SourceGenerator.dll" />
->>>>>>> Stashed changes
-=======
-    <Analyzer Include="C:\Users\Chang\.vscode\extensions\visualstudiotoolsforunity.vstuc-1.1.2\Analyzers\Microsoft.Unity.Analyzers.dll" />
-    <Analyzer Include="C:\Program Files\Unity\Hub\Editor\2022.3.22f1\Editor\Data\Tools\Unity.SourceGenerators\Unity.SourceGenerators.dll" />
-    <Analyzer Include="C:\Program Files\Unity\Hub\Editor\2022.3.22f1\Editor\Data\Tools\Unity.SourceGenerators\Unity.Properties.SourceGenerator.dll" />
->>>>>>> Stashed changes
-=======
-    <Analyzer Include="C:\Users\Chang\.vscode\extensions\visualstudiotoolsforunity.vstuc-1.1.2\Analyzers\Microsoft.Unity.Analyzers.dll" />
-    <Analyzer Include="C:\Program Files\Unity\Hub\Editor\2022.3.22f1\Editor\Data\Tools\Unity.SourceGenerators\Unity.SourceGenerators.dll" />
-    <Analyzer Include="C:\Program Files\Unity\Hub\Editor\2022.3.22f1\Editor\Data\Tools\Unity.SourceGenerators\Unity.Properties.SourceGenerator.dll" />
->>>>>>> Stashed changes
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\_Scripts\Core\Utilities\Helpers.cs" />
+    <Compile Include="Assets\_Scripts\Systems\GameCore\VideoManager.cs" />
+    <Compile Include="Assets\_Scripts\Systems\InterAction\PickableInteractable.cs" />
     <Compile Include="Assets\_Scripts\UI\Menu\UIEvents.cs" />
     <Compile Include="Assets\_Scripts\Core\Utilities\FPSCounter.cs" />
     <Compile Include="Assets\_Scripts\Systems\Hint System\HintTrigger.cs" />
@@ -100,7 +76,6 @@
     <Compile Include="Assets\_Scripts\Systems\Audio\Music\MusicManager.cs" />
     <Compile Include="Assets\_Scripts\UI\Menu\ColorChangeMenuHandler.cs" />
     <Compile Include="Assets\_Scripts\Core\Utilities\GameObjectExtensions.cs" />
-    <Compile Include="Assets\_Scripts\Systems\Input\GameInputManager.cs" />
     <Compile Include="Assets\_Scripts\Core\Pattern\Singleton.cs" />
     <Compile Include="Assets\_Scripts\Systems\Systems.cs" />
     <Compile Include="Assets\_Scripts\Systems\MonsterSpawner\MonsterSpawnTrigger.cs" />
@@ -108,11 +83,16 @@
     <Compile Include="Assets\QuickOutline\Scripts\Outline.cs" />
     <Compile Include="Assets\_Scripts\Systems\Hint System\HintEvents.cs" />
     <Compile Include="Assets\_Scripts\UI\Menu\MenuEventSystemHandler.cs" />
+    <Compile Include="Assets\_Scripts\Systems\InterAction\DialogueInteractable.cs" />
     <Compile Include="Assets\_Scripts\Systems\MonsterSpawner\MonsterController.cs" />
     <Compile Include="Assets\_Scripts\Core\Pattern\PersistentSingleton.cs" />
     <Compile Include="Assets\_Scripts\Systems\Scriptables\MusicConfiiguration.cs" />
+    <Compile Include="Assets\Paro222\Underwater Effects\Underwater.cs" />
     <Compile Include="Assets\_Scripts\Player\PlayerInteraction\Interactable.cs" />
     <Compile Include="Assets\_Scripts\Systems\GameCore\LeveManager.cs" />
+    <Compile Include="Assets\_Scripts\Systems\MonsterSpawner\MonsterActivationManager.cs" />
+    <Compile Include="Assets\_Scripts\Systems\Dialogue\DialogueTrigger.cs" />
+    <Compile Include="Assets\_Scripts\Systems\Dialogue\DialogueManager.cs" />
     <Compile Include="Assets\_Scripts\Systems\Audio\Sound\SoundData.cs" />
     <Compile Include="Assets\_Scripts\Player\PlayerInteraction\PlayerInteraction.cs" />
     <Compile Include="Assets\_Scripts\Systems\Audio\Sound\SoundEmitter.cs" />
@@ -120,14 +100,19 @@
     <Compile Include="Assets\_Scripts\Systems\Tutorial\TutorialData.cs" />
     <Compile Include="Assets\_Scripts\Systems\Management\PauseManager.cs" />
     <Compile Include="Assets\_Scripts\UI\Menu\MainMenuCameraEventHandler.cs" />
+    <Compile Include="Assets\_Scripts\Systems\InterAction\RotatingObjectInteractable.cs" />
+    <Compile Include="Assets\IgniteCoders\Simple Water Shader\Resources\WaterReflection.cs" />
     <Compile Include="Assets\_Scripts\Player\JumpScare\JumpscareMechanic.cs" />
     <Compile Include="Assets\_Scripts\Systems\InterAction\MovingObjectInteractable.cs" />
+    <Compile Include="Assets\_Scripts\Systems\Scriptables\SceneConfiguration.cs" />
     <Compile Include="Assets\_Scripts\Systems\Audio\AudioExtensions.cs" />
     <Compile Include="Assets\_Scripts\Systems\MonsterSpawner\MonsterSpawnManager.cs" />
     <Compile Include="Assets\_Scripts\UI\Menu\MainMenuEventHandler.cs" />
+    <Compile Include="Assets\_Scripts\Systems\MonsterSpawner\MonsterModeTrigger.cs" />
     <Compile Include="Assets\_Scripts\Systems\Audio\Sound\SoundBuilder.cs" />
     <Compile Include="Assets\_Scripts\Systems\Hint System\HintManager.cs" />
     <Compile Include="Assets\_Scripts\UI\Menu\ScaleChangeMenuHandler.cs" />
+    <Compile Include="Assets\_Scripts\Systems\InterAction\LockedDoorInteractable.cs" />
     <Compile Include="Assets\_Scripts\Systems\Management\CameraManager.cs" />
     <Compile Include="Assets\_Scripts\Systems\Input\InputSystem.cs" />
     <Compile Include="Assets\_Scripts\Core\Pattern\ImpersistentSingleton.cs" />
@@ -138,10 +123,11 @@
     <Compile Include="Assets\_Scripts\Systems\Audio\Sound\SoundManager.cs" />
     <Compile Include="Assets\_Scripts\Core\Pattern\StaticInstance.cs" />
     <Compile Include="Assets\_Scripts\Systems\Tutorial\ITutorialStep.cs" />
+    <Compile Include="Assets\_Scripts\Systems\GameCore\Inventory.cs" />
     <Compile Include="Assets\_Scripts\Systems\Hint System\HintData.cs" />
     <Compile Include="Assets\_Scripts\Systems\Audio\Music\MusicSelector.cs" />
+    <Compile Include="Assets\_Scripts\Systems\MonsterSpawner\MonsterActivationTrigger.cs" />
     <Compile Include="Assets\_Scripts\UI\Menu\DeathScreen.cs" />
-    <Compile Include="Assets\_Scripts\Systems\MonsterSpawner\MonsterCameraRoot.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
@@ -158,10 +144,12 @@
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile SSD.shader" />
     <None Include="Assets\TextMesh Pro\Resources\LineBreaking Leading Characters.txt" />
     <None Include="Assets\TextMesh Pro\Shaders\TMPro_Properties.cginc" />
+    <None Include="Assets\Paro222\Underwater Effects\UnderwaterEffects.shader" />
     <None Include="Assets\QuickOutline\Readme.txt" />
     <None Include="Assets\TextMesh Pro\Shaders\TMPro_Surface.cginc" />
     <None Include="Assets\TextMesh Pro\Resources\LineBreaking Following Characters.txt" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile Masking.shader" />
+    <None Include="Assets\Paro222\Underwater Effects\Readme.txt" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF Overlay.shader" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_Bitmap-Mobile.shader" />
     <None Include="Assets\QuickOutline\Resources\Shaders\OutlineFill.shader" />
@@ -1072,12 +1060,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-<<<<<<< Updated upstream
-    <ProjectReference Include="Assembly-CSharp-firstpass.csproj">
-      <Project>{E58F9303-081D-F923-A7F6-73601FE9D129}</Project>
-      <Name>Assembly-CSharp-firstpass</Name>
-    </ProjectReference>
-=======
     <ProjectReference Include="Assembly-CSharp-firstpass.csproj" />
     <ProjectReference Include="com.unity.cinemachine.editor.csproj" />
     <ProjectReference Include="Unity.Postprocessing.Runtime.csproj" />
@@ -1122,15 +1104,5 @@
     <ProjectCapability Remove="ReferenceManagerCOM" />
     <ProjectCapability Remove="AssemblyReferences" />
     <ProjectCapability Remove="ReferenceManagerAssemblies" />
->>>>>>> Stashed changes
   </ItemGroup>
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <Target Name="GenerateTargetFrameworkMonikerAttribute" />
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
-       Other similar extension points exist, see Microsoft.Common.targets.
-  <Target Name="BeforeBuild">
-  </Target>
-  <Target Name="AfterBuild">
-  </Target>
-  -->
 </Project>

@@ -21,8 +21,6 @@ public class DialogueManager : MonoBehaviour
 
     public Animator animator;
 
-    private Dialogue currentDialogue;
-
     private void Awake()
     {
         if (Instance == null)
@@ -35,15 +33,11 @@ public class DialogueManager : MonoBehaviour
     {
         isDialogueActive = true;
 
-        currentDialogue = dialogue;
-
-        currentDialogue.OnDialogueStart?.Invoke();  // Invoke the start event if it exists
-
         dialogueBox.SetActive(true);
 
         lines.Clear();
 
-        foreach (DialogueLine dialogueLine in currentDialogue.dialogueLines)
+        foreach (DialogueLine dialogueLine in dialogue.dialogueLines)
         {
             lines.Enqueue(dialogueLine);
         }
@@ -94,10 +88,5 @@ public class DialogueManager : MonoBehaviour
     {
         isDialogueActive = false;
         dialogueBox.SetActive(false);
-
-        // Invoke this specific dialogue's end event
-        currentDialogue.OnDialogueEnd?.Invoke();
-        currentDialogue = null;
-
     }
 }

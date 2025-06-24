@@ -118,6 +118,11 @@ public class PauseManager : StaticInstance<PauseManager>
         }
     }
 
+    public void QuitGame()
+    {
+       Application.Quit();
+    }
+
     public void LoadMainMenu()
     {
         InputSystem.Instance.SetInputState(false);

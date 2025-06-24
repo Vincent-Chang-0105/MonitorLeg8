@@ -31,8 +31,6 @@ public class InputSystem : PersistentSingleton<InputSystem> {
 
     private void Start()
     {
-        // Set initial cursor state
-        SetCursorState(true);
     
     }
 
@@ -45,9 +43,9 @@ public class InputSystem : PersistentSingleton<InputSystem> {
 
     public void OnMove(InputValue value)
 	{
-        if(enableMoveInput)
+        if (enableMoveInput)
         {
-		    MoveEvent?.Invoke(value.Get<Vector2>());
+            MoveEvent?.Invoke(value.Get<Vector2>());
         }
 	}
 
@@ -86,7 +84,6 @@ public class InputSystem : PersistentSingleton<InputSystem> {
     }
 
     #region Debug
-    public PlayerInput playerInput;
 
     void OnEnable()
     {
