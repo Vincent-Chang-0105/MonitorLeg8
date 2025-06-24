@@ -11,7 +11,7 @@ public class DeathScreen : MonoBehaviour
     [Header("UI References")]
     [SerializeField] private GameObject deathScreenUI;
     [SerializeField] private RawImage staticOverlay;
-    
+
     [Header("Video Settings")]
     [SerializeField] private VideoClip staticVideo;
     [SerializeField] private float staticDuration = 2f;
@@ -86,12 +86,12 @@ public class DeathScreen : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 }

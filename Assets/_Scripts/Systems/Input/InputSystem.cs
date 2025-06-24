@@ -81,6 +81,12 @@ public class InputSystem : PersistentSingleton<InputSystem> {
         {
             LookEvent?.Invoke(Vector2.zero);
         }
+
+        // Reset move input to zero when disabling input
+        if (!value)
+        {
+            MoveEvent?.Invoke(Vector2.zero);
+        }
     }
 
     #region Debug

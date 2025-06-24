@@ -42,7 +42,7 @@ public class PauseManager : StaticInstance<PauseManager>
                 menuButtons = pauseMenuGO.GetComponentsInChildren<Button>();
         }
         
-        //InputSystem.Instance.EscapeKeyEvent += TogglePause;
+        InputSystem.Instance.EscapeKeyEvent += TogglePause;
     }
 
     public void TogglePause()
