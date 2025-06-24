@@ -68,7 +68,7 @@ public class GameManager : PersistentSingleton<GameManager>
     private IEnumerator LoadSceneCoroutine(SceneConfiguration.SceneSettings settings)
     {
         currentSceneSettings = settings;
-        OnLevelLoadStart?.Invoke();
+        //OnLevelLoadStart?.Invoke();
 
         // Apply pre-load settings
         ApplyPreLoadSettings(settings);
@@ -89,6 +89,7 @@ public class GameManager : PersistentSingleton<GameManager>
 
     private void ApplyPreLoadSettings(SceneConfiguration.SceneSettings settings)
     {
+
     }
 
     private void ApplyPostLoadSettings(SceneConfiguration.SceneSettings settings)
@@ -161,7 +162,7 @@ public class GameManager : PersistentSingleton<GameManager>
         return GetSceneSettings(sceneName) != null;
     }
     
-        // Apply settings for the currently active scene (used on startup)
+    // Apply settings for the currently active scene (used on startup)
     private void ApplySettingsForCurrentScene()
     {
         string currentSceneName = SceneManager.GetActiveScene().name;
