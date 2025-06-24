@@ -63,9 +63,9 @@ public class MovingObjectInteractable : Interactable
         }
     }
 
-    private void MoveObject()
+    private IEnumerator MoveObject()
     {
-        if (isMoving) return; // Prevent multiple interactions while moving
+        if (isMoving) yield break; // Prevent multiple interactions while moving
 
         isMoving = true;
 
@@ -74,6 +74,8 @@ public class MovingObjectInteractable : Interactable
         // If at target position, we're returning to original (turn off)
         bool shouldTurnOn = isAtOriginalPosition;
         TriggerLeverAnimation(shouldTurnOn);
+
+        yield return new WaitForSeconds(1.0f); // Wait before starting movement
 
         // Switch to virtual camera if enabled
         if (useCameraSwitch && virtualCamera != null)
@@ -229,7 +231,7 @@ public class MovingObjectInteractable : Interactable
 
     public override void Interact()
     {
-        MoveObject();
+        StartCoroutine(MoveObject());
         soundBuilder.WithPosition(gameObject.transform.position).Play(interactButtonClick);
         TriggerHints();
     }
