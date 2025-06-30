@@ -111,6 +111,7 @@
     <Compile Include="Assets\_Scripts\Systems\InterAction\LockedDoorInteractable.cs" />
     <Compile Include="Assets\_Scripts\Systems\Management\CameraManager.cs" />
     <Compile Include="Assets\_Scripts\Systems\GameCore\ChangeSceneTrigger.cs" />
+    <Compile Include="Assets\_Scripts\Environment\ChangeRenderer.cs" />
     <Compile Include="Assets\_Scripts\Environment\LightFlicker.cs" />
     <Compile Include="Assets\_Scripts\Systems\Input\InputSystem.cs" />
     <Compile Include="Assets\_Scripts\Core\Pattern\ImpersistentSingleton.cs" />
