@@ -18,8 +18,16 @@ MonoBehaviour:
     hintId: 0
     displayDuration: 3
     isCompleted: 1
-  - hintText: "Posters? Could be a clue to where I\u2019m headed."
+  - hintText: Look Around
     hintId: 1
-    displayDuration: 3
+    displayDuration: 0
+    isCompleted: 1
+  - hintText: Find the lever. Move the crates
+    hintId: 2
+    displayDuration: 0
+    isCompleted: 0
+  - hintText: Find the lever.
+    hintId: 2
+    displayDuration: 0
     isCompleted: 0
   autoStartFirstHint: 1
