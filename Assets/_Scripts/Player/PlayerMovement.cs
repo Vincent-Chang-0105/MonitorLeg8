@@ -74,6 +74,8 @@ public class PlayerMovement : MonoBehaviour
     private bool _sprintInput;
     private bool _jumpInput;
 
+    public bool canMove = true; // Flag to control movement
+
     private void Awake()
     {
         // Get reference to main camera
@@ -131,6 +133,8 @@ public class PlayerMovement : MonoBehaviour
 
     private void Update()
     {
+        if (!canMove) return; // Check if movement is allowed
+
         GroundedCheck();
         JumpAndGravity();
         Move();
@@ -232,7 +236,7 @@ public class PlayerMovement : MonoBehaviour
 
         // Play footstep sound 
         if (isGrounded && footStep != null && _speed > 0.1f)
-        { 
+        {
             float actualHorizontalSpeed = new Vector3(_controller.velocity.x, 0.0f, _controller.velocity.z).magnitude;
 
             if (actualHorizontalSpeed > 0.3f)
@@ -350,5 +354,15 @@ public class PlayerMovement : MonoBehaviour
         Gizmos.DrawSphere(
             new Vector3(transform.position.x, transform.position.y - groundedOffset, transform.position.z),
             groundedRadius);
+    }
+
+    public void EnableMovement()
+    {
+        canMove = true;
+    }
+    
+    public void DisableMovement()
+    {
+        canMove = false;
     }
 }

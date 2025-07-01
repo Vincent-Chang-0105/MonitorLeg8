@@ -15,6 +15,9 @@ public class HintTrigger : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             HintEvents.CompleteHint(hintID);
+
+            Debug.Log($"Hint {hintID} completed by {other.name}");
+            
             onTriggerAction?.Invoke();
         }
     }

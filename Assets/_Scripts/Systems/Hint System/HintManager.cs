@@ -29,7 +29,7 @@ public class HintManager : PersistentSingleton<HintManager>
 
     void Start()
     {
-        //LoadLevelHints(currentLevelHints);
+        LoadLevelHints(currentLevelHints);
         // if (currentLevelHints != null && currentLevelHints.autoStartFirstHint)
         // {
         //     ShowNextHint();
