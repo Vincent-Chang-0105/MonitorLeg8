@@ -12,11 +12,22 @@ public class GameManager : PersistentSingleton<GameManager>
     [Header("Scene Settings SO")]
     [SerializeField] private SceneConfiguration sceneConfig;
 
+    [Header("Loading Screen")]
+    [SerializeField] private GameObject loadingScreenPrefab;
+    [SerializeField] private float minimumLoadingTime = 1f; // Minimum time to show loading screen
+
     [Header("Events")]
     public UnityEvent OnLevelLoadStart;
     public UnityEvent OnLevelLoadComplete;
 
+    // Loading progress events
+    public UnityEvent<float> OnLoadingProgress; // Progress from 0 to 1
+    public UnityEvent<string> OnLoadingStatusUpdate; // Status text updates
+
     private SceneConfiguration.SceneSettings currentSceneSettings;
+    private GameObject currentLoadingScreen;
+    private LoadingScreenController loadingScreenController;
+
     protected override void Awake()
     {
         base.Awake();
@@ -71,21 +82,121 @@ public class GameManager : PersistentSingleton<GameManager>
         currentSceneSettings = settings;
         //OnLevelLoadStart?.Invoke();
 
+        // Show loading screen
+        ShowLoadingScreen();
+        
+        OnLevelLoadStart?.Invoke();
+        OnLoadingStatusUpdate?.Invoke("Initializing...");
+        OnLoadingProgress?.Invoke(0f);
+
+        float startTime = Time.realtimeSinceStartup;
+
         // Apply pre-load settings
         ApplyPreLoadSettings(settings);
+        OnLoadingStatusUpdate?.Invoke("Preparing scene...");
+        OnLoadingProgress?.Invoke(0.1f);
+
+        // Small delay to show preparation
+        yield return new WaitForSecondsRealtime(0.1f);
 
         // Load the scene
+        OnLoadingStatusUpdate?.Invoke($"Loading {settings.sceneName}...");
         AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(settings.sceneName);
 
+        // Don't allow the scene to activate immediately
+        asyncLoad.allowSceneActivation = false;
+
+        // Update progress while loading
+        while (asyncLoad.progress < 0.9f) // Unity caps progress at 0.9 until allowSceneActivation is true
+        {
+            float progress = Mathf.Lerp(0.1f, 0.8f, asyncLoad.progress / 0.9f);
+            OnLoadingProgress?.Invoke(progress);
+            yield return null;
+        }
+
+        OnLoadingStatusUpdate?.Invoke("Finalizing...");
+        OnLoadingProgress?.Invoke(0.9f);
+
+        // Ensure minimum loading time has passed (for better UX)
+        float elapsedTime = Time.realtimeSinceStartup - startTime;
+        if (elapsedTime < minimumLoadingTime)
+        {
+            yield return new WaitForSecondsRealtime(minimumLoadingTime - elapsedTime);
+        }
+
+        // Allow scene activation
+        asyncLoad.allowSceneActivation = true;
+        
+        // Wait for scene to fully load
         while (!asyncLoad.isDone)
         {
+            OnLoadingProgress?.Invoke(0.95f);
             yield return null;
         }
 
         // Apply post-load settings
+        OnLoadingStatusUpdate?.Invoke("Applying settings...");
+        OnLoadingProgress?.Invoke(0.98f);
         ApplyPostLoadSettings(settings);
 
+        // Complete loading
+        OnLoadingProgress?.Invoke(1f);
+        OnLoadingStatusUpdate?.Invoke("Complete!");
+        
+        yield return new WaitForSecondsRealtime(0.2f); // Brief pause to show completion
+
+        // Hide loading screen
+        HideLoadingScreen();
+        
         OnLevelLoadComplete?.Invoke();
+    }
+
+        private void ShowLoadingScreen()
+    {
+        if (loadingScreenPrefab != null && currentLoadingScreen == null)
+        {
+            currentLoadingScreen = Instantiate(loadingScreenPrefab);
+            loadingScreenController = currentLoadingScreen.GetComponent<LoadingScreenController>();
+            
+            // Subscribe to progress events
+            if (loadingScreenController != null)
+            {
+                OnLoadingProgress.AddListener(loadingScreenController.UpdateProgress);
+                OnLoadingStatusUpdate.AddListener(loadingScreenController.UpdateStatusText);
+            }
+            
+            // Make sure loading screen persists during scene changes
+            DontDestroyOnLoad(currentLoadingScreen);
+        }
+    }
+
+    private void HideLoadingScreen()
+    {
+        if (currentLoadingScreen != null)
+        {
+            // Unsubscribe from events
+            if (loadingScreenController != null)
+            {
+                OnLoadingProgress.RemoveListener(loadingScreenController.UpdateProgress);
+                OnLoadingStatusUpdate.RemoveListener(loadingScreenController.UpdateStatusText);
+            }
+            
+            // Destroy loading screen with fade out animation
+            if (loadingScreenController != null)
+            {
+                loadingScreenController.FadeOut(() => 
+                {
+                    Destroy(currentLoadingScreen);
+                    currentLoadingScreen = null;
+                    loadingScreenController = null;
+                });
+            }
+            else
+            {
+                Destroy(currentLoadingScreen);
+                currentLoadingScreen = null;
+            }
+        }
     }
 
     private void ApplyPreLoadSettings(SceneConfiguration.SceneSettings settings)
@@ -104,6 +215,23 @@ public class GameManager : PersistentSingleton<GameManager>
         if (InputSystem.Instance != null) InputSystem.Instance.SetInputState(settings.hideCursorAtStart);
 
         if (settings.hintData != null) HintEvents.LoadLevels(settings.hintData);
+
+        if (settings.introVideoClip != null && VideoManager.Instance != null)
+        {
+            // Pause game before playing video
+            Time.timeScale = 0f;
+            
+            VideoManager.Instance.PlayVideo(settings.introVideoClip, () =>
+            {
+                // Resume game after video
+                Time.timeScale = 1f;
+            });
+        }
+        else
+        {
+            // Resume game if no video
+            Time.timeScale = 1f;
+        }
     }
 
     // Utility methods for scene navigation
