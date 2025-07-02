@@ -16,9 +16,9 @@ MonoBehaviour:
   settings:
     material: {fileID: 2100000, guid: d7eff91adf883494db9dbd5fd180ae71, type: 2}
     renderPassEvent: 400
-    color: {r: 0.096440025, g: 0.13207549, b: 0.12539384, a: 0}
+    color: {r: 0.0056278883, g: 0.0026999998, b: 0.01, a: 1}
     distance: 10
-    alpha: 0.043
+    alpha: 0.115
     refraction: 1
     normalmap: {fileID: 0}
     UV: {x: 1, y: 1, z: 0.2, w: 0.1}
@@ -372,7 +372,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a163714fc2589b4c9e843f355ab0fae, type: 3}
   m_Name: VhsFx
   m_EditorClassIdentifier: 
-  m_Active: 1
+  m_Active: 0
   _event: 600
   _pass: {fileID: 3467369045734596794}
   _blitShader: {fileID: 4800000, guid: c17132b1f77d20942aa75f8429c0f8bc, type: 3}

@@ -5,6 +5,7 @@ using AudioSystem;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.Events;
+using UnityEngine.Video;
 
 public class GameManager : PersistentSingleton<GameManager>
 {
@@ -161,7 +162,7 @@ public class GameManager : PersistentSingleton<GameManager>
     {
         return GetSceneSettings(sceneName) != null;
     }
-    
+
     // Apply settings for the currently active scene (used on startup)
     private void ApplySettingsForCurrentScene()
     {
@@ -175,11 +176,51 @@ public class GameManager : PersistentSingleton<GameManager>
             ApplyPostLoadSettings(settings);
             Debug.Log($"Applied settings for startup scene: {currentSceneName}");
             Debug.Log($"Applied if hide cursor at start: {currentSceneSettings.hideCursorAtStart}");
-            
+
         }
         else
         {
             Debug.LogWarning($"No configuration found for startup scene: {currentSceneName}");
+        }
+    }
+    
+    public void LoadSceneThenPlayVideo(string sceneName, VideoClip introVideo)
+    {
+        StartCoroutine(LoadSceneThenPlayVideoCoroutine(sceneName, introVideo));
+    }
+
+    private IEnumerator LoadSceneThenPlayVideoCoroutine(string sceneName, VideoClip introVideo)
+    {
+        var settings = GetSceneSettings(sceneName);
+        if (settings == null)
+        {
+            Debug.LogError($"Scene '{sceneName}' not found in configuration!");
+            yield break;
+        }
+
+        // Load the scene
+        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(settings.sceneName);
+        while (!asyncLoad.isDone)
+        {
+            yield return null;
+        }
+
+        // Pause the game
+        Time.timeScale = 0f;
+
+        // Play the video
+        if (introVideo != null && VideoManager.Instance != null)
+        {
+            VideoManager.Instance.PlayVideo(introVideo, () =>
+            {
+                // Resume the game after video
+                Time.timeScale = 1f;
+            });
+        }
+        else
+        {
+            // Resume the game if no video
+            Time.timeScale = 1f;
         }
     }
 }
