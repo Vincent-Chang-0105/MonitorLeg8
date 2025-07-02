@@ -98,13 +98,12 @@ public class MainMenuEventHandler : ColorChangeMenuHandler
         // Check if we should play the intro video
         if (introVideo != null && (!hasPlayedIntro || !skipVideoOnReplay))
         {
-            // Play video then load scene
-            VideoManager.Instance.PlayIntroVideoThenLoadScene(introVideo, "Level1");
+            // Load scene first, then play video
+            GameManager.Instance.LoadSceneThenPlayVideo("Level1", introVideo);
             hasPlayedIntro = true;
         }
         else
         {
-            // Skip video and load scene directly
             GameManager.Instance.LoadScene("Level1");
         }
     }
