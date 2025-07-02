@@ -126,7 +126,7 @@ public class PauseManager : StaticInstance<PauseManager>
     public void LoadMainMenu()
     {
         InputSystem.Instance.SetInputState(false);
-        SceneManager.LoadScene(0);
+        GameManager.Instance.LoadScene("MainMenu");
         Time.timeScale = 1f;
     }
 
