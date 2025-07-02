@@ -1,0 +1,97 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &5979428979068054976
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: -8679921383154817045, guid: adacb86158d0cd2469ec9b0b0a9967ac, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 7.574768
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: adacb86158d0cd2469ec9b0b0a9967ac, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.0000019073486
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: adacb86158d0cd2469ec9b0b0a9967ac, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -484.6727
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: adacb86158d0cd2469ec9b0b0a9967ac, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: adacb86158d0cd2469ec9b0b0a9967ac, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: adacb86158d0cd2469ec9b0b0a9967ac, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: adacb86158d0cd2469ec9b0b0a9967ac, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: adacb86158d0cd2469ec9b0b0a9967ac, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: adacb86158d0cd2469ec9b0b0a9967ac, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: adacb86158d0cd2469ec9b0b0a9967ac, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -3636837728943014549, guid: adacb86158d0cd2469ec9b0b0a9967ac, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: c386f6d830fe1284d9eba300ee042365, type: 2}
+    - target: {fileID: 919132149155446097, guid: adacb86158d0cd2469ec9b0b0a9967ac, type: 3}
+      propertyPath: m_Name
+      value: Viking_Ride_Animated
+      objectReference: {fileID: 0}
+    - target: {fileID: 6862221435064771883, guid: adacb86158d0cd2469ec9b0b0a9967ac, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 04e66678933e8a141a12bce3edeceeb8, type: 2}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: adacb86158d0cd2469ec9b0b0a9967ac, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1587534727090374851}
+  m_SourcePrefab: {fileID: 100100000, guid: adacb86158d0cd2469ec9b0b0a9967ac, type: 3}
+--- !u!1 &6789839615655809169 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: adacb86158d0cd2469ec9b0b0a9967ac, type: 3}
+  m_PrefabInstance: {fileID: 5979428979068054976}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &1587534727090374851
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6789839615655809169}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 5c4bee407915b5a4c88ac2b989cf809e, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
