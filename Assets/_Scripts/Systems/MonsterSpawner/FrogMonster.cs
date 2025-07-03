@@ -13,7 +13,7 @@ public class FrogMonster : MonoBehaviour
     private SoundBuilder soundBuilder;
 
     [Header("Jumpscare Settings")]
-    public float jumpscareDistance = 2f;
+    public float jumpscareDistance = -2f;
     public float jumpscareDelay = 0.5f;
     public float deathScreenDelay = 1.5f;
 
@@ -53,9 +53,6 @@ public class FrogMonster : MonoBehaviour
         GameObject player = GameObject.FindGameObjectWithTag("Player");
         if (player != null)
         {
-            Vector3 directionToFrog = (transform.position - player.transform.position).normalized;
-            player.transform.rotation = Quaternion.LookRotation(directionToFrog);
-            
             // You could also freeze the player's position more explicitly if needed
             CharacterController characterController = player.GetComponent<CharacterController>();
             if (characterController != null)
@@ -63,14 +60,47 @@ public class FrogMonster : MonoBehaviour
                 // Disable character controller to prevent movement
                 characterController.enabled = false;
             }
-        }
 
+            // First, determine the direction for the jumpscare
+            // Use a consistent forward direction (frog's forward)
+            Vector3 jumpscareDirection = -transform.forward; // Negative to position player in front of frog's face
+            jumpscareDirection.y = 0; // Keep orientation on the horizontal plane
+            jumpscareDirection = jumpscareDirection.normalized;
+
+            // Calculate player position with adjusted distance to prevent clipping
+            // Increase the distance to make sure there's no clipping
+            float adjustedDistance = jumpscareDistance - 10; // Add extra distance to prevent clipping
+            Vector3 idealPlayerPosition = transform.position + (jumpscareDirection * adjustedDistance);
+            
+            // Only adjust XZ position, keep player's original Y position
+            idealPlayerPosition.y = player.transform.position.y;
+            
+            // Teleport player to the calculated position
+            player.transform.position = idealPlayerPosition;
+            
+            // Make player face the frog
+            Vector3 lookDirection = (transform.position - player.transform.position).normalized;
+            lookDirection.y = 0; // Keep on horizontal plane
+            if (lookDirection != Vector3.zero)
+            {
+                player.transform.rotation = Quaternion.LookRotation(lookDirection);
+            }
+
+            // Make frog face the player
+            Vector3 frogFaceDirection = (player.transform.position - transform.position).normalized;
+            frogFaceDirection.y = 0;
+            if (frogFaceDirection != Vector3.zero)
+            {
+                transform.rotation = Quaternion.LookRotation(frogFaceDirection);
+            }
+        }
+       
         yield return new WaitForSeconds(jumpscareDelay);
 
         // Trigger jumpscare animation/effects
         if (animator != null)
         {
-            animator.SetTrigger("Jumpscare");
+            animator.CrossFadeInFixedTime("Scene",0.1f);
         }
 
         // Play jumpscare sound using sound system
