@@ -41,12 +41,23 @@ public class MovingObjectInteractable : Interactable
     [SerializeField] SoundData interactMoveObject;
     private SoundBuilder soundBuilder;
 
+    [Header("Glow Fill Effect")]
+    [SerializeField] private bool useGlowEffect = false;
+    [SerializeField] private Material originalMaterial;
+    [SerializeField] private Material glowingMaterial;
+    [SerializeField] private Renderer objectRenderer;
+    [SerializeField] private float glowFillDuration = 2f;
+    [SerializeField] private AnimationCurve glowFillCurve = AnimationCurve.EaseInOut(0, 0, 1, 1);
+    [SerializeField] private bool glowOnActivation = true; // Glow when moving to target
+    [SerializeField] private bool resetGlowOnReturn = true; // Reset glow when returning to original
+
     private Vector3 originalPosition;
     private Vector3 targetPosition;
     private Vector3 waypointPosition;
     private bool isMoving = false;
     private bool isAtOriginalPosition = true;
     private bool cameraIsActive = false;
+    private bool isGlowing = false; // Track if the object is currently glowing
 
     private void TriggerLeverAnimation(bool isOn)
     {
@@ -63,17 +74,52 @@ public class MovingObjectInteractable : Interactable
         }
     }
 
+    private void StartGlowFillEffect(bool activate)
+    {
+        if (!useGlowEffect || objectRenderer == null) return;
+
+        if (activate && !isGlowing)
+        {
+            // Start glow fill effect
+            objectRenderer.material = glowingMaterial;
+
+            // Animate the fill effect
+            if (glowingMaterial.HasProperty("_FillHeight"))
+            {
+                glowingMaterial.SetFloat("_FillHeight", 0f);
+                DOTween.To(() => 0f, x => glowingMaterial.SetFloat("_FillHeight", x), 1f, glowFillDuration)
+                    .SetEase(glowFillCurve);
+            }
+            
+            isGlowing = true;
+        }
+        else if (!activate && isGlowing && resetGlowOnReturn)
+        {
+            // Reset to original material
+            if (originalMaterial != null)
+            {
+                objectRenderer.material = originalMaterial;
+            }
+            isGlowing = false;
+        }
+    }
+
     private IEnumerator MoveObject()
     {
         if (isMoving) yield break; // Prevent multiple interactions while moving
 
         isMoving = true;
-
-        // Trigger lever animation based on current state
-        // If at original position, we're moving to target (turn on)
-        // If at target position, we're returning to original (turn off)
         bool shouldTurnOn = isAtOriginalPosition;
         TriggerLeverAnimation(shouldTurnOn);
+
+        if (glowOnActivation && shouldTurnOn)
+        {
+            StartGlowFillEffect(true);
+        }
+        else if (!shouldTurnOn)
+        {
+            StartGlowFillEffect(false);
+        }
 
         yield return new WaitForSeconds(1.0f); // Wait before starting movement
 
@@ -260,6 +306,18 @@ public class MovingObjectInteractable : Interactable
             {
                 Debug.LogWarning("Lever Animator is not assigned in " + gameObject.name);
             }
+
+            if (useGlowEffect)
+            {
+                if (glowingMaterial == null)
+                {
+                    Debug.LogWarning("Glowing Material is not assigned in " + gameObject.name);
+                }
+                if (objectRenderer == null)
+                {
+                    Debug.LogWarning("Object Renderer is not found in " + gameObject.name);
+                }
+            }
         }
         else
         {
@@ -269,3 +327,4 @@ public class MovingObjectInteractable : Interactable
         soundBuilder = SoundManager.Instance.CreateSoundBuilder();
     }
 }
+
