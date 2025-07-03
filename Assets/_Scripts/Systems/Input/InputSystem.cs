@@ -16,6 +16,9 @@ public class InputSystem : PersistentSingleton<InputSystem> {
     public event UnityAction<Vector2> LookEvent;
     public event UnityAction<bool> SprintEvent;
     public event UnityAction EscapeKeyEvent;
+    public event UnityAction SpaceBarKeyEvent;        // Keep this for backward compatibility if needed
+    public event UnityAction SpaceBarKeyDownEvent;    // New event for key press down
+    public event UnityAction SpaceBarKeyUpEvent;      // New event for key release
 
     private ActionMap _currentActionMap = ActionMap.Player;
     public ActionMap CurrentActionMap => _currentActionMap;
@@ -70,6 +73,21 @@ public class InputSystem : PersistentSingleton<InputSystem> {
         }
     }
 
+    public void OnSpaceBarKey(InputValue value)
+    {
+        if (value.isPressed)
+        {
+            // Spacebar was pressed down
+            SpaceBarKeyEvent?.Invoke();        // Keep existing functionality
+            SpaceBarKeyDownEvent?.Invoke();    // New down event
+        }
+        else
+        {
+            // Spacebar was released
+            SpaceBarKeyUpEvent?.Invoke();      // New up event
+        }
+    }
+
     public void SetInputState(bool value)
     {
         SetCursorState(value);
@@ -87,6 +105,28 @@ public class InputSystem : PersistentSingleton<InputSystem> {
         {
             MoveEvent?.Invoke(Vector2.zero);
         }
+    }
+
+    public void DisableMovementInputs()
+    {
+        enableMoveInput = false;
+        MoveEvent?.Invoke(Vector2.zero);
+    }
+
+    public void EnableMovementInputs()
+    {
+        enableMoveInput = true;
+    }
+
+    public void DisableLookInputs()
+    {
+        enableLookInput = false;
+        LookEvent?.Invoke(Vector2.zero);
+    }
+
+    public void EnableLookInputs()
+    {
+        enableLookInput = true;
     }
 
     #region Debug

@@ -15,10 +15,10 @@ MonoBehaviour:
   m_Active: 1
   settings:
     material: {fileID: 2100000, guid: d7eff91adf883494db9dbd5fd180ae71, type: 2}
-    renderPassEvent: 400
-    color: {r: 0.0056278883, g: 0.0026999998, b: 0.01, a: 1}
+    renderPassEvent: 350
+    color: {r: 0.0050530196, g: 0.0034264943, b: 0.009433985, a: 0.39607844}
     distance: 10
-    alpha: 0.115
+    alpha: 0.5
     refraction: 1
     normalmap: {fileID: 0}
     UV: {x: 1, y: 1, z: 0.2, w: 0.1}
@@ -115,7 +115,7 @@ MonoBehaviour:
     failOperation: 0
     zFailOperation: 0
   m_ShadowTransparentReceive: 1
-  m_RenderingMode: 0
+  m_RenderingMode: 1
   m_DepthPrimingMode: 0
   m_CopyDepthMode: 0
   m_AccurateGbufferNormals: 0

@@ -4,17 +4,20 @@ using UnityEngine;
 using UnityEngine.Video;
 using AudioSystem;
 using UnityEngine.Events;
+using UnityEngine.UI;
+using Microsoft.Unity.VisualStudio.Editor;
+using Image = UnityEngine.UI.Image;
 
 public class VideoManager : Singleton<VideoManager>
 {
     [Header("Video Player Setup")]
     [SerializeField] private VideoPlayer videoPlayer;
     [SerializeField] private Canvas videoCanvas;
-    [SerializeField] private GameObject skipButton; // Optional skip button UI
+    [SerializeField] private GameObject skipPrompt; // Optional skip button UI
+    [SerializeField] private Image skipPromptImage; // Optional image for skip prompt
 
     [Header("Settings")]
     [SerializeField] private bool allowSkipping = true;
-    [SerializeField] private KeyCode[] skipKeys = { KeyCode.Escape, KeyCode.Space };
     [SerializeField] private bool debugMode = true; // Add debug toggle
 
     [Header("Events")]
@@ -24,11 +27,15 @@ public class VideoManager : Singleton<VideoManager>
 
     private bool isPlayingVideo = false;
     private Action onVideoCompleteCallback;
+    private bool isSkipPromptActive = false;
+    private bool isHoldingSpace;
+    private float skipHoldTimer = 0f;
+    private float requiredHoldTime = 2f; // seconds to hold spacebar
 
     protected override void Awake()
     {
         base.Awake();
-        
+
         // Setup video player if not assigned
         if (videoPlayer == null)
         {
@@ -47,13 +54,52 @@ public class VideoManager : Singleton<VideoManager>
         }
 
         // Hide skip button initially
-        if (skipButton != null)
+        if (skipPrompt != null)
         {
-            skipButton.SetActive(false);
+            skipPrompt.SetActive(false);
             if (debugMode) Debug.Log("Skip button initially hidden");
+        }
+
+        if (InputSystem.Instance != null)
+        {
+            InputSystem.Instance.SpaceBarKeyDownEvent += OnSpaceBarDown;
+            InputSystem.Instance.SpaceBarKeyUpEvent += OnSpaceBarUp;
+        }
+
+        skipPromptImage.fillAmount = 0f; // Reset skip prompt image fill
+    }
+
+    private void OnDestroy()
+    {
+        if (InputSystem.Instance != null)
+        {
+            InputSystem.Instance.SpaceBarKeyDownEvent -= OnSpaceBarDown;
+            InputSystem.Instance.SpaceBarKeyUpEvent -= OnSpaceBarUp;
         }
     }
 
+    private void OnSpaceBarDown()
+    {
+        if (!isPlayingVideo || !allowSkipping || !isSkipPromptActive) return;
+
+        isHoldingSpace = true;
+        skipHoldTimer = 0f;
+
+        if (debugMode) Debug.Log("Started holding spacebar");
+    }
+
+    private void OnSpaceBarUp()
+    {
+        if (!isPlayingVideo || !allowSkipping) return;
+
+        isHoldingSpace = false;
+        skipHoldTimer = 0f;
+
+        skipPromptImage.fillAmount = 0f;
+
+        if (debugMode) Debug.Log("Released spacebar");
+    }
+    
     private void ValidateComponents()
     {
         if (videoPlayer == null)
@@ -84,7 +130,7 @@ public class VideoManager : Singleton<VideoManager>
             if (debugMode) Debug.Log($"Canvas sorting order: {videoCanvas.sortingOrder}");
         }
 
-        if (skipButton != null && skipButton.transform.parent != videoCanvas.transform)
+        if (skipPrompt != null && skipPrompt.transform.parent != videoCanvas.transform)
         {
             Debug.LogWarning("Skip button is not a child of the video canvas. This might cause UI issues.");
         }
@@ -103,16 +149,27 @@ public class VideoManager : Singleton<VideoManager>
 
     private void Update()
     {
-        // Handle skip input during video playback
-        if (isPlayingVideo && allowSkipping)
+        if (isPlayingVideo && allowSkipping && isSkipPromptActive && isHoldingSpace)
         {
-            foreach (var key in skipKeys)
+            skipHoldTimer += Time.unscaledDeltaTime;
+
+            float targetFillAmount = Mathf.Clamp01(skipHoldTimer / requiredHoldTime);
+            
+            // Smooth animation
+            skipPromptImage.fillAmount = Mathf.MoveTowards(
+                skipPromptImage.fillAmount, 
+                targetFillAmount, 
+                2 * Time.unscaledDeltaTime
+            );
+            
+            if (debugMode && skipHoldTimer % 0.5f < Time.unscaledDeltaTime) // Log every 0.5 seconds
             {
-                if (Input.GetKeyDown(key))
-                {
-                    SkipVideo();
-                    break;
-                }
+                Debug.Log($"Holding spacebar: {skipHoldTimer:F1}s / {requiredHoldTime:F1}s");
+            }
+
+            if (skipHoldTimer >= requiredHoldTime)
+            {
+                SkipVideo();
             }
         }
     }
@@ -146,6 +203,13 @@ public class VideoManager : Singleton<VideoManager>
 
         if (debugMode) Debug.Log("Video coroutine started");
 
+        if (InputSystem.Instance != null)
+        {
+            InputSystem.Instance.DisableLookInputs();
+            InputSystem.Instance.DisableMovementInputs();
+            if (debugMode) Debug.Log("Input system disabled for video playback");
+        }
+
         // Show video UI
         ShowVideoUI();
 
@@ -172,6 +236,15 @@ public class VideoManager : Singleton<VideoManager>
 
         OnVideoStart?.Invoke();
 
+        // Show skip prompt after 2 seconds
+        yield return new WaitForSecondsRealtime(2f);
+
+        if (skipPrompt != null && isPlayingVideo)
+        {
+            skipPrompt.SetActive(true);
+            isSkipPromptActive = true;
+            skipHoldTimer = 0f;
+        }
         // Wait for video to finish or be skipped
         while (videoPlayer.isPlaying && isPlayingVideo)
         {
@@ -223,12 +296,6 @@ public class VideoManager : Singleton<VideoManager>
             Debug.LogError("VideoCanvas is null in ShowVideoUI!");
         }
 
-        if (skipButton != null && allowSkipping)
-        {
-            skipButton.SetActive(true);
-            if (debugMode) Debug.Log("Skip button activated");
-        }
-
         // Hide cursor during video
         if (InputSystem.Instance != null)
         {
@@ -247,10 +314,10 @@ public class VideoManager : Singleton<VideoManager>
             if (debugMode) Debug.Log("Video canvas deactivated");
         }
 
-        if (skipButton != null)
+        if (skipPrompt != null)
         {
-            skipButton.SetActive(false);
-            if (debugMode) Debug.Log("Skip button deactivated");
+            skipPrompt.SetActive(false);
+            if (debugMode) Debug.Log("Skip prompt deactivated");
         }
     }
 
@@ -282,34 +349,9 @@ public class VideoManager : Singleton<VideoManager>
             Debug.Log("Video completed");
         }
 
+        // 
         // Execute callback
         onVideoCompleteCallback?.Invoke();
         onVideoCompleteCallback = null;
-    }
-
-    /// <summary>
-    /// Play intro video then load a scene
-    /// </summary>
-    public void PlayIntroVideoThenLoadScene(VideoClip introVideo, string sceneName)
-    {
-        PlayVideo(introVideo, () => {
-            GameManager.Instance.LoadScene(sceneName);
-        });
-    }
-
-    // Public getter for external scripts
-    public bool IsPlayingVideo => isPlayingVideo;
-
-    // Debug method to manually test UI activation
-    [ContextMenu("Test Show Video UI")]
-    public void TestShowVideoUI()
-    {
-        ShowVideoUI();
-    }
-
-    [ContextMenu("Test Hide Video UI")]
-    public void TestHideVideoUI()
-    {
-        HideVideoUI();
     }
 }
