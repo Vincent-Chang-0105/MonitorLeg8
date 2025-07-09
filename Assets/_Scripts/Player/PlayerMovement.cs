@@ -51,9 +51,16 @@ public class PlayerMovement : MonoBehaviour
 
     [Header("Sounds")]
     [SerializeField] SoundData footStep;
+    [SerializeField] SoundData wheelSound; // Wheel movement sound
     private SoundBuilder soundBuilder;
-    [SerializeField] private float footstepRate = 0.3f;
+    [SerializeField] private float footstepRate = 0.3f; 
     private float footstepTimer = 0f;
+    private SoundEmitter currentWheelSound; // Track the active wheel sound
+    private bool isWheelSoundPlaying = false;
+
+    [Header("Player Mode")]
+    [Tooltip("Check this to enable robot mode with wheel sounds")]
+    public bool isRobotMode = false; // Toggle between human and robot mode
 
     // Private variables
     private float _cinemachineTargetPitch;
@@ -75,6 +82,7 @@ public class PlayerMovement : MonoBehaviour
     private bool _jumpInput;
 
     public bool canMove = true; // Flag to control movement
+
 
     private void Awake()
     {
@@ -138,6 +146,7 @@ public class PlayerMovement : MonoBehaviour
         GroundedCheck();
         JumpAndGravity();
         Move();
+        HandleWheelSound();
     }
 
     private void LateUpdate()
@@ -233,22 +242,35 @@ public class PlayerMovement : MonoBehaviour
 
         // Move the player
         _controller.Move(inputDirection.normalized * (_speed * Time.deltaTime) + new Vector3(0.0f, _verticalVelocity, 0.0f) * Time.deltaTime);
-
-        // Play footstep sound 
-        if (isGrounded && footStep != null && _speed > 0.1f)
+        
+        // Handle sounds based on player mode
+        if (isRobotMode)
         {
-            float actualHorizontalSpeed = new Vector3(_controller.velocity.x, 0.0f, _controller.velocity.z).magnitude;
-
-            if (actualHorizontalSpeed > 0.3f)
+            HandleWheelSound();
+        }
+        else
+        {
+            // Play footstep sound (existing footstep code)
+            if (isGrounded && footStep != null && _speed > 0.1f)
             {
-                // Adjust footstep rate based on actual speed - faster when sprinting
-                float currentFootstepRate = _sprintInput ? footstepRate * 0.7f : footstepRate;
+                float actualHorizontalSpeed = new Vector3(_controller.velocity.x, 0.0f, _controller.velocity.z).magnitude;
 
-                footstepTimer -= Time.deltaTime;
-                if (footstepTimer <= 0)
+                if (actualHorizontalSpeed > 0.3f)
                 {
-                    soundBuilder.WithRandomPitch().Play(footStep);
-                    footstepTimer = currentFootstepRate;
+                    // Adjust footstep rate based on actual speed - faster when sprinting
+                    float currentFootstepRate = _sprintInput ? footstepRate * 0.7f : footstepRate;
+
+                    footstepTimer -= Time.deltaTime;
+                    if (footstepTimer <= 0)
+                    {
+                        soundBuilder.WithRandomPitch().Play(footStep);
+                        footstepTimer = currentFootstepRate;
+                    }
+                }
+                else
+                {
+                    // Reset timer when not moving so footsteps start immediately when movement begins
+                    footstepTimer = 0f;
                 }
             }
             else
@@ -256,11 +278,6 @@ public class PlayerMovement : MonoBehaviour
                 // Reset timer when not moving so footsteps start immediately when movement begins
                 footstepTimer = 0f;
             }
-        }
-        else
-        {
-            // Reset timer when not moving so footsteps start immediately when movement begins
-            footstepTimer = 0f;
         }
     }
 
@@ -306,6 +323,47 @@ public class PlayerMovement : MonoBehaviour
         if (_verticalVelocity < _terminalVelocity)
         {
             _verticalVelocity += gravity * Time.deltaTime;
+        }
+    }
+
+    private void HandleWheelSound()
+    {
+        // Only process wheel sounds in robot mode
+        if (!isRobotMode || !isGrounded || wheelSound == null) return;
+
+        float actualHorizontalSpeed = new Vector3(_controller.velocity.x, 0.0f, _controller.velocity.z).magnitude;
+
+
+        // Start wheel sound when moving
+        if (actualHorizontalSpeed > 0.3f && !isWheelSoundPlaying)
+        {
+            // Configure wheel sound
+            currentWheelSound = soundBuilder.WithPosition(transform.position).Play(wheelSound);
+            
+            if (currentWheelSound != null)
+            {
+                // Apply initial pitch based on speed
+                float pitchFactor = _sprintInput ? 1.2f : 1.0f;
+                currentWheelSound.SetPitch(wheelSound.pitch * pitchFactor);
+            }
+            isWheelSoundPlaying = true;
+        }
+        // Stop wheel sound when stopped - IMMEDIATE STOPPING
+        else if (actualHorizontalSpeed <= 0.3f && isWheelSoundPlaying)
+        {
+            if (currentWheelSound != null)
+            {
+                // Fade out the sound smoothly for better audio experience
+                currentWheelSound.FadeOutAndStop(0.1f); // Very short fade for immediate response
+                currentWheelSound = null;
+            }
+            isWheelSoundPlaying = false;
+        }
+        // Update pitch based on speed when already playing
+        else if (isWheelSoundPlaying && currentWheelSound != null)
+        {
+            float pitchFactor = Mathf.Lerp(0.8f, 1.3f, actualHorizontalSpeed / (_sprintInput ? sprintSpeed : moveSpeed));
+            currentWheelSound.SetPitch(wheelSound.pitch * pitchFactor);
         }
     }
 

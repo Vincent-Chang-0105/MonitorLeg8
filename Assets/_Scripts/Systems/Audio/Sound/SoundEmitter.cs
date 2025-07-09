@@ -73,5 +73,28 @@ namespace AudioSystem {
         public void WithRandomPitch(float min = -0.05f, float max = 0.05f) {
             audioSource.pitch += Random.Range(min, max);
         }
+
+        public void SetPitch(float newPitch) {
+            audioSource.pitch = newPitch;
+        }
+
+        public void FadeOutAndStop(float fadeTime) {
+            StartCoroutine(FadeOutRoutine(fadeTime));
+        }
+
+        private IEnumerator FadeOutRoutine(float fadeTime) {
+            float startVolume = audioSource.volume;
+            float startTime = Time.time;
+            float endTime = startTime + fadeTime;
+            
+            while (Time.time < endTime) {
+                float t = 1 - ((endTime - Time.time) / fadeTime);
+                audioSource.volume = Mathf.Lerp(startVolume, 0, t);
+                yield return null;
+            }
+            
+            audioSource.volume = 0;
+            Stop();
+        }
     }
 }
