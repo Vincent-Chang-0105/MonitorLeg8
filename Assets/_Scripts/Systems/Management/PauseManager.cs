@@ -11,8 +11,8 @@ using TMPro;
 public class PauseManager : StaticInstance<PauseManager>
 {
     // Events that other scripts can subscribe to
-    public static event Action OnGamePaused;
-    public static event Action OnGameResumed;
+    public event Action OnGamePaused;
+    public event Action OnGameResumed;
 
     [Header("Animation Settings")]
     [SerializeField] private float fadeDuration = 0.3f;
@@ -76,7 +76,7 @@ public class PauseManager : StaticInstance<PauseManager>
     }
 
     public void ResumeGame()
-    {
+    {   
         _isPaused = false;
         Time.timeScale = 1f;
 

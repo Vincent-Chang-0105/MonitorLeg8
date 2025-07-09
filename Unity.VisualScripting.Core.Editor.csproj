@@ -511,8 +511,8 @@
     <Compile Include="Library\PackageCache\com.unity.visualscripting@1.9.2\Editor\VisualScripting.Core\Inspection\Special\EnumInspector.cs" />
     <Compile Include="Library\PackageCache\com.unity.visualscripting@1.9.2\Editor\VisualScripting.Core\Inspection\Unity\BoundsInspector.cs" />
     <Compile Include="Library\PackageCache\com.unity.visualscripting@1.9.2\Editor\VisualScripting.Core\Context\GraphContextExtension.cs" />
-    <Compile Include="Library\PackageCache\com.unity.visualscripting@1.9.2\Editor\VisualScripting.Core\Utilities\PathUtility.cs" />
     <Compile Include="Library\PackageCache\com.unity.visualscripting@1.9.2\Editor\VisualScripting.Core\Plugin\Migrations\Migration_Asset_to_Package.cs" />
+    <Compile Include="Library\PackageCache\com.unity.visualscripting@1.9.2\Editor\VisualScripting.Core\Utilities\PathUtility.cs" />
     <Compile Include="Library\PackageCache\com.unity.visualscripting@1.9.2\Editor\VisualScripting.Core\Inspection\Special\KeyValuePairInspector.cs" />
     <Compile Include="Library\PackageCache\com.unity.visualscripting@1.9.2\Editor\VisualScripting.Core\Plugin\Changelogs\LegacyLudiqCore\Changelog_1_4_4.cs" />
     <Compile Include="Library\PackageCache\com.unity.visualscripting@1.9.2\Editor\VisualScripting.Core\Inspection\Root\LudiqScriptableObjectEditor.cs" />

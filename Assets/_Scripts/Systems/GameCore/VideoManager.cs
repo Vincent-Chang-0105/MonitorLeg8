@@ -2,13 +2,11 @@ using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.Video;
-using AudioSystem;
 using UnityEngine.Events;
 using UnityEngine.UI;
-using Microsoft.Unity.VisualStudio.Editor;
 using Image = UnityEngine.UI.Image;
 
-public class VideoManager : Singleton<VideoManager>
+public class VideoManager : PersistentSingleton<VideoManager>
 {
     [Header("Video Player Setup")]
     [SerializeField] private VideoPlayer videoPlayer;
@@ -25,7 +23,7 @@ public class VideoManager : Singleton<VideoManager>
     public UnityEvent OnVideoComplete;
     public UnityEvent OnVideoSkipped;
 
-    private bool isPlayingVideo = false;
+    public bool isPlayingVideo { get; private set; } = false;
     private Action onVideoCompleteCallback;
     private bool isSkipPromptActive = false;
     private bool isHoldingSpace;
@@ -66,6 +64,13 @@ public class VideoManager : Singleton<VideoManager>
             InputSystem.Instance.SpaceBarKeyUpEvent += OnSpaceBarUp;
         }
 
+        if (PauseManager.Instance != null)
+        {
+            PauseManager.Instance.OnGamePaused += PauseVideo;
+            PauseManager.Instance.OnGameResumed += ResumeVideo;
+        }
+        
+
         skipPromptImage.fillAmount = 0f; // Reset skip prompt image fill
     }
 
@@ -75,6 +80,12 @@ public class VideoManager : Singleton<VideoManager>
         {
             InputSystem.Instance.SpaceBarKeyDownEvent -= OnSpaceBarDown;
             InputSystem.Instance.SpaceBarKeyUpEvent -= OnSpaceBarUp;
+        }
+
+        if (PauseManager.Instance != null)
+        {
+            PauseManager.Instance.OnGamePaused -= PauseVideo;
+            PauseManager.Instance.OnGameResumed -= ResumeVideo;
         }
     }
 
@@ -99,7 +110,7 @@ public class VideoManager : Singleton<VideoManager>
 
         if (debugMode) Debug.Log("Released spacebar");
     }
-    
+
     private void ValidateComponents()
     {
         if (videoPlayer == null)
@@ -139,7 +150,7 @@ public class VideoManager : Singleton<VideoManager>
     private void Start()
     {
         //soundBuilder = SoundManager.Instance?.CreateSoundBuilder();
-        
+
         // Additional validation after Start
         if (debugMode)
         {
@@ -154,14 +165,14 @@ public class VideoManager : Singleton<VideoManager>
             skipHoldTimer += Time.unscaledDeltaTime;
 
             float targetFillAmount = Mathf.Clamp01(skipHoldTimer / requiredHoldTime);
-            
+
             // Smooth animation
             skipPromptImage.fillAmount = Mathf.MoveTowards(
-                skipPromptImage.fillAmount, 
-                targetFillAmount, 
+                skipPromptImage.fillAmount,
+                targetFillAmount,
                 2 * Time.unscaledDeltaTime
             );
-            
+
             if (debugMode && skipHoldTimer % 0.5f < Time.unscaledDeltaTime) // Log every 0.5 seconds
             {
                 Debug.Log($"Holding spacebar: {skipHoldTimer:F1}s / {requiredHoldTime:F1}s");
@@ -219,19 +230,19 @@ public class VideoManager : Singleton<VideoManager>
         // Setup and play video
         videoPlayer.clip = videoClip;
         videoPlayer.isLooping = false;
-        
+
         // Prepare the video first
         videoPlayer.Prepare();
-        
+
         // Wait for video to be prepared
         while (!videoPlayer.isPrepared)
         {
             if (debugMode) Debug.Log("Waiting for video to prepare...");
             yield return null;
         }
-        
+
         videoPlayer.Play();
-        
+
         if (debugMode) Debug.Log("Video started playing");
 
         OnVideoStart?.Invoke();
@@ -265,7 +276,7 @@ public class VideoManager : Singleton<VideoManager>
         {
             // Force activation
             videoCanvas.gameObject.SetActive(true);
-            
+
             // Double-check activation
             if (videoCanvas.gameObject.activeInHierarchy)
             {
@@ -274,7 +285,7 @@ public class VideoManager : Singleton<VideoManager>
             else
             {
                 Debug.LogError("Failed to activate video canvas! Check if parent objects are active.");
-                
+
                 // Try to activate parent objects
                 Transform parent = videoCanvas.transform.parent;
                 while (parent != null)
@@ -286,7 +297,7 @@ public class VideoManager : Singleton<VideoManager>
                     }
                     parent = parent.parent;
                 }
-                
+
                 // Try again
                 videoCanvas.gameObject.SetActive(true);
             }
@@ -353,5 +364,38 @@ public class VideoManager : Singleton<VideoManager>
         // Execute callback
         onVideoCompleteCallback?.Invoke();
         onVideoCompleteCallback = null;
+
+        // --- Reset input and skip states ---
+        isSkipPromptActive = false;
+        isHoldingSpace = false;
+        skipHoldTimer = 0f;
+        if (skipPromptImage != null)
+            skipPromptImage.fillAmount = 0f;
+    }
+
+    public void PauseVideo()
+    {
+        if (debugMode) Debug.Log("Pausing video");
+
+        if (videoPlayer.isPlaying)
+        {
+            videoPlayer.Pause();
+            isPlayingVideo = false;
+            HideVideoUI();
+
+
+        }
+    }        
+    
+    public void ResumeVideo()
+    {
+        if (debugMode) Debug.Log("Resuming video");
+
+        if (!videoPlayer.isPlaying && videoPlayer.clip != null)
+        {
+            videoPlayer.Play();
+            isPlayingVideo = true;
+            ShowVideoUI();
+        }
     }
 }

@@ -13,6 +13,7 @@ Library: D:\Unity Projects\MonitorLeg8\Temp\BurstOutput\Data\Plugins\x86_64\lib_
 --assembly-defines=Assembly-CSharp-firstpass;
 --assembly-defines=Assembly-CSharp;
 --assembly-defines=Unity.RenderPipelines.ShaderGraph.ShaderGraphLibrary;
+--assembly-defines=Unity.VisualEffectGraph.Runtime;
 --assembly-defines=Unity.RenderPipelines.Core.Runtime;
 --assembly-defines=Unity.RenderPipelines.Universal.Runtime;
 --assembly-defines=Unity.Postprocessing.Runtime;
@@ -20,8 +21,8 @@ Library: D:\Unity Projects\MonitorLeg8\Temp\BurstOutput\Data\Plugins\x86_64\lib_
 --assembly-defines=Unity.AI.Navigation;
 --assembly-defines=Unity.VisualScripting.Core;
 --assembly-defines=Unity.RenderPipelines.Universal.Config.Runtime;
---assembly-defines=Unity.VisualScripting.Flow;
 --assembly-defines=Unity.RenderPipeline.Universal.ShaderLibrary;
+--assembly-defines=Unity.VisualScripting.Flow;
 --assembly-defines=Unity.Timeline;
 --assembly-defines=Unity.InputSystem;
 --assembly-defines=Unity.InputSystem.ForUI;
@@ -81,6 +82,7 @@ Library: D:\Unity Projects\MonitorLeg8\Temp\BurstOutput\Data\Plugins\x86_64\lib_
 --assembly-defines=Assembly-CSharp-firstpass;
 --assembly-defines=Assembly-CSharp;
 --assembly-defines=Unity.RenderPipelines.ShaderGraph.ShaderGraphLibrary;
+--assembly-defines=Unity.VisualEffectGraph.Runtime;
 --assembly-defines=Unity.RenderPipelines.Core.Runtime;
 --assembly-defines=Unity.RenderPipelines.Universal.Runtime;
 --assembly-defines=Unity.Postprocessing.Runtime;
@@ -88,8 +90,8 @@ Library: D:\Unity Projects\MonitorLeg8\Temp\BurstOutput\Data\Plugins\x86_64\lib_
 --assembly-defines=Unity.AI.Navigation;
 --assembly-defines=Unity.VisualScripting.Core;
 --assembly-defines=Unity.RenderPipelines.Universal.Config.Runtime;
---assembly-defines=Unity.VisualScripting.Flow;
 --assembly-defines=Unity.RenderPipeline.Universal.ShaderLibrary;
+--assembly-defines=Unity.VisualScripting.Flow;
 --assembly-defines=Unity.Timeline;
 --assembly-defines=Unity.InputSystem;
 --assembly-defines=Unity.InputSystem.ForUI;
@@ -147,6 +149,7 @@ Library: D:\Unity Projects\MonitorLeg8\Temp\BurstOutput\Data\Plugins\x86_64\lib_
 --assembly-defines=Assembly-CSharp-firstpass;
 --assembly-defines=Assembly-CSharp;
 --assembly-defines=Unity.RenderPipelines.ShaderGraph.ShaderGraphLibrary;
+--assembly-defines=Unity.VisualEffectGraph.Runtime;
 --assembly-defines=Unity.RenderPipelines.Core.Runtime;
 --assembly-defines=Unity.RenderPipelines.Universal.Runtime;
 --assembly-defines=Unity.Postprocessing.Runtime;
@@ -154,8 +157,8 @@ Library: D:\Unity Projects\MonitorLeg8\Temp\BurstOutput\Data\Plugins\x86_64\lib_
 --assembly-defines=Unity.AI.Navigation;
 --assembly-defines=Unity.VisualScripting.Core;
 --assembly-defines=Unity.RenderPipelines.Universal.Config.Runtime;
---assembly-defines=Unity.VisualScripting.Flow;
 --assembly-defines=Unity.RenderPipeline.Universal.ShaderLibrary;
+--assembly-defines=Unity.VisualScripting.Flow;
 --assembly-defines=Unity.Timeline;
 --assembly-defines=Unity.InputSystem;
 --assembly-defines=Unity.InputSystem.ForUI;
@@ -219,6 +222,7 @@ Library: D:\Unity Projects\MonitorLeg8\Temp\BurstOutput\Data\Plugins\x86_64\lib_
 --assembly-defines=Assembly-CSharp-firstpass;
 --assembly-defines=Assembly-CSharp;
 --assembly-defines=Unity.RenderPipelines.ShaderGraph.ShaderGraphLibrary;
+--assembly-defines=Unity.VisualEffectGraph.Runtime;
 --assembly-defines=Unity.RenderPipelines.Core.Runtime;
 --assembly-defines=Unity.RenderPipelines.Universal.Runtime;
 --assembly-defines=Unity.Postprocessing.Runtime;
@@ -226,8 +230,8 @@ Library: D:\Unity Projects\MonitorLeg8\Temp\BurstOutput\Data\Plugins\x86_64\lib_
 --assembly-defines=Unity.AI.Navigation;
 --assembly-defines=Unity.VisualScripting.Core;
 --assembly-defines=Unity.RenderPipelines.Universal.Config.Runtime;
---assembly-defines=Unity.VisualScripting.Flow;
 --assembly-defines=Unity.RenderPipeline.Universal.ShaderLibrary;
+--assembly-defines=Unity.VisualScripting.Flow;
 --assembly-defines=Unity.Timeline;
 --assembly-defines=Unity.InputSystem;
 --assembly-defines=Unity.InputSystem.ForUI;
