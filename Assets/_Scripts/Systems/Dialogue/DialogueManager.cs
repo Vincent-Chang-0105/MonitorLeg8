@@ -4,9 +4,8 @@ using UnityEngine.UI;
 using UnityEngine;
 using TMPro;
 
-public class DialogueManager : MonoBehaviour
+public class DialogueManager : StaticInstance<DialogueManager>
 {
-    public static DialogueManager Instance;
 
     public TextMeshProUGUI characterName;
     public TextMeshProUGUI dialogueArea;
@@ -22,11 +21,10 @@ public class DialogueManager : MonoBehaviour
     public Animator animator;
 
     private Dialogue currentDialogue;
-    private void Awake()
+    protected override void Awake()
     {
-        if (Instance == null)
-            Instance = this;
-
+        base.Awake();
+        
         lines = new Queue<DialogueLine>();
     }
 
@@ -89,12 +87,12 @@ public class DialogueManager : MonoBehaviour
         EndDialogue();
     }
 
-    void EndDialogue()
+    public void EndDialogue()
     {
         isDialogueActive = false;
         dialogueBox.SetActive(false);
 
-        currentDialogue.OnDialogueEnd?.Invoke();
+        currentDialogue?.OnDialogueEnd?.Invoke();
         currentDialogue = null;
     }
 }
