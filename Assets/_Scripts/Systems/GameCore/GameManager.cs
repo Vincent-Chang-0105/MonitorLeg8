@@ -27,6 +27,9 @@ public class GameManager : PersistentSingleton<GameManager>
     private SceneConfiguration.SceneSettings currentSceneSettings;
     private GameObject currentLoadingScreen;
     private LoadingScreenController loadingScreenController;
+    
+    // Flag to skip intro video on retry
+    private bool skipIntroVideo = false;
 
     protected override void Awake()
     {
@@ -38,7 +41,6 @@ public class GameManager : PersistentSingleton<GameManager>
             enabled = false;
             return;
         }
-
     }
 
     private void Start()
@@ -48,6 +50,7 @@ public class GameManager : PersistentSingleton<GameManager>
 
     public void LoadScene(string sceneName)
     {
+        skipIntroVideo = false; // Reset flag for new scenes
         var settings = GetSceneSettings(sceneName);
         if (settings != null)
         {
@@ -61,6 +64,7 @@ public class GameManager : PersistentSingleton<GameManager>
 
     public void LoadScene(int sceneIndex)
     {
+        skipIntroVideo = false; // Reset flag for new scenes
         if (sceneIndex >= 0 && sceneIndex < sceneConfig.sceneSettings.Count)
         {
             var settings = sceneConfig.sceneSettings[sceneIndex];
@@ -80,7 +84,6 @@ public class GameManager : PersistentSingleton<GameManager>
     private IEnumerator LoadSceneCoroutine(SceneConfiguration.SceneSettings settings)
     {
         currentSceneSettings = settings;
-        //OnLevelLoadStart?.Invoke();
 
         // Show loading screen
         ShowLoadingScreen();
@@ -151,7 +154,7 @@ public class GameManager : PersistentSingleton<GameManager>
         OnLevelLoadComplete?.Invoke();
     }
 
-        private void ShowLoadingScreen()
+    private void ShowLoadingScreen()
     {
         if (loadingScreenPrefab != null && currentLoadingScreen == null)
         {
@@ -216,7 +219,8 @@ public class GameManager : PersistentSingleton<GameManager>
 
         if (settings.hintData != null) HintEvents.LoadLevels(settings.hintData);
 
-        if (settings.introVideoClip != null && VideoManager.Instance != null)
+        // Only play intro video if not skipping and video exists
+        if (!skipIntroVideo && settings.introVideoClip != null && VideoManager.Instance != null)
         {
             // Pause game before playing video
             Time.timeScale = 0f;
@@ -229,7 +233,7 @@ public class GameManager : PersistentSingleton<GameManager>
         }
         else
         {
-            // Resume game if no video
+            // Resume game if no video or skipping
             Time.timeScale = 1f;
         }
     }
@@ -275,6 +279,7 @@ public class GameManager : PersistentSingleton<GameManager>
     {
         if (currentSceneSettings != null)
         {
+            skipIntroVideo = true; // Set flag to skip intro video on retry
             StartCoroutine(LoadSceneCoroutine(currentSceneSettings));
         }
     }
@@ -304,7 +309,6 @@ public class GameManager : PersistentSingleton<GameManager>
             ApplyPostLoadSettings(settings);
             Debug.Log($"Applied settings for startup scene: {currentSceneName}");
             Debug.Log($"Applied if hide cursor at start: {currentSceneSettings.hideCursorAtStart}");
-
         }
         else
         {

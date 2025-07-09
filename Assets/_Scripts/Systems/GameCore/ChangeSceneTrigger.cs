@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class ChangeSceneTrigger : MonoBehaviour
 {
+    [SerializeField] private int sceneIndex;
     // Start is called before the first frame update
     void Start()
     {
@@ -20,7 +21,7 @@ public class ChangeSceneTrigger : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            GameManager.Instance.LoadNextScene();
+            GameManager.Instance.LoadScene(sceneIndex);
         }
     }
 }
