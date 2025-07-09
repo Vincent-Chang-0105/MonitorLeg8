@@ -102,6 +102,7 @@
     <Compile Include="Assets\_Scripts\Systems\Hint System\Hint.cs" />
     <Compile Include="Assets\_Scripts\Systems\Tutorial\TutorialData.cs" />
     <Compile Include="Assets\_Scripts\Systems\Management\PauseManager.cs" />
+    <Compile Include="Assets\_Scripts\UI\Menu\ThunderFlash.cs" />
     <Compile Include="Assets\_Scripts\UI\Menu\MainMenuCameraEventHandler.cs" />
     <Compile Include="Assets\_Scripts\Systems\InterAction\RotatingObjectInteractable.cs" />
     <Compile Include="Assets\IgniteCoders\Simple Water Shader\Resources\WaterReflection.cs" />
