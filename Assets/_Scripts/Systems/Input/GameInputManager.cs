@@ -65,18 +65,18 @@ public class GameInputManager : PersistentSingleton<GameInputManager>
     private void UpdateCurrentContext()
     {
         // Determine current context based on game state
-        if (VideoManager.Instance != null && VideoManager.Instance.IsPlayingVideo)
-        {
-            currentContext = InputContext.Video;
-        }
-        else if (PauseManager.Instance != null && PauseManager.Instance._isPaused)
-        {
-            currentContext = InputContext.Pause;
-        }
-        else
-        {
-            currentContext = InputContext.Gameplay;
-        }
+        // if (VideoManager.Instance != null && VideoManager.Instance.IsPlayingVideo)
+        // {
+        //     currentContext = InputContext.Video;
+        // }
+        // else if (PauseManager.Instance != null && PauseManager.Instance._isPaused)
+        // {
+        //     currentContext = InputContext.Pause;
+        // }
+        // else
+        // {
+        //     currentContext = InputContext.Gameplay;
+        // }
     }
 
     private void OnDestroy()
