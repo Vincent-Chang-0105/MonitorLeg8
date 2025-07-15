@@ -29,6 +29,64 @@ public class FrogMonster : MonoBehaviour
         
         // Get sound builder from sound manager
         soundBuilder = SoundManager.Instance.CreateSoundBuilder();
+        
+        // Disable all animations at start
+        DisableFrogAnimations();
+    }
+
+    private void DisableFrogAnimations()
+    {
+        // Disable the main animator if assigned
+        if (animator != null)
+        {
+            animator.enabled = false;
+        }
+        
+        // Disable all Animator components on this GameObject and its children
+        Animator[] animators = GetComponentsInChildren<Animator>();
+        foreach (Animator anim in animators)
+        {
+            anim.enabled = false;
+        }
+        
+        // Disable all Animation components (legacy animation system)
+        Animation[] animations = GetComponentsInChildren<Animation>();
+        foreach (Animation animation in animations)
+        {
+            animation.enabled = false;
+        }
+        
+        Debug.Log($"Disabled animations for frog monster: {gameObject.name}");
+    }
+
+    private void EnableFrogAnimations()
+    {
+        // Enable the main animator if assigned
+        if (animator != null)
+        {
+            animator.enabled = true;
+        }
+        
+        // Enable all Animator components on this GameObject and its children
+        Animator[] animators = GetComponentsInChildren<Animator>();
+        foreach (Animator anim in animators)
+        {
+            anim.enabled = true;
+        }
+        
+        // Enable all Animation components (legacy animation system)
+        Animation[] animations = GetComponentsInChildren<Animation>();
+        foreach (Animation animation in animations)
+        {
+            animation.enabled = true;
+            // Start playing the default animation if it exists
+            if (animation.clip != null)
+            {
+                animation.Play();
+            }
+        }
+        
+        Debug.Log($"Enabled animations for frog monster: {gameObject.name}");
     }
 
     public void ActivateJumpscare(Vector3 playerPosition)
@@ -97,10 +155,13 @@ public class FrogMonster : MonoBehaviour
        
         yield return new WaitForSeconds(jumpscareDelay);
 
+        // Enable animations before triggering jumpscare
+        EnableFrogAnimations();
+
         // Trigger jumpscare animation/effects
         if (animator != null)
         {
-            animator.CrossFadeInFixedTime("Scene",0.1f);
+            animator.CrossFadeInFixedTime("Scene", 0.1f);
         }
 
         // Play jumpscare sound using sound system
@@ -119,5 +180,12 @@ public class FrogMonster : MonoBehaviour
         // The game will handle re-enabling inputs after loading a new scene
         
         isJumpscaring = false;
+    }
+
+    // Optional: Method to reset the frog (for testing or if frog needs to be reused)
+    public void ResetFrog()
+    {
+        isJumpscaring = false;
+        DisableFrogAnimations();
     }
 }
