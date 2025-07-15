@@ -24,7 +24,7 @@ public class GameManager : PersistentSingleton<GameManager>
     public UnityEvent<float> OnLoadingProgress; // Progress from 0 to 1
     public UnityEvent<string> OnLoadingStatusUpdate; // Status text updates
 
-    private SceneConfiguration.SceneSettings currentSceneSettings;
+    public SceneConfiguration.SceneSettings currentSceneSettings { get; private set; }
     private GameObject currentLoadingScreen;
     private LoadingScreenController loadingScreenController;
     
@@ -210,11 +210,7 @@ public class GameManager : PersistentSingleton<GameManager>
     private void ApplyPostLoadSettings(SceneConfiguration.SceneSettings settings)
     {
         // Play music if specified
-        if (settings.musicClip != null && MusicManager.Instance != null)
-        {
-            MusicManager.Instance.Play(settings.musicClip);
-        }
-
+        
         if (InputSystem.Instance != null) InputSystem.Instance.SetInputState(settings.hideCursorAtStart);
 
         if (settings.hintData != null) HintEvents.LoadLevels(settings.hintData);
@@ -229,10 +225,15 @@ public class GameManager : PersistentSingleton<GameManager>
             {
                 // Resume game after video
                 Time.timeScale = 1f;
+                MusicManager.Instance.Play(settings.musicClip);
             });
         }
         else
         {
+            if (settings.musicClip != null && MusicManager.Instance != null)
+            {
+                MusicManager.Instance.Play(settings.musicClip);
+            }
             // Resume game if no video or skipping
             Time.timeScale = 1f;
         }

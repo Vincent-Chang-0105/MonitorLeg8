@@ -17,17 +17,45 @@ MonoBehaviour:
   - hintText: 
     hintId: 0
     displayDuration: 3
-    isCompleted: 1
-  - hintText: Look Around
+    isCompleted: 0
+  - hintText: Look around and interact with your surroundings
     hintId: 1
     displayDuration: 0
-    isCompleted: 1
-  - hintText: Find the lever. Move the crates
+    isCompleted: 0
+  - hintText: Find the first lever.
     hintId: 2
     displayDuration: 0
     isCompleted: 0
-  - hintText: Find the lever.
+  - hintText: Find the second lever.
+    hintId: 3
+    displayDuration: 0
+    isCompleted: 0
+  - hintText: Find the third lever.
+    hintId: 4
+    displayDuration: 0
+    isCompleted: 0
+  - hintText: Find the fourth lever.
+    hintId: 5
+    displayDuration: 0
+    isCompleted: 0
+  - hintText: Find the fifth lever.
+    hintId: 6
+    displayDuration: 0
+    isCompleted: 0
+  - hintText: Find the sixth lever.
+    hintId: 7
+    displayDuration: 0
+    isCompleted: 0
+  - hintText: PULL THE LEVER. PULL IT.
     hintId: 2
+    displayDuration: 0
+    isCompleted: 0
+  - hintText: Pull the last lever.
+    hintId: 8
+    displayDuration: 0
+    isCompleted: 0
+  - hintText: Find your way out. Now.
+    hintId: 9
     displayDuration: 0
     isCompleted: 0
   autoStartFirstHint: 1

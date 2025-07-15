@@ -5,6 +5,8 @@ using UnityEngine.Video;
 using UnityEngine.Events;
 using UnityEngine.UI;
 using Image = UnityEngine.UI.Image;
+using UnityEditor.SearchService;
+using AudioSystem;
 
 public class VideoManager : PersistentSingleton<VideoManager>
 {
@@ -17,6 +19,7 @@ public class VideoManager : PersistentSingleton<VideoManager>
     [Header("Settings")]
     [SerializeField] private bool allowSkipping = true;
     [SerializeField] private bool debugMode = true; // Add debug toggle
+    [SerializeField] private bool dontPlayVideo = false;
 
     [Header("Events")]
     public UnityEvent OnVideoStart;
@@ -204,6 +207,12 @@ public class VideoManager : PersistentSingleton<VideoManager>
         }
 
         if (debugMode) Debug.Log($"Starting video: {videoClip.name}");
+        if (dontPlayVideo)
+        {
+            Debug.Log("Skipping video playback due to dontPlayVideo setting.");
+            onComplete?.Invoke();
+            return;
+        }
         StartCoroutine(PlayVideoCoroutine(videoClip, onComplete));
     }
 
@@ -360,6 +369,11 @@ public class VideoManager : PersistentSingleton<VideoManager>
             Debug.Log("Video completed");
         }
 
+        if (GameManager.Instance != null)
+        {
+            SceneConfiguration.SceneSettings sceneSettings = GameManager.Instance.currentSceneSettings;
+            MusicManager.Instance.Play(sceneSettings.musicClip);
+        }
         // 
         // Execute callback
         onVideoCompleteCallback?.Invoke();

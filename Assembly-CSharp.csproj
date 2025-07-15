@@ -64,12 +64,10 @@
     <Analyzer Include="C:\Program Files\Unity\Hub\Editor\2022.3.22f1\Editor\Data\Tools\Unity.SourceGenerators\Unity.Properties.SourceGenerator.dll" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\_Scripts\Systems\PauseSystem\GamePlayPauseUI.cs" />
     <Compile Include="Assets\_Scripts\Core\Utilities\Helpers.cs" />
     <Compile Include="Assets\_Scripts\Systems\GameCore\VideoManager.cs" />
     <Compile Include="Assets\_Scripts\Systems\InterAction\PickableInteractable.cs" />
     <Compile Include="Assets\_Scripts\UI\Menu\UIEvents.cs" />
-    <Compile Include="Assets\_Scripts\Systems\PauseSystem\BaseMenuUI.cs" />
     <Compile Include="Assets\_Scripts\Core\Utilities\FPSCounter.cs" />
     <Compile Include="Assets\_Scripts\Systems\Hint System\HintTrigger.cs" />
     <Compile Include="Assets\_Scripts\Systems\Tutorial\TutorialStep.cs" />
@@ -78,7 +76,6 @@
     <Compile Include="Assets\_Scripts\Systems\Audio\Music\MusicManager.cs" />
     <Compile Include="Assets\_Scripts\UI\Menu\ColorChangeMenuHandler.cs" />
     <Compile Include="Assets\_Scripts\Core\Utilities\GameObjectExtensions.cs" />
-    <Compile Include="Assets\_Scripts\Systems\Input\GameInputManager.cs" />
     <Compile Include="Assets\_Scripts\Core\Pattern\Singleton.cs" />
     <Compile Include="Assets\_Scripts\Systems\GameCore\SceneChangerTrigger.cs" />
     <Compile Include="Assets\_Scripts\Systems\Systems.cs" />
@@ -107,8 +104,9 @@
     <Compile Include="Assets\_Scripts\Systems\Hint System\Hint.cs" />
     <Compile Include="Assets\_Scripts\Systems\Tutorial\TutorialData.cs" />
     <Compile Include="Assets\_Scripts\Systems\MonsterSpawner\FrogMonster.cs" />
+    <Compile Include="Assets\_Scripts\Systems\Management\PauseManager.cs" />
+    <Compile Include="Assets\_Scripts\Systems\MonsterSpawner\TentacleController.cs" />
     <Compile Include="Assets\_Scripts\UI\Menu\ThunderFlash.cs" />
-    <Compile Include="Assets\_Scripts\Systems\PauseSystem\PauseManager.cs" />
     <Compile Include="Assets\_Scripts\UI\Menu\MainMenuCameraEventHandler.cs" />
     <Compile Include="Assets\_Scripts\Systems\InterAction\RotatingObjectInteractable.cs" />
     <Compile Include="Assets\IgniteCoders\Simple Water Shader\Resources\WaterReflection.cs" />
@@ -120,7 +118,6 @@
     <Compile Include="Assets\_Scripts\UI\Menu\MainMenuEventHandler.cs" />
     <Compile Include="Assets\_Scripts\Systems\MonsterSpawner\MonsterModeTrigger.cs" />
     <Compile Include="Assets\_Scripts\Systems\Cutscene\CutsceneTrigger.cs" />
-    <Compile Include="Assets\_Scripts\Systems\PauseSystem\MainMenuPauseUI.cs" />
     <Compile Include="Assets\_Scripts\Systems\Audio\Sound\SoundBuilder.cs" />
     <Compile Include="Assets\_Scripts\Systems\Hint System\HintManager.cs" />
     <Compile Include="Assets\_Scripts\UI\Menu\ScaleChangeMenuHandler.cs" />
@@ -137,11 +134,13 @@
     <Compile Include="Assets\_Scripts\Player\PlayerMovement.cs" />
     <Compile Include="Assets\_Scripts\Systems\Audio\Sound\SoundManager.cs" />
     <Compile Include="Assets\_Scripts\Core\Pattern\StaticInstance.cs" />
+    <Compile Include="Assets\_Scripts\Systems\MonsterSpawner\TentacleStateMachine.cs" />
     <Compile Include="Assets\_Scripts\Systems\Tutorial\ITutorialStep.cs" />
     <Compile Include="Assets\_Scripts\Systems\GameCore\Inventory.cs" />
     <Compile Include="Assets\_Scripts\Systems\Hint System\HintData.cs" />
     <Compile Include="Assets\_Scripts\Systems\Audio\Music\MusicSelector.cs" />
     <Compile Include="Assets\_Scripts\Systems\MonsterSpawner\MonsterActivationTrigger.cs" />
+    <Compile Include="Assets\_Scripts\Systems\InterAction\GeneratorInteraction.cs" />
     <Compile Include="Assets\_Scripts\UI\Menu\DeathScreen.cs" />
   </ItemGroup>
   <ItemGroup>
