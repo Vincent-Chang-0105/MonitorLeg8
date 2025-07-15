@@ -105,6 +105,7 @@
     <Compile Include="Assets\_Scripts\Systems\Tutorial\TutorialData.cs" />
     <Compile Include="Assets\_Scripts\Systems\MonsterSpawner\FrogMonster.cs" />
     <Compile Include="Assets\_Scripts\Systems\Management\PauseManager.cs" />
+    <Compile Include="Assets\_Scripts\Systems\MonsterSpawner\TentacleController.cs" />
     <Compile Include="Assets\_Scripts\UI\Menu\ThunderFlash.cs" />
     <Compile Include="Assets\_Scripts\UI\Menu\MainMenuCameraEventHandler.cs" />
     <Compile Include="Assets\_Scripts\Systems\InterAction\RotatingObjectInteractable.cs" />
@@ -133,6 +134,7 @@
     <Compile Include="Assets\_Scripts\Player\PlayerMovement.cs" />
     <Compile Include="Assets\_Scripts\Systems\Audio\Sound\SoundManager.cs" />
     <Compile Include="Assets\_Scripts\Core\Pattern\StaticInstance.cs" />
+    <Compile Include="Assets\_Scripts\Systems\MonsterSpawner\TentacleStateMachine.cs" />
     <Compile Include="Assets\_Scripts\Systems\Tutorial\ITutorialStep.cs" />
     <Compile Include="Assets\_Scripts\Systems\GameCore\Inventory.cs" />
     <Compile Include="Assets\_Scripts\Systems\Hint System\HintData.cs" />
