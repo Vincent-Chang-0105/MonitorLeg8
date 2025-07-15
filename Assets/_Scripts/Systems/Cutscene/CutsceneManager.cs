@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.Playables;
 using UnityEngine.Events;
 using UnityEngine.UI;
+using Unity.VisualScripting;
 
 [System.Serializable]
 public class CutsceneData
@@ -28,6 +29,9 @@ public class CutsceneData
 
 public class CutsceneManager : StaticInstance<CutsceneManager>
 {
+    [Header("Debug Mode")]
+    public bool debugMode = false; // Enable to see debug logs in the console
+
     [Header("Settings")]
     public KeyCode skipKey = KeyCode.Space;
     public KeyCode pauseKey = KeyCode.Escape;
@@ -181,11 +185,15 @@ public class CutsceneManager : StaticInstance<CutsceneManager>
     /// </summary>
     public void PlayCutscene(CutsceneData cutscene, Action onComplete = null)
     {
-        if (isPlayingCutscene)
+        if (debugMode)
         {
-            Debug.LogWarning("Already playing a cutscene! Stopping current cutscene.");
-            StopCurrentCutscene();
+            return;
         }
+        if (isPlayingCutscene)
+            {
+                Debug.LogWarning("Already playing a cutscene! Stopping current cutscene.");
+                StopCurrentCutscene();
+            }
         
         if (cutscene == null || cutscene.timeline == null)
         {
