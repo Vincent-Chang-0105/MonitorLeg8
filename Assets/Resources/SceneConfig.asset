@@ -28,10 +28,10 @@ MonoBehaviour:
     hideCursorAtStart: 1
     hintData: {fileID: 11400000, guid: 56cf44b76f11ff44e8b8a5d2a643c7f5, type: 2}
     introVideoClip: {fileID: 32900000, guid: 74b1f4edb70c00141b8ecbcc100be374, type: 3}
-  - sceneName: Level3
+  - sceneName: Level3Pol
     musicClip: {fileID: 8300000, guid: ee747b0e999a7f9458b5c21b9d6944a1, type: 3}
     hideCursorAtStart: 1
-    hintData: {fileID: 0}
+    hintData: {fileID: 11400000, guid: 4ed8d87272d34bf489baab8d9cd5e0b7, type: 2}
     introVideoClip: {fileID: 0}
   - sceneName: Level4
     musicClip: {fileID: 8300000, guid: e255cbab04fe00042b316bfa24b7ada4, type: 3}
