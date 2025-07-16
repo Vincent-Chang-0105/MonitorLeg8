@@ -5,7 +5,6 @@ using UnityEngine.Video;
 using UnityEngine.Events;
 using UnityEngine.UI;
 using Image = UnityEngine.UI.Image;
-using UnityEditor.SearchService;
 using AudioSystem;
 
 public class VideoManager : PersistentSingleton<VideoManager>

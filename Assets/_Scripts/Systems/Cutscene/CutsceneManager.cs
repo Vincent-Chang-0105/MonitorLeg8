@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.Playables;
 using UnityEngine.Events;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 using Unity.VisualScripting;
 
 [System.Serializable]
@@ -23,8 +24,6 @@ public class CutsceneData
     public UnityEvent onCutsceneStart;
     public UnityEvent onCutsceneEnd;
     public UnityEvent onCutsceneSkipped;
-
-    
 }
 
 public class CutsceneManager : StaticInstance<CutsceneManager>
@@ -36,10 +35,10 @@ public class CutsceneManager : StaticInstance<CutsceneManager>
     public KeyCode skipKey = KeyCode.Space;
     public KeyCode pauseKey = KeyCode.Escape;
     public float skipHoldTime = 2f; // Set to 0 for instant skip, or time in seconds to hold
-    
+
     [Header("Cutscenes")]
     public List<CutsceneData> cutscenes = new List<CutsceneData>();
-    
+
     [Header("Global Events")]
     public UnityEvent onAnyCutsceneStart;
     public UnityEvent onAnyCutsceneEnd;
@@ -47,7 +46,7 @@ public class CutsceneManager : StaticInstance<CutsceneManager>
     [Header("UI")]
     public GameObject skipPrompt; // Optional UI element
     public Image skipPromptImage; // Optional image for skip prompt
-    
+
     // Current state
     private CutsceneData currentCutscene;
     private bool isPlayingCutscene = false;
@@ -56,33 +55,145 @@ public class CutsceneManager : StaticInstance<CutsceneManager>
     private bool isHoldingSpace = false;
     private float skipHoldTimer = 0f;
     private Coroutine currentCutsceneCoroutine;
-    
+
     // Callbacks
     private Action onCurrentCutsceneComplete;
-    
+
     // Properties
     public bool IsPlayingCutscene => isPlayingCutscene;
     public bool IsPaused => isPaused;
     public string CurrentCutsceneName => currentCutscene?.cutsceneName ?? "";
 
-    private void Awake()
+    protected override void Awake()
     {
         base.Awake();
 
+        // Subscribe to scene loaded event to reset state on scene changes
+        SceneManager.sceneLoaded += OnSceneLoaded;
+
+        // Initialize input system connections
+        InitializeInputConnections();
+    }
+
+    private void OnDestroy()
+    {
+        // Unsubscribe from scene event
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+
+        // Unsubscribe from input events
+        DisconnectInputEvents();
+    }
+
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        // Only reset cutscene state if we're not currently playing a cutscene
+        // This prevents interrupting cutscenes that start immediately after scene load
+        if (!isPlayingCutscene)
+        {
+            ResetCutsceneState();
+        }
+        else
+        {
+            // If we're playing a cutscene, just reset the UI elements but keep the state
+            ResetUIElements();
+        }
+
+        // Reinitialize input connections in case InputSystem was recreated
+        StartCoroutine(DelayedInputReinitialization());
+    }
+
+    private IEnumerator DelayedInputReinitialization()
+    {
+        // Wait a frame to ensure all managers are initialized
+        yield return null;
+
+        // Disconnect and reconnect input events
+        DisconnectInputEvents();
+        InitializeInputConnections();
+    }
+
+    private void InitializeInputConnections()
+    {
+        // Wait for InputSystem to be available
+        if (InputSystem.Instance != null)
+        {
+            ConnectInputEvents();
+        }
+        else
+        {
+            // If InputSystem isn't ready, try again next frame
+            StartCoroutine(WaitForInputSystemAndConnect());
+        }
+    }
+
+    private IEnumerator WaitForInputSystemAndConnect()
+    {
+        // Wait for InputSystem to be initialized
+        while (InputSystem.Instance == null)
+        {
+            yield return null;
+        }
+
+        ConnectInputEvents();
+    }
+
+    private void ConnectInputEvents()
+    {
         if (InputSystem.Instance != null)
         {
             InputSystem.Instance.SpaceBarKeyDownEvent += OnSpaceBarDown;
             InputSystem.Instance.SpaceBarKeyUpEvent += OnSpaceBarUp;
         }
-        
     }
 
-    private void OnDestroy()
+    private void DisconnectInputEvents()
     {
         if (InputSystem.Instance != null)
         {
             InputSystem.Instance.SpaceBarKeyDownEvent -= OnSpaceBarDown;
             InputSystem.Instance.SpaceBarKeyUpEvent -= OnSpaceBarUp;
+        }
+    }
+
+    private void ResetCutsceneState()
+    {
+        // Stop any running cutscene
+        if (currentCutsceneCoroutine != null)
+        {
+            StopCoroutine(currentCutsceneCoroutine);
+            currentCutsceneCoroutine = null;
+        }
+
+        // Reset all state variables
+        currentCutscene = null;
+        isPlayingCutscene = false;
+        isPaused = false;
+        isSkipPromptActive = false;
+        isHoldingSpace = false;
+        skipHoldTimer = 0f;
+        onCurrentCutsceneComplete = null;
+
+        // Reset time scale in case it was left paused
+        Time.timeScale = 1f;
+
+        // Reset UI elements
+        ResetUIElements();
+
+        Debug.Log("Cutscene state reset for scene reload");
+    }
+
+    private void ResetUIElements()
+    {
+        // Hide skip prompt if it exists
+        if (skipPrompt != null)
+        {
+            skipPrompt.SetActive(false);
+        }
+
+        // Reset skip prompt image
+        if (skipPromptImage != null)
+        {
+            skipPromptImage.fillAmount = 0f;
         }
     }
 
@@ -93,7 +204,10 @@ public class CutsceneManager : StaticInstance<CutsceneManager>
             return;
 
         if (!isPlayingCutscene || currentCutscene == null || !currentCutscene.canSkip || !isSkipPromptActive)
+        {
+            Debug.Log($"Space bar pressed but conditions not met: isPlayingCutscene={isPlayingCutscene}, currentCutscene={currentCutscene?.cutsceneName}, canSkip={currentCutscene?.canSkip}, isSkipPromptActive={isSkipPromptActive}");
             return;
+        }
 
         Debug.Log("Space bar pressed for cutscene skip");
         isHoldingSpace = true;
@@ -117,23 +231,24 @@ public class CutsceneManager : StaticInstance<CutsceneManager>
 
     void Update()
     {
-        //if (!isPlayingCutscene) return;
         HandleInput();
     }
-    
+
     void HandleInput()
     {
         if (currentCutscene != null && currentCutscene.canSkip && isSkipPromptActive && isHoldingSpace)
         {
             skipHoldTimer += Time.unscaledDeltaTime;
 
-            float targetFill = Mathf.Clamp01(skipHoldTimer / skipHoldTime);
-            skipPromptImage.fillAmount = Mathf.MoveTowards(
-                skipPromptImage.fillAmount,
-                targetFill,
-                2f * Time.unscaledDeltaTime
-            );
-
+            if (skipPromptImage != null)
+            {
+                float targetFill = Mathf.Clamp01(skipHoldTimer / skipHoldTime);
+                skipPromptImage.fillAmount = Mathf.MoveTowards(
+                    skipPromptImage.fillAmount,
+                    targetFill,
+                    2f * Time.unscaledDeltaTime
+                );
+            }
 
             // Check if hold time is reached
             if (skipHoldTime > 0 && skipHoldTimer >= skipHoldTime)
@@ -146,9 +261,9 @@ public class CutsceneManager : StaticInstance<CutsceneManager>
             }
         }
     }
-    
+
     #region Public Methods
-    
+
     /// <summary>
     /// Play a cutscene by name
     /// </summary>
@@ -164,7 +279,7 @@ public class CutsceneManager : StaticInstance<CutsceneManager>
             Debug.LogError($"Cutscene '{cutsceneName}' not found!");
         }
     }
-    
+
     /// <summary>
     /// Play a cutscene by index
     /// </summary>
@@ -179,7 +294,7 @@ public class CutsceneManager : StaticInstance<CutsceneManager>
             Debug.LogError($"Cutscene index {index} is out of range!");
         }
     }
-    
+
     /// <summary>
     /// Play a specific cutscene
     /// </summary>
@@ -187,107 +302,115 @@ public class CutsceneManager : StaticInstance<CutsceneManager>
     {
         if (debugMode)
         {
+            Debug.Log($"Debug mode is on, skipping cutscene: {cutscene?.cutsceneName}");
             return;
         }
+
         if (isPlayingCutscene)
-            {
-                Debug.LogWarning("Already playing a cutscene! Stopping current cutscene.");
-                StopCurrentCutscene();
-            }
-        
+        {
+            Debug.LogWarning("Already playing a cutscene! Stopping current cutscene.");
+            StopCurrentCutscene();
+        }
+
         if (cutscene == null || cutscene.timeline == null)
         {
             Debug.LogError("Invalid cutscene data!");
             return;
         }
-        
+
+        Debug.Log($"Starting cutscene playback: {cutscene.cutsceneName}");
+
         currentCutscene = cutscene;
         onCurrentCutsceneComplete = onComplete;
-        
+
         if (currentCutsceneCoroutine != null)
         {
             StopCoroutine(currentCutsceneCoroutine);
         }
-        
+
         currentCutsceneCoroutine = StartCoroutine(PlayCutsceneCoroutine(cutscene));
     }
-    
+
     /// <summary>
     /// Skip the currently playing cutscene
     /// </summary>
     public void SkipCurrentCutscene()
     {
-        if (!isPlayingCutscene || currentCutscene == null) return;
-        
+        if (!isPlayingCutscene || currentCutscene == null)
+        {
+            Debug.Log($"Cannot skip cutscene: isPlayingCutscene={isPlayingCutscene}, currentCutscene={currentCutscene?.cutsceneName}");
+            return;
+        }
+
         if (!currentCutscene.canSkip)
         {
             Debug.Log("Current cutscene cannot be skipped.");
             return;
         }
-        
+
         Debug.Log($"Skipping cutscene: {currentCutscene.cutsceneName}");
-        
+
         // Jump to end of timeline
-        if (currentCutscene.timeline.state == PlayState.Playing)
+        if (currentCutscene.timeline != null && currentCutscene.timeline.state == PlayState.Playing)
         {
             currentCutscene.timeline.time = currentCutscene.timeline.duration;
             currentCutscene.timeline.Evaluate();
         }
-        
+
         // Trigger skip event
         currentCutscene.onCutsceneSkipped?.Invoke();
-        
+
         // End cutscene
         EndCurrentCutscene();
     }
-    
+
     /// <summary>
     /// Stop the current cutscene immediately
     /// </summary>
     public void StopCurrentCutscene()
     {
         if (!isPlayingCutscene) return;
-        
+
         Debug.Log($"Stopping cutscene: {currentCutscene?.cutsceneName}");
-        
+
         if (currentCutscene?.timeline != null)
         {
             currentCutscene.timeline.Stop();
         }
-        
+
         if (currentCutsceneCoroutine != null)
         {
             StopCoroutine(currentCutsceneCoroutine);
             currentCutsceneCoroutine = null;
         }
-        
+
         EndCurrentCutscene();
     }
-    
+
     /// <summary>
     /// Pause the current cutscene
     /// </summary>
     public void PauseCutscene()
     {
         if (!isPlayingCutscene || isPaused) return;
-        
+
         isPaused = true;
         currentCutscene?.timeline.Pause();
         Debug.Log("Cutscene paused");
     }
-    
+
     /// <summary>
     /// Resume the current cutscene
     /// </summary>
     public void ResumeCutscene()
     {
         if (!isPlayingCutscene || !isPaused) return;
-        
+
         isPaused = false;
         currentCutscene?.timeline.Resume();
         Debug.Log("Cutscene resumed");
     }
-    
+
     /// <summary>
     /// Check if a specific cutscene exists
     /// </summary>
@@ -295,7 +418,7 @@ public class CutsceneManager : StaticInstance<CutsceneManager>
     {
         return GetCutsceneByName(cutsceneName) != null;
     }
-    
+
     /// <summary>
     /// Get all cutscene names
     /// </summary>
@@ -308,28 +431,30 @@ public class CutsceneManager : StaticInstance<CutsceneManager>
         }
         return names;
     }
-    
+
     #endregion
-    
+
     #region Private Methods
-    
+
     private CutsceneData GetCutsceneByName(string name)
     {
         return cutscenes.Find(c => c.cutsceneName.Equals(name, StringComparison.OrdinalIgnoreCase));
     }
-    
+
     private IEnumerator PlayCutsceneCoroutine(CutsceneData cutscene)
     {
-        // Setup
+        // Setup - Set this IMMEDIATELY at the start of the coroutine
         isPlayingCutscene = true;
         isPaused = false;
-        
+
+        Debug.Log($"PlayCutsceneCoroutine started for: {cutscene.cutsceneName}, isPlayingCutscene={isPlayingCutscene}");
+
         // Handle gameplay pause
         if (cutscene.pauseGameplay)
         {
             Time.timeScale = 0f;
         }
-        
+
         // Handle player input
         if (cutscene.disablePlayerInput)
         {
@@ -337,22 +462,15 @@ public class CutsceneManager : StaticInstance<CutsceneManager>
             // For example: PlayerController.Instance.DisableInput();
         }
 
-        // Show skip prompt
-        if (skipPrompt != null)
-        {
-            skipPrompt.SetActive(false);
-            if (skipPromptImage != null)
-            {
-                skipPromptImage.fillAmount = 0f; // Reset fill amount
-            }
-        }
- 
+        // Reset UI elements
+        ResetUIElements();
+
         // Trigger events
         cutscene.onCutsceneStart?.Invoke();
         onAnyCutsceneStart?.Invoke();
-        
+
         Debug.Log($"Starting cutscene: {cutscene.cutsceneName}");
-        
+
         // Play timeline
         cutscene.timeline.Play();
 
@@ -363,62 +481,64 @@ public class CutsceneManager : StaticInstance<CutsceneManager>
             skipPrompt.SetActive(true);
             isSkipPromptActive = true;
             skipHoldTimer = 0f;
+            Debug.Log($"Skip prompt activated for cutscene: {cutscene.cutsceneName}");
         }
-        
+
         // Wait for timeline to finish
         while (cutscene.timeline.state == PlayState.Playing)
         {
             yield return null;
         }
-        
+
         // Natural end
         EndCurrentCutscene();
     }
-    
+
     private void EndCurrentCutscene()
     {
         if (currentCutscene != null)
         {
             Debug.Log($"Ending cutscene: {currentCutscene.cutsceneName}");
-            
+
             // Hide skip prompt
             if (skipPrompt != null)
             {
                 skipPrompt.SetActive(false);
             }
-            
+
             // Restore gameplay
             if (currentCutscene.pauseGameplay)
             {
                 Time.timeScale = 1f;
             }
-            
+
             // Restore player input
             if (currentCutscene.disablePlayerInput)
             {
                 // You can add your input enabling logic here
                 // For example: PlayerController.Instance.EnableInput();
             }
-            
+
             // Trigger events
             currentCutscene.onCutsceneEnd?.Invoke();
             onAnyCutsceneEnd?.Invoke();
-            
+
             // Call completion callback
             onCurrentCutsceneComplete?.Invoke();
         }
-        
+
         // Reset state
         currentCutscene = null;
         isPlayingCutscene = false;
         isPaused = false;
         skipHoldTimer = 0f;
-        isHoldingSpace = false; // <-- Add this line
+        isHoldingSpace = false;
         isSkipPromptActive = false;
         onCurrentCutsceneComplete = null;
         currentCutsceneCoroutine = null;
+
+        Debug.Log("Cutscene state fully reset");
     }
-    
+
     #endregion
-    
 }

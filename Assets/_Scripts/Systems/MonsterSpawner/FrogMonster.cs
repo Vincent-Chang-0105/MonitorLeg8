@@ -13,9 +13,9 @@ public class FrogMonster : MonoBehaviour
     private SoundBuilder soundBuilder;
 
     [Header("Jumpscare Settings")]
-    public float jumpscareDistance = -2f;
-    public float jumpscareDelay = 0.5f;
-    public float deathScreenDelay = 1.5f;
+    public float jumpscareDistance = -3f;
+    public float jumpscareDelay = 1f;
+    public float deathScreenDelay = 3f;
 
     private bool isJumpscaring = false;
 
@@ -32,6 +32,10 @@ public class FrogMonster : MonoBehaviour
         
         // Disable all animations at start
         DisableFrogAnimations();
+    }
+
+    private void Update()
+    {
     }
 
     private void DisableFrogAnimations()
@@ -107,6 +111,12 @@ public class FrogMonster : MonoBehaviour
             InputSystem.Instance.SetInputState(false);
         }
 
+        // Enable animations before triggering jumpscare
+        EnableFrogAnimations();
+
+        yield return new WaitForSeconds(jumpscareDelay);
+
+
         // Orient player to face this frog
         GameObject player = GameObject.FindGameObjectWithTag("Player");
         if (player != null)
@@ -153,11 +163,6 @@ public class FrogMonster : MonoBehaviour
             }
         }
        
-        yield return new WaitForSeconds(jumpscareDelay);
-
-        // Enable animations before triggering jumpscare
-        EnableFrogAnimations();
-
         // Trigger jumpscare animation/effects
         if (animator != null)
         {

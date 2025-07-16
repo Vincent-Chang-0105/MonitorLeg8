@@ -6,6 +6,7 @@ public class TentaclesController : MonoBehaviour
 {
     [Header("Tentacle Management")]
     public List<TentacleStateMachine> tentacles = new List<TentacleStateMachine>();
+    public TentacleStateMachine startingTentacle;
     
     [Header("Timing Settings")]
     public float cycleInterval = 4f; // Time between tentacle activations
@@ -18,6 +19,7 @@ public class TentaclesController : MonoBehaviour
     private bool isCycleRunning = false;
     private bool isPaused = false;
     private TentacleStateMachine currentActiveTentacle = null;
+    private bool hasStartingTentacleActivated = false; // Track if starting tentacle has been activated
     
     void Start()
     {
@@ -72,6 +74,7 @@ public class TentaclesController : MonoBehaviour
         }
         
         isCycleRunning = true;
+        hasStartingTentacleActivated = false; // Reset flag when cycle starts
         cycleCoroutine = StartCoroutine(TentacleCycleRoutine());
         
         if (showDebugLogs)
@@ -108,9 +111,30 @@ public class TentaclesController : MonoBehaviour
                 continue;
             }
             
-            // Activate a random tentacle
-            ActivateRandomTentacle();
+            // Activate tentacle based on priority
+            ActivateNextTentacle();
         }
+    }
+    
+    void ActivateNextTentacle()
+    {
+        if (tentacles.Count == 0) return;
+        
+        // If starting tentacle hasn't been activated yet and is available, prioritize it
+        if (!hasStartingTentacleActivated && startingTentacle != null && 
+            startingTentacle.currentState == TentacleStateMachine.TentacleState.Stalking)
+        {
+            ActivateSpecificTentacle(startingTentacle);
+            hasStartingTentacleActivated = true;
+            
+            if (showDebugLogs)
+                Debug.Log($"Activating STARTING tentacle first: {startingTentacle.name}");
+            
+            return;
+        }
+        
+        // After starting tentacle has been activated, proceed with random selection
+        ActivateRandomTentacle();
     }
     
     void ActivateRandomTentacle()
@@ -137,13 +161,22 @@ public class TentaclesController : MonoBehaviour
         
         // Randomly select from available tentacles
         int randomIndex = Random.Range(0, availableTentacles.Count);
-        currentActiveTentacle = availableTentacles[randomIndex];
+        TentacleStateMachine selectedTentacle = availableTentacles[randomIndex];
+        
+        ActivateSpecificTentacle(selectedTentacle);
+    }
+    
+    void ActivateSpecificTentacle(TentacleStateMachine tentacle)
+    {
+        if (tentacle == null) return;
+        
+        currentActiveTentacle = tentacle;
         
         if (showDebugLogs)
-            Debug.Log($"Activating tentacle: {currentActiveTentacle.name}");
+            Debug.Log($"Activating tentacle: {tentacle.name}");
         
         // Start the tentacle sequence: Idle -> Agitated -> Slam -> back to Stalking
-        currentActiveTentacle.ForceState(TentacleStateMachine.TentacleState.Idle);
+        tentacle.ForceState(TentacleStateMachine.TentacleState.Idle);
     }
     
     void HandleTentacleStateChanged(TentacleStateMachine tentacle, TentacleStateMachine.TentacleState newState)
@@ -223,8 +256,13 @@ public class TentaclesController : MonoBehaviour
                 currentActiveTentacle.ForceState(TentacleStateMachine.TentacleState.Stalking);
             }
             
-            currentActiveTentacle = tentacle;
-            tentacle.ForceState(TentacleStateMachine.TentacleState.Idle);
+            // Mark starting tentacle as activated if this is the starting tentacle
+            if (tentacle == startingTentacle)
+            {
+                hasStartingTentacleActivated = true;
+            }
+            
+            ActivateSpecificTentacle(tentacle);
             
             if (showDebugLogs)
                 Debug.Log($"Force activated tentacle {tentacle.name}");
@@ -242,6 +280,7 @@ public class TentaclesController : MonoBehaviour
         }
         
         currentActiveTentacle = null;
+        hasStartingTentacleActivated = false; // Reset the flag
         
         if (showDebugLogs)
             Debug.Log("All tentacles reset to stalking state");
@@ -252,6 +291,15 @@ public class TentaclesController : MonoBehaviour
         StopCycle();
         ResetAllTentacles();
         StartCycle();
+    }
+    
+    // Public method to manually reset the starting tentacle priority
+    public void ResetStartingTentaclePriority()
+    {
+        hasStartingTentacleActivated = false;
+        
+        if (showDebugLogs)
+            Debug.Log("Starting tentacle priority reset - will be activated first on next cycle");
     }
     
     void OnDestroy()

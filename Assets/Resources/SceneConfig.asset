@@ -18,28 +18,34 @@ MonoBehaviour:
     hideCursorAtStart: 0
     hintData: {fileID: 0}
     introVideoClip: {fileID: 0}
+    outroVideoClip: {fileID: 0}
   - sceneName: Level1
     musicClip: {fileID: 8300000, guid: ab05a299a744eb041ab7b1ed36098546, type: 3}
     hideCursorAtStart: 1
     hintData: {fileID: 11400000, guid: d9e961ab625c3064f8cc197c10de6a06, type: 2}
     introVideoClip: {fileID: 32900000, guid: 3be2d49b13ef2c74794b79e1b4ae1f2b, type: 3}
+    outroVideoClip: {fileID: 0}
   - sceneName: Level2
     musicClip: {fileID: 8300000, guid: d2c2760f01e2b3a418a96accf0b2c3ad, type: 3}
     hideCursorAtStart: 1
     hintData: {fileID: 11400000, guid: 56cf44b76f11ff44e8b8a5d2a643c7f5, type: 2}
-    introVideoClip: {fileID: 32900000, guid: 74b1f4edb70c00141b8ecbcc100be374, type: 3}
+    introVideoClip: {fileID: 0}
+    outroVideoClip: {fileID: 32900000, guid: 74b1f4edb70c00141b8ecbcc100be374, type: 3}
   - sceneName: Level3Pol
     musicClip: {fileID: 8300000, guid: ee747b0e999a7f9458b5c21b9d6944a1, type: 3}
     hideCursorAtStart: 1
     hintData: {fileID: 11400000, guid: 4ed8d87272d34bf489baab8d9cd5e0b7, type: 2}
     introVideoClip: {fileID: 0}
+    outroVideoClip: {fileID: 0}
   - sceneName: Level4
     musicClip: {fileID: 8300000, guid: e255cbab04fe00042b316bfa24b7ada4, type: 3}
     hideCursorAtStart: 1
     hintData: {fileID: 0}
     introVideoClip: {fileID: 0}
+    outroVideoClip: {fileID: 0}
   - sceneName: Level5
     musicClip: {fileID: 8300000, guid: 04903c577033f214faa90af8daf62f57, type: 3}
     hideCursorAtStart: 1
     hintData: {fileID: 0}
     introVideoClip: {fileID: 0}
+    outroVideoClip: {fileID: 0}

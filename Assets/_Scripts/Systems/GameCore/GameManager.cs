@@ -84,6 +84,33 @@ public class GameManager : PersistentSingleton<GameManager>
     private IEnumerator LoadSceneCoroutine(SceneConfiguration.SceneSettings settings)
     {
         currentSceneSettings = settings;
+        
+        // Play outro video BEFORE showing loading screen if it exists
+        if (currentSceneSettings != null && currentSceneSettings.outroVideoClip != null && VideoManager.Instance != null)
+        {
+            Debug.Log("Playing outro video before scene transition...");
+
+            // Pause the game during outro video
+            Time.timeScale = 0f;
+
+            // Create a flag to track video completion
+            bool videoCompleted = false;
+
+            // Play the outro video
+            VideoManager.Instance.PlayVideo(currentSceneSettings.outroVideoClip, () =>
+            {
+                videoCompleted = true;
+                Time.timeScale = 1f; // Resume time scale after video
+            });
+
+            // Wait for outro video to complete
+            while (!videoCompleted)
+            {
+                yield return null;
+            }
+
+            Debug.Log("Outro video completed, proceeding with scene loading...");
+        }
 
         // Show loading screen
         ShowLoadingScreen();
