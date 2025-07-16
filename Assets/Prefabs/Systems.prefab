@@ -114,6 +114,7 @@ MonoBehaviour:
   skipPromptImage: {fileID: 8788479376963478747}
   allowSkipping: 1
   debugMode: 1
+  dontPlayVideo: 0
   OnVideoStart:
     m_PersistentCalls:
       m_Calls:
@@ -571,7 +572,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Hold SpareBar to Skip
+  m_text: Hold Space Bar to Skip
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: bacaf590402822740bdc5d4447ae5433, type: 2}
   m_sharedMaterial: {fileID: 3795463195770220533, guid: bacaf590402822740bdc5d4447ae5433,
@@ -685,7 +686,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d56b5dad61a51a94d840b660cc968976, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  AutoUnparentOnAwake: 1
+  fadeDuration: 0.3
+  pauseMenuGO: {fileID: 0}
+  canvasGroup: {fileID: 0}
+  PauseBackground: {fileID: 0}
+  pauseTitle: {fileID: 0}
+  menuButtons: []
 --- !u!1 &6616048628272087482
 GameObject:
   m_ObjectHideFlags: 0

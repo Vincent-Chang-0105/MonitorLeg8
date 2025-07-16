@@ -141,7 +141,17 @@ public class PlayerMovement : MonoBehaviour
 
     private void Update()
     {
-        if (!canMove) return; // Check if movement is allowed
+        if (!canMove) 
+        {
+            // Stop any playing wheel sounds when movement is disabled
+            if (isWheelSoundPlaying && currentWheelSound != null)
+            {
+                currentWheelSound.FadeOutAndStop(0.1f);
+                currentWheelSound = null;
+                isWheelSoundPlaying = false;
+            }
+            return; // Exit early when movement is disabled
+        }
 
         GroundedCheck();
         JumpAndGravity();
