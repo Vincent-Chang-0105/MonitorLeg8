@@ -9,9 +9,11 @@ public class PickableInteractable : Interactable
     [SerializeField] private Sprite itemIcon; // Icon for inventory display
     [SerializeField] private int itemID = 0; // Unique identifier for the item
     [SerializeField] private int quantity = 1; // How many of this item to give
+    [SerializeField] private bool ifCanPickUp = false; // Can the player pick this up?
 
     [Header("Dialogue")]
-    [SerializeField] private Dialogue dialogue;
+    [SerializeField] private Dialogue canPickUpDialogue; // Dialogue when successfully picking up ("Found it!")
+    [SerializeField] private Dialogue cannotPickUpDialogue; // Dialogue when can't pick up ("Is this a keycard?")
 
     [Header("Pickup Animation")]
     [SerializeField] private bool usePickupAnimation = true;
@@ -25,19 +27,41 @@ public class PickableInteractable : Interactable
     [SerializeField] private bool destroyAfterPickup = true; // Should the object be destroyed after pickup
 
     [Header("Sounds")]
-    [SerializeField] SoundData interactPickupObject;
+    [SerializeField] SoundData interactPickupObject; // Sound when successfully picking up
+    [SerializeField] SoundData cannotPickupSound; // Sound when can't pick up
     private SoundBuilder soundBuilder;
 
     private Renderer objectRenderer;
     private Collider objectCollider;
 
+    public override void Interact()
+    {
+        if (ifCanPickUp)
+        {
+            // Player can pick up the item
+            PickupObject();
+        }
+        else
+        {
+            // Player cannot pick up the item
+            CannotPickupObject();
+        }
+        
+        TriggerHints();
+    }
+
     private void PickupObject()
     {
-        // Add item to inventory (you'll need to implement your inventory system)
+        // Add item to inventory
         AddToInventory();
 
         // Play pickup sound
-        soundBuilder.Play(interactPickupObject);
+        if (interactPickupObject != null)
+            soundBuilder.Play(interactPickupObject);
+
+        // Play success dialogue ("Found it!")
+        if (canPickUpDialogue != null && DialogueManager.Instance != null)
+            DialogueManager.Instance.StartDialogue(canPickUpDialogue);
 
         // Spawn pickup VFX if assigned
         if (pickupVFX != null)
@@ -62,6 +86,19 @@ public class PickableInteractable : Interactable
             else
                 gameObject.SetActive(false);
         }
+    }
+
+    private void CannotPickupObject()
+    {
+        // Play "cannot pickup" sound
+        if (cannotPickupSound != null)
+            //soundBuilder.Play(cannotPickupSound);
+
+        // Play dialogue asking about the item ("Is this a keycard?")
+        if (cannotPickUpDialogue != null && DialogueManager.Instance != null)
+            DialogueManager.Instance.StartDialogue(cannotPickUpDialogue);
+
+        Debug.Log($"Cannot pick up item {itemID} - ifCanPickUp is false");
     }
 
     private void PlayPickupAnimation()
@@ -112,12 +149,6 @@ public class PickableInteractable : Interactable
         }
     }
 
-    public override void Interact()
-    {
-        PickupObject();
-        TriggerHints();
-    }
-
     // Start is called before the first frame update
     void Start()
     {
@@ -131,18 +162,30 @@ public class PickableInteractable : Interactable
             objectCollider = GetComponentInChildren<Collider>();
 
         soundBuilder = SoundManager.Instance.CreateSoundBuilder();
-        
+    }
+
+    // Optional: Method to enable pickup (useful for progression systems)
+    public void EnablePickup()
+    {
+        ifCanPickUp = true;
+        Debug.Log($"Item {itemID} can now be picked up!");
+    }
+
+    public void DisablePickup()
+    {
+        ifCanPickUp = false;
+        Debug.Log($"Item {itemID} can no longer be picked up!");
     }
 
     // Optional: Visualize pickup area in editor
     private void OnDrawGizmosSelected()
     {
-        // Draw pickup indicator
-        Gizmos.color = Color.green;
+        // Draw pickup indicator - green if can pickup, red if cannot
+        Gizmos.color = ifCanPickUp ? Color.green : Color.red;
         Gizmos.DrawWireSphere(transform.position, 0.2f);
         
         // Draw pickup animation preview
-        if (usePickupAnimation)
+        if (usePickupAnimation && ifCanPickUp)
         {
             Gizmos.color = Color.yellow;
             Vector3 targetPos = transform.position + Vector3.up * floatHeight;
@@ -151,7 +194,7 @@ public class PickableInteractable : Interactable
         }
         
         // Draw quantity indicator if more than 1
-        if (quantity > 1)
+        if (quantity > 1 && ifCanPickUp)
         {
             Gizmos.color = Color.cyan;
             for (int i = 0; i < Mathf.Min(quantity, 5); i++)

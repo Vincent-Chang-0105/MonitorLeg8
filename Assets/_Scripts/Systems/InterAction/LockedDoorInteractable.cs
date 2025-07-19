@@ -1,5 +1,4 @@
 using UnityEngine;
-using DG.Tweening;
 using AudioSystem;
 
 public class LockedDoorInteractable : Interactable
@@ -9,26 +8,15 @@ public class LockedDoorInteractable : Interactable
 
     [Header("Key Requirements")]
     [SerializeField] private int requiredKeyID = 1;
-    [SerializeField] private bool consumeKeyOnUse = false; // Should the key be removed after use?
+    [SerializeField] private bool consumeKeyOnUse = false;
     
-    [Header("Door Settings")]
-    [SerializeField] private Transform doorToMove;
-    [SerializeField] private Vector3 moveDirection = Vector3.forward; // Default direction is forward
-    [SerializeField] private float moveDistance = 1f; // Default distance is 1 unit
-    [SerializeField] private float moveDuration = 1f; // How long the movement takes
-    [SerializeField] private Ease easeType = Ease.InOutQuad; // Easing function
+    [Header("Door Reference")]
+    [SerializeField] private DoorController doorController; // Reference to shared door controller
     
     [Header("Sounds")]
     [SerializeField] SoundData interactButtonClick;
     [SerializeField] SoundData doorLockedSound;
-    [SerializeField] SoundData doorOpenSound;
     private SoundBuilder soundBuilder;
-    
-    private bool isUnlocked = false;
-    private bool isOpen = false;
-    private bool isMoving = false;
-    private Vector3 originalPosition;
-    private Vector3 targetPosition;
     
     public override void Interact()
     {
@@ -36,7 +24,18 @@ public class LockedDoorInteractable : Interactable
         if (Inventory.Instance.HasItem(requiredKeyID))
         {
             soundBuilder.WithPosition(gameObject.transform.position).Play(interactButtonClick);
-            ToggleDoor();
+            
+            // Use the shared door controller
+            if (doorController != null)
+            {
+                doorController.ToggleDoor();
+                
+                // Optionally consume the key
+                if (consumeKeyOnUse)
+                {
+                    Inventory.Instance.RemoveItem(requiredKeyID);
+                }
+            }
         }
         else
         {
@@ -46,34 +45,9 @@ public class LockedDoorInteractable : Interactable
             Debug.Log($"Door is locked! You need key ID: {requiredKeyID}");
         }
     }
-
-    private void ToggleDoor()
-    {
-        if (doorToMove == null || isMoving) return;
-
-        isMoving = true;
-
-        Vector3 destination = isOpen ? originalPosition : targetPosition;
-
-        doorToMove.DOMove(destination, moveDuration)
-            .SetEase(easeType)
-            .OnComplete(() =>
-            {
-                isOpen = !isOpen;
-                isMoving = false;
-            });
-
-        soundBuilder.WithPosition(doorToMove.transform.position).Play(doorOpenSound);
-    }
     
     void Start()
     {
         soundBuilder = SoundManager.Instance.CreateSoundBuilder();
-        
-        if (doorToMove != null)
-        {
-            originalPosition = doorToMove.position;
-            targetPosition = originalPosition + (moveDirection.normalized * moveDistance);
-        }
     }
 }

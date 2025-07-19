@@ -238,7 +238,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: cecfea48f9b3c964fa548455d0439af8,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 1.108
+      value: 21.174
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: cecfea48f9b3c964fa548455d0439af8,
         type: 3}
@@ -248,12 +248,12 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: cecfea48f9b3c964fa548455d0439af8,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 24.492
+      value: 6.574
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: cecfea48f9b3c964fa548455d0439af8,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.70710784
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: cecfea48f9b3c964fa548455d0439af8,
         type: 3}
@@ -263,7 +263,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: cecfea48f9b3c964fa548455d0439af8,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.70710576
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: cecfea48f9b3c964fa548455d0439af8,
         type: 3}
@@ -278,7 +278,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: cecfea48f9b3c964fa548455d0439af8,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: -90
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: cecfea48f9b3c964fa548455d0439af8,
         type: 3}
@@ -342,6 +342,10 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 6527003179090005933}
     m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: cecfea48f9b3c964fa548455d0439af8,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 5648898979716858799}
     - targetCorrespondingSourceObject: {fileID: -8149178742885545091, guid: cecfea48f9b3c964fa548455d0439af8,
         type: 3}
       insertIndex: -1
@@ -389,6 +393,52 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 2962505173406734229, guid: cecfea48f9b3c964fa548455d0439af8, type: 3}
+--- !u!1 &1134538911560666579 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: cecfea48f9b3c964fa548455d0439af8,
+    type: 3}
+  m_PrefabInstance: {fileID: 252158633274749058}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &5648898979716858799
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1134538911560666579}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3cd25f356ecccc44a9fd6a3a3515a0be, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  doorToMove: {fileID: 357299006312732521}
+  moveDirection: {x: 0, y: 1, z: 0}
+  moveDistance: 4
+  moveDuration: 2
+  easeType: 7
+  doorOpenSound:
+    clip: {fileID: 0}
+    mixerGroup: {fileID: 0}
+    loop: 0
+    playOnAwake: 0
+    frequentSound: 0
+    mute: 0
+    bypassEffects: 0
+    bypassListenerEffects: 0
+    bypassReverbZones: 0
+    priority: 128
+    volume: 1
+    pitch: 1
+    panStereo: 0
+    spatialBlend: 0
+    reverbZoneMix: 1
+    dopplerLevel: 1
+    spread: 0
+    minDistance: 1
+    maxDistance: 500
+    ignoreListenerVolume: 0
+    ignoreListenerPause: 0
+    rolloffMode: 0
 --- !u!1 &4301251346189761021 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -5129945498980185729, guid: cecfea48f9b3c964fa548455d0439af8,

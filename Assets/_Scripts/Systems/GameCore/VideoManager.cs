@@ -20,6 +20,10 @@ public class VideoManager : PersistentSingleton<VideoManager>
     [SerializeField] private bool debugMode = true; // Add debug toggle
     [SerializeField] private bool dontPlayVideo = false;
 
+    [Header("Audio Settings")]
+    [SerializeField] private bool muteVideo = false;
+    [SerializeField] [Range(0f, 1f)] private float videoVolume = 0.5f;
+
     [Header("Events")]
     public UnityEvent OnVideoStart;
     public UnityEvent OnVideoComplete;
@@ -71,9 +75,55 @@ public class VideoManager : PersistentSingleton<VideoManager>
             PauseManager.Instance.OnGamePaused += PauseVideo;
             PauseManager.Instance.OnGameResumed += ResumeVideo;
         }
-        
+
 
         skipPromptImage.fillAmount = 0f; // Reset skip prompt image fill
+        
+        SetupVideoAudio();
+    }
+
+    private void SetupVideoAudio()
+    {
+        if (videoPlayer == null) return;
+        
+        // Configure audio output
+        videoPlayer.audioOutputMode = VideoAudioOutputMode.Direct;
+        
+        // Set volume and mute state
+        SetVideoVolume(videoVolume);
+        SetVideoMute(muteVideo);
+    }
+
+    public void SetVideoVolume(float volume)
+    {
+        videoVolume = Mathf.Clamp01(volume);
+        
+        if (videoPlayer != null)
+        {
+            // Set volume for all audio tracks
+            for (ushort i = 0; i < videoPlayer.audioTrackCount; i++)
+            {
+                videoPlayer.SetDirectAudioVolume(i, videoVolume);
+            }
+        }
+        
+        if (debugMode) Debug.Log($"Video volume set to: {videoVolume}");
+    }
+    
+    public void SetVideoMute(bool mute)
+    {
+        muteVideo = mute;
+        
+        if (videoPlayer != null)
+        {
+            // Mute/unmute all audio tracks
+            for (ushort i = 0; i < videoPlayer.audioTrackCount; i++)
+            {
+                videoPlayer.SetDirectAudioMute(i, muteVideo);
+            }
+        }
+        
+        if (debugMode) Debug.Log($"Video muted: {muteVideo}");
     }
 
     private void OnDestroy()

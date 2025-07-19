@@ -3,6 +3,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.Video;
 
 public class LoadingScreenController : MonoBehaviour
 {
@@ -12,6 +13,12 @@ public class LoadingScreenController : MonoBehaviour
     [SerializeField] private TextMeshProUGUI statusText;
     [SerializeField] private TextMeshProUGUI percentageText;
     [SerializeField] private CanvasGroup canvasGroup;
+
+    [Header("Video Background")]
+    [SerializeField] private VideoPlayer videoPlayer;
+    [SerializeField] private RawImage videoBackground; // RawImage to display video
+    [SerializeField] private VideoClip backgroundVideo;
+    [SerializeField] private bool muteVideo = true;
     
     [Header("Animation Settings")]
     [SerializeField] private float fillAnimationSpeed = 2f;
@@ -24,6 +31,7 @@ public class LoadingScreenController : MonoBehaviour
     
     private float targetProgress = 0f;
     private float currentProgress = 0f;
+    private RenderTexture videoRenderTexture;
     
     private void Awake()
     {
@@ -32,17 +40,20 @@ public class LoadingScreenController : MonoBehaviour
         {
             canvas.sortingOrder = 1000; // High sorting order to appear on top
         }
-        
+
+        // Setup video background
+        SetupVideoBackground();
+
         // Initialize UI
         if (progressBarFill != null)
             progressBarFill.fillAmount = 0f;
-            
+
         if (percentageText != null)
             percentageText.text = "0%";
-            
+
         if (statusText != null)
             statusText.text = "Loading...";
-            
+
         // Start with fade in
         StartCoroutine(FadeIn());
     }
@@ -67,6 +78,53 @@ public class LoadingScreenController : MonoBehaviour
         {
             spinningIcon.transform.Rotate(0, 0, -spinSpeed * Time.unscaledDeltaTime);
         }
+    }
+
+    private void SetupVideoBackground()
+    {
+        if (videoPlayer == null || videoBackground == null || backgroundVideo == null)
+        {
+            Debug.LogWarning("Video components not properly assigned for loading screen background");
+            return;
+        }
+        
+        // Create render texture for video output
+        videoRenderTexture = new RenderTexture(1920, 1080, 0);
+        videoRenderTexture.Create();
+        
+        // Configure video player
+        videoPlayer.clip = backgroundVideo;
+        videoPlayer.renderMode = VideoRenderMode.RenderTexture;
+        videoPlayer.targetTexture = videoRenderTexture;
+        videoPlayer.isLooping = true;
+        videoPlayer.playOnAwake = true;
+        videoPlayer.skipOnDrop = true;
+        
+        // Mute video if specified
+        if (muteVideo)
+        {
+            videoPlayer.SetDirectAudioMute(0, true);
+        }
+        
+        // Set video texture to RawImage
+        videoBackground.texture = videoRenderTexture;
+        
+        // Start playing
+        videoPlayer.Play();
+        
+        // Optional: Wait for video to be ready
+        StartCoroutine(WaitForVideoReady());
+    }
+
+    private IEnumerator WaitForVideoReady()
+    {
+        // Wait for video to start playing
+        while (!videoPlayer.isPlaying)
+        {
+            yield return null;
+        }
+        
+        Debug.Log("Loading screen video background ready");
     }
     
     public void UpdateProgress(float progress)
@@ -121,7 +179,32 @@ public class LoadingScreenController : MonoBehaviour
         }
         
         canvasGroup.alpha = 0f;
+
+        // Stop video when fading out
+        StopVideoBackground();
+
         onComplete?.Invoke();
+    }
+
+    private void StopVideoBackground()
+    {
+        if (videoPlayer != null && videoPlayer.isPlaying)
+        {
+            videoPlayer.Stop();
+        }
+    }
+    
+    private void OnDestroy()
+    {
+        // Clean up render texture
+        if (videoRenderTexture != null)
+        {
+            videoRenderTexture.Release();
+            DestroyImmediate(videoRenderTexture);
+        }
+        
+        // Stop video player
+        StopVideoBackground();
     }
     
     // Optional: Add loading tips or hints
