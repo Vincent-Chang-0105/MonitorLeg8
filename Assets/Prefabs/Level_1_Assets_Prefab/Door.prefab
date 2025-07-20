@@ -418,7 +418,8 @@ MonoBehaviour:
   easeType: 7
   doorOpenSound:
     clip: {fileID: 8300000, guid: e47235691b921574e985d020f2d4e774, type: 3}
-    mixerGroup: {fileID: 0}
+    mixerGroup: {fileID: 7142711898134432833, guid: 63090d78504b5da43bed8f06cca39817,
+      type: 2}
     loop: 0
     playOnAwake: 0
     frequentSound: 0

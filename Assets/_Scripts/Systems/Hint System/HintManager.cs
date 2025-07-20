@@ -20,7 +20,7 @@ public class HintManager : PersistentSingleton<HintManager>
     private Coroutine hideHintCoroutine;
     private CanvasGroup hintCanvasGroup;
 
-    private void Awake()
+    protected override void Awake()
     {
         base.Awake();
         SetupUI();
@@ -181,7 +181,17 @@ public class HintManager : PersistentSingleton<HintManager>
     IEnumerator HideHintAfterDelay(float delay)
     {
         yield return new WaitForSeconds(delay);
-        HideCurrentHint();
+
+        // Auto-complete the hint if it has a duration
+        if (currentHint != null && currentHint.displayDuration > 0)
+        {
+            CompleteHint(currentHint.hintId);
+        }
+        else
+        {
+            // Just hide if no duration (manual hints)
+            HideCurrentHint();
+        }
     }
     
     IEnumerator FadeCanvasGroup(CanvasGroup canvasGroup, float from, float to, float duration)
@@ -206,25 +216,40 @@ public class HintManager : PersistentSingleton<HintManager>
             return;
         }
 
-        Hint hint = currentLevelHints.GetHint(hintId);
-        if (hint != null)
-        {
-            hint.isCompleted = true;
-
-            // If this is the currently displayed hint, hide it
-            if (currentHint == hint)
-            {
-                HideCurrentHint();
-                currentHint = null;
-
-                StartCoroutine(ShowNextHintAfterDelay(fadeOutDuration + 0.1f));
-            }
-        }
-        else
+        Hint targetHint = currentLevelHints.GetHint(hintId);
+        if (targetHint == null)
         {
             Debug.LogError($"Hint not found: {hintId}");
+            return;
         }
 
+        // Get all hints that will be completed
+        List<Hint> hintsToComplete = currentLevelHints.GetHintsUpTo(hintId);
+        bool currentHintWasCompleted = false;
+
+        // Complete all hints up to the target ID
+        foreach (var hint in hintsToComplete)
+        {
+            if (!hint.isCompleted)
+            {
+                hint.isCompleted = true;
+                Debug.Log($"Auto-completed hint {hint.hintId}: {hint.hintText}");
+                
+                // Check if we're completing the currently displayed hint
+                if (currentHint != null && currentHint.hintId == hint.hintId)
+                {
+                    currentHintWasCompleted = true;
+                }
+            }
+        }
+
+        // If the currently displayed hint was completed, hide it and show next
+        if (currentHintWasCompleted)
+        {
+            HideCurrentHint();
+            currentHint = null;
+            StartCoroutine(ShowNextHintAfterDelay(fadeOutDuration + 0.1f));
+        }
     }
     
     // Debug methods

@@ -8,6 +8,10 @@ public class HintTrigger : MonoBehaviour
 {
     [Header("Hint Configuration")]
     [SerializeField] private List<int> hintIDs = new List<int>(); // Hint IDs that this trigger can complete (e.g., 4, 5, 6)
+    
+    [Header("Trigger Mode")]
+    [SerializeField] private bool autoCompleteUpToHighest = false; // If true, completes up to highest ID regardless of current hint
+    [SerializeField] private bool onlyTriggerMatching = true; // If true, only triggers if current hint matches one in the list
 
     [Header("Events")]
     [SerializeField] private UnityEvent onTriggerAction;
@@ -35,8 +39,31 @@ public class HintTrigger : MonoBehaviour
             return;
         }
 
-        // Check if current hint matches any of our specified IDs
-        if (HintManager.Instance != null && HintManager.Instance.currentHint != null)
+        if (HintManager.Instance == null)
+        {
+            Debug.LogError("HintManager.Instance is null!");
+            return;
+        }
+
+        // Mode 1: Auto-complete up to highest ID (regardless of current hint)
+        if (autoCompleteUpToHighest)
+        {
+            int highestHintId = 0;
+            foreach (int id in hintIDs)
+            {
+                if (id > highestHintId)
+                {
+                    highestHintId = id;
+                }
+            }
+
+            HintEvents.CompleteHint(highestHintId);
+            Debug.Log($"Auto-completed all hints up to {highestHintId} from trigger {gameObject.name}");
+            return;
+        }
+
+        // Mode 2: Only trigger if current hint matches one in the list
+        if (onlyTriggerMatching && HintManager.Instance.currentHint != null)
         {
             int currentHintId = HintManager.Instance.currentHint.hintId;
             
@@ -47,8 +74,12 @@ public class HintTrigger : MonoBehaviour
             }
             else
             {
-                Debug.Log($"Current hint {currentHintId} not in trigger list {string.Join(", ", hintIDs)}");
+                Debug.Log($"Current hint {currentHintId} not in trigger list {string.Join(", ", hintIDs)} - no action taken");
             }
+        }
+        else if (onlyTriggerMatching)
+        {
+            Debug.Log("No current hint displayed - no action taken");
         }
     }
 }

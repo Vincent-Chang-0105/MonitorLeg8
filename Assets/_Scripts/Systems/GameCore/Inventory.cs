@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Inventory : PersistentSingleton<Inventory>
+public class Inventory : StaticInstance<Inventory>
 {
     private HashSet<int> ownedItems = new HashSet<int>();
 

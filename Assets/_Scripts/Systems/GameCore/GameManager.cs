@@ -27,7 +27,7 @@ public class GameManager : PersistentSingleton<GameManager>
     public SceneConfiguration.SceneSettings currentSceneSettings { get; private set; }
     private GameObject currentLoadingScreen;
     private LoadingScreenController loadingScreenController;
-    
+
     // Flag to skip intro video on retry
     private bool skipIntroVideo = false;
 
@@ -84,7 +84,7 @@ public class GameManager : PersistentSingleton<GameManager>
     private IEnumerator LoadSceneCoroutine(SceneConfiguration.SceneSettings settings)
     {
         currentSceneSettings = settings;
-        
+
         // Play outro video BEFORE showing loading screen if it exists
         if (currentSceneSettings != null && currentSceneSettings.outroVideoClip != null && VideoManager.Instance != null)
         {
@@ -114,7 +114,7 @@ public class GameManager : PersistentSingleton<GameManager>
 
         // Show loading screen
         ShowLoadingScreen();
-        
+
         OnLevelLoadStart?.Invoke();
         OnLoadingStatusUpdate?.Invoke("Initializing...");
         OnLoadingProgress?.Invoke(0f);
@@ -156,13 +156,17 @@ public class GameManager : PersistentSingleton<GameManager>
 
         // Allow scene activation
         asyncLoad.allowSceneActivation = true;
-        
+
         // Wait for scene to fully load
         while (!asyncLoad.isDone)
         {
             OnLoadingProgress?.Invoke(0.95f);
             yield return null;
         }
+
+        // PAUSE THE SCENE IMMEDIATELY AFTER LOADING
+        Time.timeScale = 0f;
+        Debug.Log("Scene loaded and immediately paused");
 
         // Apply post-load settings
         OnLoadingStatusUpdate?.Invoke("Applying settings...");
@@ -172,12 +176,12 @@ public class GameManager : PersistentSingleton<GameManager>
         // Complete loading
         OnLoadingProgress?.Invoke(1f);
         OnLoadingStatusUpdate?.Invoke("Complete!");
-        
+
         yield return new WaitForSecondsRealtime(0.2f); // Brief pause to show completion
 
         // Hide loading screen
         HideLoadingScreen();
-        
+
         OnLevelLoadComplete?.Invoke();
     }
 
@@ -187,14 +191,14 @@ public class GameManager : PersistentSingleton<GameManager>
         {
             currentLoadingScreen = Instantiate(loadingScreenPrefab);
             loadingScreenController = currentLoadingScreen.GetComponent<LoadingScreenController>();
-            
+
             // Subscribe to progress events
             if (loadingScreenController != null)
             {
                 OnLoadingProgress.AddListener(loadingScreenController.UpdateProgress);
                 OnLoadingStatusUpdate.AddListener(loadingScreenController.UpdateStatusText);
             }
-            
+
             // Make sure loading screen persists during scene changes
             DontDestroyOnLoad(currentLoadingScreen);
         }
@@ -210,11 +214,11 @@ public class GameManager : PersistentSingleton<GameManager>
                 OnLoadingProgress.RemoveListener(loadingScreenController.UpdateProgress);
                 OnLoadingStatusUpdate.RemoveListener(loadingScreenController.UpdateStatusText);
             }
-            
+
             // Destroy loading screen with fade out animation
             if (loadingScreenController != null)
             {
-                loadingScreenController.FadeOut(() => 
+                loadingScreenController.FadeOut(() =>
                 {
                     Destroy(currentLoadingScreen);
                     currentLoadingScreen = null;
@@ -237,7 +241,7 @@ public class GameManager : PersistentSingleton<GameManager>
     private void ApplyPostLoadSettings(SceneConfiguration.SceneSettings settings)
     {
         // Play music if specified
-        
+
         if (InputSystem.Instance != null) InputSystem.Instance.SetInputState(settings.hideCursorAtStart);
 
         if (settings.hintData != null) HintEvents.LoadLevels(settings.hintData);
@@ -247,7 +251,7 @@ public class GameManager : PersistentSingleton<GameManager>
         {
             // Pause game before playing video
             Time.timeScale = 0f;
-            
+
             VideoManager.Instance.PlayVideo(settings.introVideoClip, () =>
             {
                 // Resume game after video
@@ -335,6 +339,13 @@ public class GameManager : PersistentSingleton<GameManager>
             currentSceneSettings = settings;
             ApplyPreLoadSettings(settings);
             ApplyPostLoadSettings(settings);
+
+            // Save progress when entering a level (not MainMenu)
+            if (currentSceneName != "MainMenu")
+            {
+                SaveSystem.SaveProgress(currentSceneName);
+            }
+
             Debug.Log($"Applied settings for startup scene: {currentSceneName}");
             Debug.Log($"Applied if hide cursor at start: {currentSceneSettings.hideCursorAtStart}");
         }
@@ -343,7 +354,7 @@ public class GameManager : PersistentSingleton<GameManager>
             Debug.LogWarning($"No configuration found for startup scene: {currentSceneName}");
         }
     }
-    
+
     public void LoadSceneThenPlayVideo(string sceneName, VideoClip introVideo)
     {
         StartCoroutine(LoadSceneThenPlayVideoCoroutine(sceneName, introVideo));
@@ -381,6 +392,28 @@ public class GameManager : PersistentSingleton<GameManager>
         {
             // Resume the game if no video
             Time.timeScale = 1f;
+        }
+    }
+    
+    // Add this method to start a new game
+    public void StartNewGame()
+    {
+        SaveSystem.ClearSaveData(); // Clear any existing save
+        LoadScene("Level1"); // Start from first level
+    }
+
+    // Add this method to continue game
+    public void ContinueGame()
+    {
+        if (SaveSystem.HasSaveData())
+        {       
+            string lastLevel = SaveSystem.LoadLastLevel();
+            LoadScene(lastLevel);
+        }
+        else
+        {
+            Debug.LogWarning("No save data found, starting new game");
+            StartNewGame();
         }
     }
 }

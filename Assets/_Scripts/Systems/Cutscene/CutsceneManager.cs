@@ -351,15 +351,10 @@ public class CutsceneManager : StaticInstance<CutsceneManager>
         Debug.Log($"Skipping cutscene: {currentCutscene.cutsceneName}");
 
         // Jump to end of timeline
-        // if (currentCutscene.timeline != null && currentCutscene.timeline.state == PlayState.Playing)
-        // {
-        //     currentCutscene.timeline.time = currentCutscene.timeline.duration;
-        //     currentCutscene.timeline.Evaluate();
-        // }
-
-        // Stop the timeline instead of jumping to the end
-        if (currentCutscene.timeline != null)
+        if (currentCutscene.timeline != null && currentCutscene.timeline.state == PlayState.Playing)
         {
+            currentCutscene.timeline.time = currentCutscene.timeline.duration;
+            currentCutscene.timeline.Evaluate();
             currentCutscene.timeline.Stop();
         }
 
@@ -525,6 +520,8 @@ public class CutsceneManager : StaticInstance<CutsceneManager>
                 // For example: PlayerController.Instance.EnableInput();
             }
 
+            StartCoroutine(EndDialogueWithDelay());
+
             // Trigger events
             currentCutscene.onCutsceneEnd?.Invoke();
             onAnyCutsceneEnd?.Invoke();
@@ -544,6 +541,16 @@ public class CutsceneManager : StaticInstance<CutsceneManager>
         currentCutsceneCoroutine = null;
 
         Debug.Log("Cutscene state fully reset");
+    }
+
+    private IEnumerator EndDialogueWithDelay()
+    {
+        yield return new WaitForSeconds(2f);
+        // Logic to end the dialogue
+        if (DialogueManager.Instance != null && DialogueManager.Instance.isDialogueActive)
+        {
+            yield return DialogueManager.Instance.EndDialogueWithDelay();
+        }
     }
 
     #endregion

@@ -16,16 +16,16 @@ MonoBehaviour:
   hints:
   - hintText: 
     hintId: 0
-    displayDuration: 3
+    displayDuration: 0
     isCompleted: 1
   - hintText: Look around and interact with your surroundings
     hintId: 1
     displayDuration: 0
-    isCompleted: 1
+    isCompleted: 0
   - hintText: Find the first lever.
     hintId: 2
     displayDuration: 0
-    isCompleted: 1
+    isCompleted: 0
   - hintText: Find the second lever.
     hintId: 3
     displayDuration: 0

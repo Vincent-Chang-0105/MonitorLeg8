@@ -23,12 +23,19 @@ public class HintData : ScriptableObject
 
     public Hint GetNextIncompleteHint()
     {
+        Hint lowestIdIncompleteHint = null;
+        int lowestId = int.MaxValue;
+
         foreach (var hint in hints)
         {
-            if (!hint.isCompleted)
-                return hint;
+            if (!hint.isCompleted && hint.hintId < lowestId)
+            {
+                lowestId = hint.hintId;
+                lowestIdIncompleteHint = hint;
+            }
         }
-        return null;
+
+        return lowestIdIncompleteHint;
     }
 
     public void ResetAllHints()
@@ -38,12 +45,36 @@ public class HintData : ScriptableObject
             hint.isCompleted = false;
         }
     }
-    
+
     private void OnDisable()
     {
         // Reset hints when the scriptable object is disabled
         // This prevents the completed state from being saved to the asset
         ResetAllHints();
+    }
+    
+    public void CompleteHintsUpTo(int hintId)
+    {
+        foreach (var hint in hints)
+        {
+            if (hint.hintId <= hintId)
+            {
+                hint.isCompleted = true;
+            }
+        }
+    }
+
+    public List<Hint> GetHintsUpTo(int hintId)
+    {
+        List<Hint> hintsToComplete = new List<Hint>();
+        foreach (var hint in hints)
+        {
+            if (hint.hintId <= hintId)
+            {
+                hintsToComplete.Add(hint);
+            }
+        }
+        return hintsToComplete;
     }
 
 }

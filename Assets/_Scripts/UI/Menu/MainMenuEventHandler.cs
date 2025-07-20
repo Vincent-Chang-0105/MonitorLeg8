@@ -10,6 +10,8 @@ public class MainMenuEventHandler : ColorChangeMenuHandler
 {
     [Header("References")]
     [SerializeField] private MainMenuCameraEventHandler cameraEventHandler;
+    [SerializeField] private Button continueButton; // Add this reference
+
     
     [Header("Menu Preset Mapping")]
     [SerializeField] private List<MenuCameraPreset> menuCameraPresets = new List<MenuCameraPreset>();
@@ -27,11 +29,11 @@ public class MainMenuEventHandler : ColorChangeMenuHandler
     }
     
     private Dictionary<Selectable, string> presetMappings = new Dictionary<Selectable, string>();
-    
+
     public override void Awake()
     {
         base.Awake();
-        
+
         // Find camera controller if not assigned
         if (cameraEventHandler == null)
         {
@@ -41,7 +43,7 @@ public class MainMenuEventHandler : ColorChangeMenuHandler
                 Debug.LogError("No MainMenuCameraEventHandler found in scene!");
             }
         }
-        
+
         // Create mapping dictionary for quicker lookups
         foreach (var preset in menuCameraPresets)
         {
@@ -52,13 +54,37 @@ public class MainMenuEventHandler : ColorChangeMenuHandler
         }
 
         soundBuilder = SoundManager.Instance.CreateSoundBuilder();
+        
+        UpdateContinueButton();
+    }
+    
+    private void UpdateContinueButton()
+    {
+        if (continueButton != null)
+        {
+            // Enable/disable continue button based on save data
+            continueButton.interactable = SaveSystem.HasSaveData();
+            
+            // Optional: Change button appearance when disabled
+            var buttonColors = continueButton.colors;
+            if (SaveSystem.HasSaveData())
+            {
+                buttonColors.normalColor = Color.white;
+                buttonColors.disabledColor = Color.gray;
+            }
+            else
+            {
+                buttonColors.disabledColor = Color.gray;
+            }
+            continueButton.colors = buttonColors;
+        }
     }
     
     protected override void HandleSelect(Selectable selectable)
     {
         // Handle text color change from base class
         base.HandleSelect(selectable);
-        
+
         // Make Sound
         soundBuilder.WithRandomPitch().Play(soundDataButtonHover);
 
@@ -85,14 +111,22 @@ public class MainMenuEventHandler : ColorChangeMenuHandler
     // Add game functionality methods
     public void StartGame()
     {
-        Debug.Log("Starting new game...");
-        GameManager.Instance.LoadScene("Level1");
+        GameManager.Instance.StartNewGame();
     }
     
     public void ContinueGame()
     {
         Debug.Log("Continuing game...");
-        // Add your continue game logic here
+    
+        if (SaveSystem.HasSaveData())
+        {
+            GameManager.Instance.ContinueGame();
+        }
+        else
+        {
+            Debug.LogWarning("No save data available, starting new game instead");
+            StartGame();
+        }
     }
     
     public void OpenSettings()

@@ -265,6 +265,35 @@ public class VideoManager : PersistentSingleton<VideoManager>
         StartCoroutine(PlayVideoCoroutine(videoClip, onComplete));
     }
 
+    /// <summary>
+    /// Play a video and load a scene when it completes
+    /// </summary>
+    public void PlayVideoThenLoadScene(VideoClip videoClip, string sceneName)
+    {
+        PlayVideo(videoClip, () =>
+        {
+            if (debugMode) Debug.Log($"Video completed, loading scene: {sceneName}");
+            
+            // Load the specified scene
+            if (GameManager.Instance != null)
+            {
+                GameManager.Instance.LoadScene(sceneName);
+            }
+            else
+            {
+                Debug.LogError("GameManager.Instance is null! Cannot load scene.");
+            }
+        });
+    }
+
+    /// <summary>
+    /// Play a video and load the MainMenu scene when it completes
+    /// </summary>
+    public void PlayVideoThenLoadMainMenu(VideoClip videoClip)
+    {
+        PlayVideoThenLoadScene(videoClip, "MainMenu");
+    }
+
     private IEnumerator PlayVideoCoroutine(VideoClip videoClip, Action onComplete)
     {
         isPlayingVideo = true;

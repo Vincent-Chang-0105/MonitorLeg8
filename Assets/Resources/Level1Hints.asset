@@ -21,17 +21,25 @@ MonoBehaviour:
   - hintText: Find the keycard.
     hintId: 2
     displayDuration: 0
-    isCompleted: 1
+    isCompleted: 0
   - hintText: Get Out.
     hintId: 3
     displayDuration: 0
-    isCompleted: 1
+    isCompleted: 0
   - hintText: Find the last keycard.
     hintId: 4
     displayDuration: 0
-    isCompleted: 1
+    isCompleted: 0
   - hintText: Get Out.
     hintId: 5
     displayDuration: 0
     isCompleted: 0
+  - hintText: Press WASD to move
+    hintId: -1
+    displayDuration: 5
+    isCompleted: 1
+  - hintText: Press E to interact
+    hintId: 0
+    displayDuration: 5
+    isCompleted: 1
   autoStartFirstHint: 1
