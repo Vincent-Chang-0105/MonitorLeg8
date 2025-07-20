@@ -256,7 +256,7 @@ public class CutsceneManager : StaticInstance<CutsceneManager>
                 SkipCurrentCutscene();
                 if (DialogueManager.Instance != null && DialogueManager.Instance.isDialogueActive)
                 {
-                    DialogueManager.Instance.EndDialogue();
+                    StartCoroutine(DialogueManager.Instance?.EndDialogueWithDelay());
                 }
             }
         }
@@ -351,10 +351,16 @@ public class CutsceneManager : StaticInstance<CutsceneManager>
         Debug.Log($"Skipping cutscene: {currentCutscene.cutsceneName}");
 
         // Jump to end of timeline
-        if (currentCutscene.timeline != null && currentCutscene.timeline.state == PlayState.Playing)
+        // if (currentCutscene.timeline != null && currentCutscene.timeline.state == PlayState.Playing)
+        // {
+        //     currentCutscene.timeline.time = currentCutscene.timeline.duration;
+        //     currentCutscene.timeline.Evaluate();
+        // }
+
+        // Stop the timeline instead of jumping to the end
+        if (currentCutscene.timeline != null)
         {
-            currentCutscene.timeline.time = currentCutscene.timeline.duration;
-            currentCutscene.timeline.Evaluate();
+            currentCutscene.timeline.Stop();
         }
 
         // Trigger skip event

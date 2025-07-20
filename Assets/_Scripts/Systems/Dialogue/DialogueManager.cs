@@ -81,13 +81,14 @@ public class DialogueManager : StaticInstance<DialogueManager>
         DisplayNextDialogueLine();
     }
 
-    IEnumerator EndDialogueWithDelay()
+    public IEnumerator EndDialogueWithDelay()
     {
-        yield return new WaitForSeconds(1f);  // Wait 1 second before ending the dialogue
+        yield return new WaitForSeconds(2f);  // Wait 1 second before ending the dialogue
+        Debug.Log("Ending dialogue after delay");
         EndDialogue();
     }
 
-    public void EndDialogue()
+    private void EndDialogue()
     {
         isDialogueActive = false;
         dialogueBox.SetActive(false);

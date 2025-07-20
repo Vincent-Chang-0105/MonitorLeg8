@@ -29,8 +29,8 @@ MonoBehaviour:
     musicClip: {fileID: 8300000, guid: d2c2760f01e2b3a418a96accf0b2c3ad, type: 3}
     hideCursorAtStart: 1
     hintData: {fileID: 11400000, guid: 56cf44b76f11ff44e8b8a5d2a643c7f5, type: 2}
-    introVideoClip: {fileID: 0}
-    outroVideoClip: {fileID: 32900000, guid: 74b1f4edb70c00141b8ecbcc100be374, type: 3}
+    introVideoClip: {fileID: 32900000, guid: 89b30468d70644b4b8c4a8dedaa7ae4b, type: 3}
+    outroVideoClip: {fileID: 32900000, guid: 2e5286db28ed1754db31d60ed03ba8c6, type: 3}
   - sceneName: Level3Pol
     musicClip: {fileID: 8300000, guid: ee747b0e999a7f9458b5c21b9d6944a1, type: 3}
     hideCursorAtStart: 1

@@ -417,7 +417,7 @@ MonoBehaviour:
   moveDuration: 2
   easeType: 7
   doorOpenSound:
-    clip: {fileID: 0}
+    clip: {fileID: 8300000, guid: e47235691b921574e985d020f2d4e774, type: 3}
     mixerGroup: {fileID: 0}
     loop: 0
     playOnAwake: 0

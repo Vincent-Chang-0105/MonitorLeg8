@@ -38,5 +38,12 @@ public class HintData : ScriptableObject
             hint.isCompleted = false;
         }
     }
+    
+    private void OnDisable()
+    {
+        // Reset hints when the scriptable object is disabled
+        // This prevents the completed state from being saved to the asset
+        ResetAllHints();
+    }
 
 }

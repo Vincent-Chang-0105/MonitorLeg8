@@ -117,6 +117,7 @@
     <Compile Include="Assets\IgniteCoders\Simple Water Shader\Resources\WaterReflection.cs" />
     <Compile Include="Assets\_Scripts\Player\JumpScare\JumpscareMechanic.cs" />
     <Compile Include="Assets\_Scripts\Systems\InterAction\MovingObjectInteractable.cs" />
+    <Compile Include="Assets\_Scripts\Systems\Audio\TimelineAudioMixerConnector.cs" />
     <Compile Include="Assets\_Scripts\Systems\Scriptables\SceneConfiguration.cs" />
     <Compile Include="Assets\_Scripts\Systems\Audio\AudioExtensions.cs" />
     <Compile Include="Assets\_Scripts\Systems\MonsterSpawner\MonsterSpawnManager.cs" />

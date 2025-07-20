@@ -16,7 +16,7 @@ public class HintManager : PersistentSingleton<HintManager>
     public float fadeInDuration = 0.5f;
     public float fadeOutDuration = 0.5f;
 
-    private Hint currentHint;
+    public Hint currentHint { get; private set; }
     private Coroutine hideHintCoroutine;
     private CanvasGroup hintCanvasGroup;
 
@@ -61,7 +61,6 @@ public class HintManager : PersistentSingleton<HintManager>
         HintEvents.OnCompleteHint -= CompleteHint;
         HintEvents.OnShowNextHint -= ShowNextHint;
         HintEvents.OnLoadlevels -= LoadLevelHints;
-
     }
     
     void SetupUI()
@@ -79,8 +78,17 @@ public class HintManager : PersistentSingleton<HintManager>
     
     public void LoadLevelHints(HintData levelHints)
     {
-        if (currentLevelHints != null)
+        // Always reset the hints when loading new level data
+        if (levelHints != null)
+        {
+            levelHints.ResetAllHints();
+        }
+        
+        // Reset previous hints if different
+        if (currentLevelHints != null && currentLevelHints != levelHints)
+        {
             currentLevelHints.ResetAllHints();
+        }
             
         currentLevelHints = levelHints;
         

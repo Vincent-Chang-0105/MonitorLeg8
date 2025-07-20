@@ -154,7 +154,8 @@ MonoBehaviour:
     rolloffMode: 0
   interactRotateObject:
     clip: {fileID: 8300000, guid: 5d5632da40f88ab44a6ad6baab964c82, type: 3}
-    mixerGroup: {fileID: 24300002, guid: 63090d78504b5da43bed8f06cca39817, type: 2}
+    mixerGroup: {fileID: 7142711898134432833, guid: 63090d78504b5da43bed8f06cca39817,
+      type: 2}
     loop: 0
     playOnAwake: 0
     frequentSound: 0
@@ -385,7 +386,8 @@ MonoBehaviour:
     rolloffMode: 0
   interactRotateObject:
     clip: {fileID: 8300000, guid: 5d5632da40f88ab44a6ad6baab964c82, type: 3}
-    mixerGroup: {fileID: 24300002, guid: 63090d78504b5da43bed8f06cca39817, type: 2}
+    mixerGroup: {fileID: 7142711898134432833, guid: 63090d78504b5da43bed8f06cca39817,
+      type: 2}
     loop: 0
     playOnAwake: 0
     frequentSound: 0
@@ -578,7 +580,8 @@ MonoBehaviour:
     rolloffMode: 0
   interactRotateObject:
     clip: {fileID: 8300000, guid: 5d5632da40f88ab44a6ad6baab964c82, type: 3}
-    mixerGroup: {fileID: 24300002, guid: 63090d78504b5da43bed8f06cca39817, type: 2}
+    mixerGroup: {fileID: 7142711898134432833, guid: 63090d78504b5da43bed8f06cca39817,
+      type: 2}
     loop: 0
     playOnAwake: 0
     frequentSound: 0
@@ -771,7 +774,8 @@ MonoBehaviour:
     rolloffMode: 0
   interactRotateObject:
     clip: {fileID: 8300000, guid: 5d5632da40f88ab44a6ad6baab964c82, type: 3}
-    mixerGroup: {fileID: 24300002, guid: 63090d78504b5da43bed8f06cca39817, type: 2}
+    mixerGroup: {fileID: 7142711898134432833, guid: 63090d78504b5da43bed8f06cca39817,
+      type: 2}
     loop: 0
     playOnAwake: 0
     frequentSound: 0
@@ -1070,7 +1074,8 @@ MonoBehaviour:
     rolloffMode: 0
   interactRotateObject:
     clip: {fileID: 8300000, guid: 5d5632da40f88ab44a6ad6baab964c82, type: 3}
-    mixerGroup: {fileID: 24300002, guid: 63090d78504b5da43bed8f06cca39817, type: 2}
+    mixerGroup: {fileID: 7142711898134432833, guid: 63090d78504b5da43bed8f06cca39817,
+      type: 2}
     loop: 0
     playOnAwake: 0
     frequentSound: 0
@@ -1263,7 +1268,8 @@ MonoBehaviour:
     rolloffMode: 0
   interactRotateObject:
     clip: {fileID: 8300000, guid: 5d5632da40f88ab44a6ad6baab964c82, type: 3}
-    mixerGroup: {fileID: 24300002, guid: 63090d78504b5da43bed8f06cca39817, type: 2}
+    mixerGroup: {fileID: 7142711898134432833, guid: 63090d78504b5da43bed8f06cca39817,
+      type: 2}
     loop: 0
     playOnAwake: 0
     frequentSound: 0
