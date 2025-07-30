@@ -1,6 +1,6 @@
 Using pre-set license
 Built from '2022.3/staging' branch; Version is '2022.3.22f1 (887be4894c44) revision 8944612'; Using compiler version '192829333'; Build Type 'Release'
-OS: 'Windows 10  (10.0.19045) 64bit Professional' Language: 'en' Physical Memory: 32688 MB
+OS: 'Windows 11  (10.0.26100) 64bit Professional' Language: 'en' Physical Memory: 28565 MB
 BatchMode: 1, IsHumanControllingUs: 0, StartBugReporterOnCrash: 0, Is64bit: 1, IsPro: 1
 
 COMMAND LINE ARGUMENTS:
@@ -11,13 +11,13 @@ C:\Program Files\Unity\Hub\Editor\2022.3.22f1\Editor\Unity.exe
 -name
 AssetImportWorker3
 -projectPath
-D:/Unity Projects/MonitorLeg8
+D:/Unity/MonitorLeg8
 -logFile
 Logs/AssetImportWorker3.log
 -srvPort
-50671
-Successfully changed project path to: D:/Unity Projects/MonitorLeg8
-D:/Unity Projects/MonitorLeg8
+58601
+Successfully changed project path to: D:/Unity/MonitorLeg8
+D:/Unity/MonitorLeg8
 [UnityMemory] Configuration Parameters - Can be set up in boot.config
     "memorysetup-bucket-allocator-granularity=16"
     "memorysetup-bucket-allocator-bucket-count=8"
@@ -49,70 +49,70 @@ D:/Unity Projects/MonitorLeg8
     "memorysetup-temp-allocator-size-cloud-worker=32768"
     "memorysetup-temp-allocator-size-gi-baking-worker=262144"
     "memorysetup-temp-allocator-size-gfx=262144"
-Player connection [5760] Host "[IP] 192.168.1.10 [Port] 0 [Flags] 2 [Guid] 3674705796 [EditorId] 3674705796 [Version] 1048832 [Id] WindowsEditor(7,DESKTOP-NB18T0M) [Debug] 1 [PackageName] WindowsEditor [ProjectName] Editor" joined multi-casting on [225.0.0.222:54997]...
+Player connection [50092] Host "[IP] 192.168.254.114 [Port] 0 [Flags] 2 [Guid] 3918937028 [EditorId] 3918937028 [Version] 1048832 [Id] WindowsEditor(7,DESKTOP-GSFHFT3) [Debug] 1 [PackageName] WindowsEditor [ProjectName] Editor" joined multi-casting on [225.0.0.222:54997]...
 
-Player connection [5760] Host "[IP] 192.168.1.10 [Port] 0 [Flags] 2 [Guid] 3674705796 [EditorId] 3674705796 [Version] 1048832 [Id] WindowsEditor(7,DESKTOP-NB18T0M) [Debug] 1 [PackageName] WindowsEditor [ProjectName] Editor" joined alternative multi-casting on [225.0.0.222:34997]...
+Player connection [50092] Host "[IP] 192.168.254.114 [Port] 0 [Flags] 2 [Guid] 3918937028 [EditorId] 3918937028 [Version] 1048832 [Id] WindowsEditor(7,DESKTOP-GSFHFT3) [Debug] 1 [PackageName] WindowsEditor [ProjectName] Editor" joined alternative multi-casting on [225.0.0.222:34997]...
 
-[Physics::Module] Initialized MultithreadedJobDispatcher with 15 workers.
-Refreshing native plugins compatible for Editor in 10.84 ms, found 3 plugins.
+[Physics::Module] Initialized MultithreadedJobDispatcher with 11 workers.
+Refreshing native plugins compatible for Editor in 8.65 ms, found 3 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Initialize engine version: 2022.3.22f1 (887be4894c44)
 [Subsystems] Discovering subsystems at path C:/Program Files/Unity/Hub/Editor/2022.3.22f1/Editor/Data/Resources/UnitySubsystems
-[Subsystems] Discovering subsystems at path D:/Unity Projects/MonitorLeg8/Assets
+[Subsystems] Discovering subsystems at path D:/Unity/MonitorLeg8/Assets
 GfxDevice: creating device client; threaded=0; jobified=0
 Direct3D:
     Version:  Direct3D 11.0 [level 11.1]
-    Renderer: NVIDIA GeForce GTX 1660 (ID=0x2184)
+    Renderer: NVIDIA GeForce RTX 4060 (ID=0x2882)
     Vendor:   NVIDIA
-    VRAM:     5966 MB
-    Driver:   32.0.15.7680
+    VRAM:     7957 MB
+    Driver:   32.0.15.6094
 Initialize mono
 Mono path[0] = 'C:/Program Files/Unity/Hub/Editor/2022.3.22f1/Editor/Data/Managed'
 Mono path[1] = 'C:/Program Files/Unity/Hub/Editor/2022.3.22f1/Editor/Data/MonoBleedingEdge/lib/mono/unityjit-win32'
 Mono config path = 'C:/Program Files/Unity/Hub/Editor/2022.3.22f1/Editor/Data/MonoBleedingEdge/etc'
-Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56096
+Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56592
 Begin MonoManager ReloadAssembly
 Registering precompiled unity dll's ...
 Register platform support module: C:/Program Files/Unity/Hub/Editor/2022.3.22f1/Editor/Data/PlaybackEngines/WebGLSupport/UnityEditor.WebGL.Extensions.dll
 Register platform support module: C:/Program Files/Unity/Hub/Editor/2022.3.22f1/Editor/Data/PlaybackEngines/AndroidPlayer/UnityEditor.Android.Extensions.dll
 Register platform support module: C:/Program Files/Unity/Hub/Editor/2022.3.22f1/Editor/Data/PlaybackEngines/WindowsStandaloneSupport/UnityEditor.WindowsStandalone.Extensions.dll
-Registered in 0.015658 seconds.
-- Loaded All Assemblies, in  0.370 seconds
+Registered in 0.010376 seconds.
+- Loaded All Assemblies, in  0.313 seconds
 Native extension for WindowsStandalone target not found
 Native extension for Android target not found
-Android Extension - Scanning For ADB Devices 257 ms
+Android Extension - Scanning For ADB Devices 288 ms
 Native extension for WebGL target not found
 Mono: successfully reloaded assembly
-- Finished resetting the current domain, in  0.591 seconds
-Domain Reload Profiling: 959ms
-	BeginReloadAssembly (110ms)
+- Finished resetting the current domain, in  0.627 seconds
+Domain Reload Profiling: 938ms
+	BeginReloadAssembly (92ms)
 		ExecutionOrderSort (0ms)
 		DisableScriptedObjects (0ms)
 		BackupInstance (0ms)
 		ReleaseScriptingObjects (0ms)
 		CreateAndSetChildDomain (1ms)
-	RebuildCommonClasses (32ms)
-	RebuildNativeTypeToScriptingClass (10ms)
-	initialDomainReloadingComplete (69ms)
-	LoadAllAssembliesAndSetupDomain (147ms)
-		LoadAssemblies (108ms)
+	RebuildCommonClasses (26ms)
+	RebuildNativeTypeToScriptingClass (8ms)
+	initialDomainReloadingComplete (55ms)
+	LoadAllAssembliesAndSetupDomain (129ms)
+		LoadAssemblies (90ms)
 		RebuildTransferFunctionScriptingTraits (0ms)
-		AnalyzeDomain (144ms)
-			TypeCache.Refresh (143ms)
-				TypeCache.ScanAssembly (131ms)
+		AnalyzeDomain (127ms)
+			TypeCache.Refresh (125ms)
+				TypeCache.ScanAssembly (114ms)
 			ScanForSourceGeneratedMonoScriptInfo (0ms)
-			ResolveRequiredComponents (0ms)
-	FinalizeReload (592ms)
+			ResolveRequiredComponents (1ms)
+	FinalizeReload (627ms)
 		ReleaseScriptCaches (0ms)
 		RebuildScriptCaches (0ms)
-		SetupLoadedEditorAssemblies (532ms)
+		SetupLoadedEditorAssemblies (567ms)
 			LogAssemblyErrors (0ms)
-			InitializePlatformSupportModulesInManaged (368ms)
+			InitializePlatformSupportModulesInManaged (398ms)
 			SetLoadedEditorAssemblies (3ms)
 			RefreshPlugins (0ms)
 			BeforeProcessingInitializeOnLoad (2ms)
-			ProcessInitializeOnLoadAttributes (115ms)
-			ProcessInitializeOnLoadMethodAttributes (44ms)
+			ProcessInitializeOnLoadAttributes (114ms)
+			ProcessInitializeOnLoadMethodAttributes (49ms)
 			AfterProcessingInitializeOnLoad (0ms)
 			EditorAssembliesLoaded (0ms)
 		ExecutionOrderSort2 (0ms)
@@ -120,8 +120,8 @@ Domain Reload Profiling: 959ms
 ========================================================================
 Worker process is ready to serve import requests
 Begin MonoManager ReloadAssembly
-- Loaded All Assemblies, in  0.719 seconds
-Refreshing native plugins compatible for Editor in 3.23 ms, found 3 plugins.
+- Loaded All Assemblies, in  0.716 seconds
+Refreshing native plugins compatible for Editor in 3.68 ms, found 3 plugins.
 Native extension for WindowsStandalone target not found
 Native extension for Android target not found
 Native extension for WebGL target not found
@@ -142,47 +142,47 @@ UnityEditor.EditorAssemblies:ProcessInitializeOnLoadMethodAttributes ()
 (Filename: ./Library/PackageCache/www.nulltale.vhsfx@341ca660dd/Editor/PassDrawer.cs Line: 162)
 
 Mono: successfully reloaded assembly
-- Finished resetting the current domain, in  0.850 seconds
-Domain Reload Profiling: 1567ms
-	BeginReloadAssembly (156ms)
+- Finished resetting the current domain, in  0.708 seconds
+Domain Reload Profiling: 1421ms
+	BeginReloadAssembly (126ms)
 		ExecutionOrderSort (0ms)
-		DisableScriptedObjects (6ms)
+		DisableScriptedObjects (5ms)
 		BackupInstance (0ms)
 		ReleaseScriptingObjects (0ms)
-		CreateAndSetChildDomain (27ms)
-	RebuildCommonClasses (32ms)
-	RebuildNativeTypeToScriptingClass (10ms)
-	initialDomainReloadingComplete (46ms)
-	LoadAllAssembliesAndSetupDomain (471ms)
-		LoadAssemblies (334ms)
+		CreateAndSetChildDomain (18ms)
+	RebuildCommonClasses (27ms)
+	RebuildNativeTypeToScriptingClass (8ms)
+	initialDomainReloadingComplete (37ms)
+	LoadAllAssembliesAndSetupDomain (515ms)
+		LoadAssemblies (339ms)
 		RebuildTransferFunctionScriptingTraits (0ms)
-		AnalyzeDomain (227ms)
-			TypeCache.Refresh (186ms)
-				TypeCache.ScanAssembly (169ms)
+		AnalyzeDomain (251ms)
+			TypeCache.Refresh (212ms)
+				TypeCache.ScanAssembly (195ms)
 			ScanForSourceGeneratedMonoScriptInfo (27ms)
-			ResolveRequiredComponents (12ms)
-	FinalizeReload (851ms)
+			ResolveRequiredComponents (11ms)
+	FinalizeReload (708ms)
 		ReleaseScriptCaches (0ms)
 		RebuildScriptCaches (0ms)
-		SetupLoadedEditorAssemblies (651ms)
+		SetupLoadedEditorAssemblies (541ms)
 			LogAssemblyErrors (0ms)
-			InitializePlatformSupportModulesInManaged (29ms)
-			SetLoadedEditorAssemblies (5ms)
+			InitializePlatformSupportModulesInManaged (23ms)
+			SetLoadedEditorAssemblies (4ms)
 			RefreshPlugins (0ms)
-			BeforeProcessingInitializeOnLoad (102ms)
-			ProcessInitializeOnLoadAttributes (416ms)
-			ProcessInitializeOnLoadMethodAttributes (84ms)
-			AfterProcessingInitializeOnLoad (15ms)
+			BeforeProcessingInitializeOnLoad (76ms)
+			ProcessInitializeOnLoadAttributes (371ms)
+			ProcessInitializeOnLoadMethodAttributes (58ms)
+			AfterProcessingInitializeOnLoad (8ms)
 			EditorAssembliesLoaded (0ms)
 		ExecutionOrderSort2 (0ms)
-		AwakeInstancesAfterBackupRestoration (8ms)
-Launched and connected shader compiler UnityShaderCompiler.exe after 0.05 seconds
-Refreshing native plugins compatible for Editor in 4.92 ms, found 3 plugins.
+		AwakeInstancesAfterBackupRestoration (6ms)
+Launched and connected shader compiler UnityShaderCompiler.exe after 0.06 seconds
+Refreshing native plugins compatible for Editor in 4.00 ms, found 3 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
-Unloading 6618 Unused Serialized files (Serialized files now loaded: 0)
-Unloading 101 unused Assets / (2.9 MB). Loaded Objects now: 7085.
+Unloading 6620 Unused Serialized files (Serialized files now loaded: 0)
+Unloading 101 unused Assets / (2.9 MB). Loaded Objects now: 7087.
 Memory consumption went from 291.7 MB to 288.8 MB.
-Total: 7.548300 ms (FindLiveObjects: 0.934700 ms CreateObjectMapping: 0.283400 ms MarkObjects: 5.234500 ms  DeleteObjects: 1.094700 ms)
+Total: 3.701800 ms (FindLiveObjects: 0.395700 ms CreateObjectMapping: 0.170200 ms MarkObjects: 2.553500 ms  DeleteObjects: 0.581300 ms)
 
 AssetImportParameters requested are different than current active one (requested -> active):
   custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
@@ -193,75 +193,113 @@ AssetImportParameters requested are different than current active one (requested
   custom:AudioImporter_EditorPlatform: d09bf68614088b80899f8185d706f6e7 -> 
   custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
   custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+  custom:video-codec-MediaFoundation-h265: 746d11721c4dcdbdad8f713fa42b33f4 -> 
   custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
   custom:CustomObjectIndexerAttribute: 3ead1caaecf1c488f20bcfeb224b6af5 -> 
   custom:container-demuxer-webm: 4f35f7cbe854078d1ac9338744f61a02 -> 
   custom:video-encoder-webm-vp8: eb34c28f22e8b96e1ab97ce403110664 -> 
 ========================================================================
 Received Import Request.
-  Time since last request: 53618.862167 seconds.
-  path: Assets/IgniteCoders/Simple Water Shader/Resources/WaterBlock_50m.mesh
-  artifactKey: Guid(3da23cdf512599b42881988944f3918c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/IgniteCoders/Simple Water Shader/Resources/WaterBlock_50m.mesh using Guid(3da23cdf512599b42881988944f3918c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'af11c7a229f643ab7ea0e618f3f57d0b') in 0.112515 seconds
+  Time since last request: 137547.510302 seconds.
+  path: Assets/Scenes/Level3Pol/Lightmap-79_comp_dir.png
+  artifactKey: Guid(45641e4ae1f5a114f979990715a2fa16) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scenes/Level3Pol/Lightmap-79_comp_dir.png using Guid(45641e4ae1f5a114f979990715a2fa16) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '0059c4d388e8bb6f8e4ebabfa1ff3bdc') in 0.120546 seconds
 Number of updated asset objects reloaded before import = 0
 Number of asset objects unloaded after import = 2
 ========================================================================
 Received Import Request.
-  Time since last request: 26.379126 seconds.
-  path: Assets/IgniteCoders/Simple Water Shader/Resources/Water_mat_03.mat
-  artifactKey: Guid(19ac4fcfcf42b4344a6c7d97a5cd61fc) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/IgniteCoders/Simple Water Shader/Resources/Water_mat_03.mat using Guid(19ac4fcfcf42b4344a6c7d97a5cd61fc) Importer(815301076,1909f56bfc062723c751e8b465ee728b) Calls to "AssetDatabase.StartAssetEditing" are restricted during asset importing. 
-UnityEngine.StackTraceUtility:ExtractStackTrace ()
-UnityEditor.VFX.VFXAssetManager:Build (bool) (at ./Library/PackageCache/com.unity.visualeffectgraph@14.0.10/Editor/Models/VFXGraph.cs:286)
-UnityEditor.VFX.VFXLibrary:SRPChanged () (at ./Library/PackageCache/com.unity.visualeffectgraph@14.0.10/Editor/Core/VFXLibrary.cs:611)
-UnityEngine.Rendering.RenderPipelineManager:OnActiveRenderPipelineTypeChanged ()
-UnityEditor.PreviewRenderUtility:Render (bool,bool)
-UnityEditor.MaterialEditor:DoRenderPreview (UnityEditor.PreviewRenderUtility,bool)
-UnityEditor.MaterialEditor:RenderStaticPreview (string,UnityEngine.Object[],int,int)
-UnityEditor.AssetPreviewUpdater:CreatePreview (UnityEngine.Object,UnityEngine.Object[],string,int,int)
-UnityEditor.AssetPreviewUpdater:CreatePreviewForAsset (UnityEngine.Object,UnityEngine.Object[],string)
-
-[./Library/PackageCache/com.unity.visualeffectgraph@14.0.10/Editor/Models/VFXGraph.cs line 286]
-
-UnityException: Calls to "AssetDatabase.StartAssetEditing" are restricted during asset importing. 
-  at (wrapper managed-to-native) UnityEditor.AssetDatabase.StartAssetEditing()
-  at UnityEditor.VFX.VFXAssetManager.Build (System.Boolean forceDirty) [0x00000] in .\Library\PackageCache\com.unity.visualeffectgraph@14.0.10\Editor\Models\VFXGraph.cs:286 
-  at UnityEditor.VFX.VFXLibrary.SRPChanged () [0x0002c] in .\Library\PackageCache\com.unity.visualeffectgraph@14.0.10\Editor\Core\VFXLibrary.cs:611 
-  at UnityEngine.Rendering.RenderPipelineManager.OnActiveRenderPipelineTypeChanged () [0x0000a] in <cb81df0c49c643b1a04d9fc6ccca2433>:0 
-UnityEngine.Camera:Render(Camera)
-UnityEditor.PreviewRenderUtility:Render(Boolean, Boolean)
-UnityEditor.MaterialEditor:DoRenderPreview(PreviewRenderUtility, Boolean)
-UnityEditor.MaterialEditor:RenderStaticPreview(String, Object[], Int32, Int32)
-UnityEditor.AssetPreviewUpdater:CreatePreview(Object, Object[], String, Int32, Int32)
-UnityEditor.AssetPreviewUpdater:CreatePreviewForAsset(Object, Object[], String)
-
-(Filename: ./Library/PackageCache/com.unity.visualeffectgraph@14.0.10/Editor/Models/VFXGraph.cs Line: 286)
-
- -> (artifact id: '75380cc012ec43947e7708440b2e8dc9') in 0.243107 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 6
-========================================================================
-Received Import Request.
-  Time since last request: 73.634874 seconds.
-  path: Assets/Prefabs/Materials/Floor.mat
-  artifactKey: Guid(9815050a81e334f45aeb41a8fa2712aa) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Prefabs/Materials/Floor.mat using Guid(9815050a81e334f45aeb41a8fa2712aa) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'fc71b4c2d25cce0ca87eacc47725a03b') in 0.029160 seconds
+  Time since last request: 0.001142 seconds.
+  path: Assets/Scenes/Level3Pol/Lightmap-86_comp_dir.png
+  artifactKey: Guid(100845875a058d144b61de20e3e5c2c2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scenes/Level3Pol/Lightmap-86_comp_dir.png using Guid(100845875a058d144b61de20e3e5c2c2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '74861fdb40572c2f43d64d48c4d14746') in 0.017283 seconds
 Number of updated asset objects reloaded before import = 0
 Number of asset objects unloaded after import = 2
 ========================================================================
 Received Import Request.
-  Time since last request: 0.000020 seconds.
-  path: Assets/Prefabs/Materials/GlassMaterial-Window.mat
-  artifactKey: Guid(85e3bc4b706ad364b9439047959b7e3c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Prefabs/Materials/GlassMaterial-Window.mat using Guid(85e3bc4b706ad364b9439047959b7e3c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'e7ae1dc3e8d843426940cd18324e2fc1') in 0.032122 seconds
+  Time since last request: 0.000017 seconds.
+  path: Assets/Scenes/Level3Pol/Lightmap-83_comp_dir.png
+  artifactKey: Guid(f7db9f6df2ab08d46b7eb309aff1ba75) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scenes/Level3Pol/Lightmap-83_comp_dir.png using Guid(f7db9f6df2ab08d46b7eb309aff1ba75) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '642d622c8f4f6efc39b0e2d8b907dd00') in 0.013887 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 2
+========================================================================
+Received Import Request.
+  Time since last request: 0.000017 seconds.
+  path: Assets/Scenes/Level3Pol/Lightmap-90_comp_dir.png
+  artifactKey: Guid(30b2527d5acade140b0e4803dc3756fb) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scenes/Level3Pol/Lightmap-90_comp_dir.png using Guid(30b2527d5acade140b0e4803dc3756fb) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'cd037326186494184288fbdc0da7e3f0') in 0.015266 seconds
 Number of updated asset objects reloaded before import = 0
 Number of asset objects unloaded after import = 2
 ========================================================================
 Received Import Request.
   Time since last request: 0.000023 seconds.
-  path: Assets/Prefabs/Materials/Water.mat
-  artifactKey: Guid(946d04ec6bcaff943a32c732b5333f79) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Prefabs/Materials/Water.mat using Guid(946d04ec6bcaff943a32c732b5333f79) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '49f6ec4b047127256abcc4342f82d302') in 0.029086 seconds
+  path: Assets/Scenes/Level3Pol/Lightmap-89_comp_light.exr
+  artifactKey: Guid(b33aec10a44458d4f9d172e16e8c3dd8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scenes/Level3Pol/Lightmap-89_comp_light.exr using Guid(b33aec10a44458d4f9d172e16e8c3dd8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '7ccf0a86d0bbdf2ee6f188cacd52c8a5') in 0.018988 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 2
+========================================================================
+Received Import Request.
+  Time since last request: 0.000021 seconds.
+  path: Assets/Scenes/Level3Pol/Lightmap-84_comp_dir.png
+  artifactKey: Guid(a3a99c578cce0204a9c43c11806e7634) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scenes/Level3Pol/Lightmap-84_comp_dir.png using Guid(a3a99c578cce0204a9c43c11806e7634) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'a9c0f68f9826c3c82398595d5239380c') in 0.014916 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 2
+========================================================================
+Received Import Request.
+  Time since last request: 0.000015 seconds.
+  path: Assets/Scenes/Level3Pol/Lightmap-89_comp_dir.png
+  artifactKey: Guid(312b9a999d50ccb4c8c80428fa45b867) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scenes/Level3Pol/Lightmap-89_comp_dir.png using Guid(312b9a999d50ccb4c8c80428fa45b867) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '7c1a0a2fc75971785649210a0bf43e4d') in 0.018050 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 2
+========================================================================
+Received Import Request.
+  Time since last request: 0.000016 seconds.
+  path: Assets/Scenes/Level3Pol/Lightmap-88_comp_light.exr
+  artifactKey: Guid(bd53faaec1574904ab9168c8d8e455a2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scenes/Level3Pol/Lightmap-88_comp_light.exr using Guid(bd53faaec1574904ab9168c8d8e455a2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '2c8da606e1ff3b35364176dab33e863f') in 0.012469 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 2
+========================================================================
+Received Import Request.
+  Time since last request: 0.000020 seconds.
+  path: Assets/Scenes/Level3Pol/Lightmap-92_comp_dir.png
+  artifactKey: Guid(77e9da389b511e7469bc838cc351fcb8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scenes/Level3Pol/Lightmap-92_comp_dir.png using Guid(77e9da389b511e7469bc838cc351fcb8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '3a4e3f43b94c32b2e03da7e809b8cb1a') in 0.018028 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 2
+========================================================================
+Received Import Request.
+  Time since last request: 0.000028 seconds.
+  path: Assets/Scenes/Level3Pol/Lightmap-80_comp_light.exr
+  artifactKey: Guid(f058f747ff1f6864888960408565d4c0) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scenes/Level3Pol/Lightmap-80_comp_light.exr using Guid(f058f747ff1f6864888960408565d4c0) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'de29784c6ac8a0d4c79251dde4030b75') in 0.014279 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 2
+========================================================================
+Received Import Request.
+  Time since last request: 0.000017 seconds.
+  path: Assets/Scenes/Level3Pol/Lightmap-91_comp_light.exr
+  artifactKey: Guid(7684e2d55278c464d95a61bf9f069cc9) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scenes/Level3Pol/Lightmap-91_comp_light.exr using Guid(7684e2d55278c464d95a61bf9f069cc9) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'af324828c8594a52a3c87d6b56972f22') in 0.028464 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 2
+========================================================================
+Received Import Request.
+  Time since last request: 2.879978 seconds.
+  path: Assets/Scenes/Level3Pol/Lightmap-95_comp_dir.png
+  artifactKey: Guid(0cd6305859031d14a980699d566cef26) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scenes/Level3Pol/Lightmap-95_comp_dir.png using Guid(0cd6305859031d14a980699d566cef26) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'ea3bb7cb30b17cf9786015c924e70315') in 0.012088 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 2
+========================================================================
+Received Import Request.
+  Time since last request: 0.000018 seconds.
+  path: Assets/Scenes/Level3Pol/Lightmap-96_comp_dir.png
+  artifactKey: Guid(755cc3456e41a5343a8937c797ce430e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scenes/Level3Pol/Lightmap-96_comp_dir.png using Guid(755cc3456e41a5343a8937c797ce430e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'bd3600be50ea0e56972d17989d2facf1') in 0.016379 seconds
 Number of updated asset objects reloaded before import = 0
 Number of asset objects unloaded after import = 2
 Editor requested this worker to shutdown with reason: Scaling down because of idle timeout
