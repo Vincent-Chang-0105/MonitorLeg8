@@ -14,10 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   levelName: Level1
   hints:
-  - hintText: Find the exit.
+  - hintText: Find a way out.
     hintId: 1
     displayDuration: 0
-    isCompleted: 1
+    isCompleted: 0
   - hintText: Find the keycard.
     hintId: 2
     displayDuration: 0
@@ -35,10 +35,14 @@ MonoBehaviour:
     displayDuration: 0
     isCompleted: 0
   - hintText: Press WASD to move
-    hintId: -1
+    hintId: -2
     displayDuration: 5
     isCompleted: 1
   - hintText: Press E to interact
+    hintId: -1
+    displayDuration: 5
+    isCompleted: 1
+  - hintText: Hold Shift to run
     hintId: 0
     displayDuration: 5
     isCompleted: 1

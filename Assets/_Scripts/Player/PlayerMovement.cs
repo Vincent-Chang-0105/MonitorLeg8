@@ -185,6 +185,9 @@ public class PlayerMovement : MonoBehaviour
 
     private void OnDestroy()
     {
+        // Stop all sounds when object is destroyed
+        StopAllSounds();
+
         // Unsubscribe from InputSystem events
         if (InputSystem.Instance != null)
         {
@@ -257,7 +260,7 @@ public class PlayerMovement : MonoBehaviour
         var lens = virtualCamera.m_Lens;
         lens.FieldOfView = Mathf.Lerp(lens.FieldOfView, targetFOV, fovTransitionSpeed * Time.deltaTime);
         virtualCamera.m_Lens = lens;
-        
+
         wasSprintingLastFrame = false;
     }
 
@@ -411,7 +414,7 @@ public class PlayerMovement : MonoBehaviour
             // Wheels create more consistent frequency regardless of speed
             float speedMultiplier = Mathf.Lerp(0.8f, 1.4f, speed / sprintSpeed);
             currentFrequency *= speedMultiplier;
-            
+
             // Wheeled robots bounce more on uneven terrain when moving fast
             if (_sprintInput)
             {
@@ -423,7 +426,7 @@ public class PlayerMovement : MonoBehaviour
             // Regular walking frequency adjustment
             float speedMultiplier = speed / moveSpeed;
             currentFrequency *= speedMultiplier;
-            
+
             if (_sprintInput)
             {
                 currentAmplitude *= 1.2f;
@@ -447,24 +450,24 @@ public class PlayerMovement : MonoBehaviour
             // Wheeled robot simulation
             // Main wheel rotation creates consistent up-down motion
             float wheelRotation = _bobTimer * 2f; // Faster rotation for wheel effect
-            
+
             // Primary vertical bobbing from wheel irregularities/terrain
             motion.y = Mathf.Sin(wheelRotation) * amplitude * 0.8f;
-            
+
             // Secondary micro-vibrations from mechanical parts
             motion.y += Mathf.Sin(wheelRotation * 3.2f) * amplitude * 0.3f;
-            
+
             // Slight forward-back motion from wheel momentum and braking
             motion.z = Mathf.Sin(wheelRotation * 0.7f) * amplitude * 0.4f;
-            
+
             // Minimal side-to-side sway (wheels keep robot more stable)
             motion.x = Mathf.Sin(wheelRotation * 0.5f) * amplitude * 0.6f;
-            
+
             // Add some mechanical jitter for realism
             float jitterIntensity = amplitude * 0.2f;
             motion.x += Mathf.Sin(_bobTimer * 8.5f) * jitterIntensity;
             motion.y += Mathf.Cos(_bobTimer * 7.3f) * jitterIntensity;
-            
+
             // Speed affects intensity (faster = more bouncing over terrain)
             float speed = new Vector3(_controller.velocity.x, 0, _controller.velocity.z).magnitude;
             float speedFactor = Mathf.Clamp01(speed / sprintSpeed);
@@ -537,7 +540,17 @@ public class PlayerMovement : MonoBehaviour
 
     private void HandleWheelSound()
     {
-        if (!isRobotMode || !isGrounded || wheelSound == null) return;
+        if (!isRobotMode || !isGrounded || wheelSound == null) 
+        {
+            // Stop wheel sound if conditions aren't met
+            if (isWheelSoundPlaying && currentWheelSound != null)
+            {
+                currentWheelSound.FadeOutAndStop(0.1f);
+                currentWheelSound = null;
+                isWheelSoundPlaying = false;
+            }
+            return;
+        }
 
         float actualHorizontalSpeed = new Vector3(_controller.velocity.x, 0.0f, _controller.velocity.z).magnitude;
 
@@ -549,8 +562,8 @@ public class PlayerMovement : MonoBehaviour
             {
                 float pitchFactor = _sprintInput ? 1.2f : 1.0f;
                 currentWheelSound.SetPitch(wheelSound.pitch * pitchFactor);
+                isWheelSoundPlaying = true;
             }
-            isWheelSoundPlaying = true;
         }
         else if (actualHorizontalSpeed <= 0.3f && isWheelSoundPlaying)
         {
@@ -563,8 +576,18 @@ public class PlayerMovement : MonoBehaviour
         }
         else if (isWheelSoundPlaying && currentWheelSound != null)
         {
-            float pitchFactor = Mathf.Lerp(0.8f, 1.3f, actualHorizontalSpeed / (_sprintInput ? sprintSpeed : moveSpeed));
-            currentWheelSound.SetPitch(wheelSound.pitch * pitchFactor);
+            // Check if the sound emitter is still valid
+            if (currentWheelSound.IsPlaying())
+            {
+                float pitchFactor = Mathf.Lerp(0.8f, 1.3f, actualHorizontalSpeed / (_sprintInput ? sprintSpeed : moveSpeed));
+                currentWheelSound.SetPitch(wheelSound.pitch * pitchFactor);
+            }
+            else
+            {
+                // Sound stopped externally, reset our tracking
+                currentWheelSound = null;
+                isWheelSoundPlaying = false;
+            }
         }
     }
 
@@ -621,6 +644,25 @@ public class PlayerMovement : MonoBehaviour
     {
         canMove = false;
 
+        // Immediately stop all sounds
+        StopAllSounds();
+
         ResetFOV();
+    }
+
+    public void StopAllSounds()
+    {
+        // Stop wheel sounds immediately
+        if (isWheelSoundPlaying && currentWheelSound != null)
+        {
+            currentWheelSound.Stop(); // Immediate stop instead of fade
+            currentWheelSound = null;
+            isWheelSoundPlaying = false;
+        }
+    }
+    
+    private void OnDisable()
+    {
+        StopAllSounds();
     }
 }

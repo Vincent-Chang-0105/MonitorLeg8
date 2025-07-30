@@ -176,9 +176,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8df7d7f4b0deab245b6a4cdc6287c13d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 4
+  moveSpeed: 6
   jumpScareRange: 2
-  detectionRange: 10
+  detectionRange: 20
   visionObstacleLayers:
     serializedVersion: 2
     m_Bits: 256
@@ -189,7 +189,7 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   patrolWaitTime: 2
-  patrolSpeed: 2
+  patrolSpeed: 4
   animationTransitionTime: 0.1
   movementThreshold: 0.1
   currentState: 2
@@ -229,7 +229,7 @@ MonoBehaviour:
     bypassListenerEffects: 0
     bypassReverbZones: 0
     priority: 128
-    volume: 0.1
+    volume: 0.7
     pitch: 1
     panStereo: 0
     spatialBlend: 0

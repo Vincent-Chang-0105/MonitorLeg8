@@ -17,6 +17,11 @@ public class DeathScreen : MonoBehaviour
     [SerializeField] private float staticDuration = 2f;
     [SerializeField] private VideoPlayer videoPlayer;
 
+    [Header("Pause Settings")]
+    [SerializeField] private bool pauseGameOnDeath = true;
+
+    private float originalTimeScale;
+
     void Awake()
     {
         // Setup video player if not assigned
@@ -51,6 +56,14 @@ public class DeathScreen : MonoBehaviour
 
     private void ShowDeathScreen()
     {
+        // Store original time scale and pause the game
+        if (pauseGameOnDeath)
+        {
+            originalTimeScale = Time.timeScale;
+            Time.timeScale = 0f;
+            Debug.Log("Game paused for death screen");
+        }
+
         // Your death screen logic here
         StartCoroutine(StaticSequence());
     }
@@ -62,7 +75,7 @@ public class DeathScreen : MonoBehaviour
         videoPlayer.Play();
 
         // Wait for static effect duration
-        yield return new WaitForSeconds(staticDuration);
+        yield return new WaitForSecondsRealtime(staticDuration);
 
         // Stop video and sound
         //videoPlayer.Stop();
@@ -74,12 +87,25 @@ public class DeathScreen : MonoBehaviour
 
     public void retryFunction()
     {
+        // Resume time before reloading scene
+        if (pauseGameOnDeath)
+        {
+            Time.timeScale = originalTimeScale;
+            Debug.Log("Game time resumed");
+        }
         GameManager.Instance.ReloadCurrentScene();
         InputSystem.Instance.SetInputState(true);
     }
 
     public void exitFunction()
     {
+        // Resume time before changing scenes
+        if (pauseGameOnDeath)
+        {
+            Time.timeScale = originalTimeScale;
+            Debug.Log("Game time resumed");
+        }
+
         // Exit the game
         GameManager.Instance.LoadScene("MainMenu");
     }
@@ -93,5 +119,15 @@ public class DeathScreen : MonoBehaviour
     void Update()
     {
 
+    }
+
+    // Safety method to ensure time scale is restored if object is destroyed
+    private void OnDestroy()
+    {
+        if (pauseGameOnDeath && Time.timeScale == 0f)
+        {
+            Time.timeScale = originalTimeScale;
+            Debug.Log("Time scale restored on DeathScreen destroy");
+        }
     }
 }

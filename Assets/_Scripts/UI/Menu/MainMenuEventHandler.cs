@@ -12,6 +12,8 @@ public class MainMenuEventHandler : ColorChangeMenuHandler
     [SerializeField] private MainMenuCameraEventHandler cameraEventHandler;
     [SerializeField] private Button continueButton; // Add this reference
 
+    [SerializeField] private GameObject levelSelectPanel;
+
     
     [Header("Menu Preset Mapping")]
     [SerializeField] private List<MenuCameraPreset> menuCameraPresets = new List<MenuCameraPreset>();
@@ -114,19 +116,9 @@ public class MainMenuEventHandler : ColorChangeMenuHandler
         GameManager.Instance.StartNewGame();
     }
     
-    public void ContinueGame()
+    public void LevelSelect()
     {
-        Debug.Log("Continuing game...");
-    
-        if (SaveSystem.HasSaveData())
-        {
-            GameManager.Instance.ContinueGame();
-        }
-        else
-        {
-            Debug.LogWarning("No save data available, starting new game instead");
-            StartGame();
-        }
+        levelSelectPanel.SetActive(true);
     }
     
     public void OpenSettings()

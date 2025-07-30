@@ -23,6 +23,18 @@ public class GeneratorInteraction : Interactable
     
     [Header("System Settings")]
     [SerializeField] private GameObject blockadePrefab; // The blockade to remove when all generators are active
+    [SerializeField] private GameObject EndingHintTrigger; // The blockade to remove when all generators are active
+
+    [Header("Glow Fill Effect")]
+    [SerializeField] private bool useGlowEffect = false;
+    [SerializeField] private Material originalMaterial;
+    [SerializeField] private Material glowingMaterial;
+    [SerializeField] private Renderer objectRenderer;
+    [SerializeField] private float glowFillDuration = 2f;
+    [SerializeField] private AnimationCurve glowFillCurve = AnimationCurve.EaseInOut(0, 0, 1, 1);
+    [SerializeField] private bool glowOnActivation = true; // Glow when moving to target
+    [SerializeField] private bool resetGlowOnReturn = true; // Reset glow when returning to original
+
     [SerializeField] private SoundData allGeneratorsActiveSound;
     [SerializeField] private SoundData blockadeRemovedSound;
     
@@ -36,6 +48,7 @@ public class GeneratorInteraction : Interactable
     private SoundEmitter rideSoundEmitter;
     private Transform playerTransform;
     private Coroutine volumeUpdateCoroutine;
+    private bool isGlowing = false; // Track if the object is currently glowing
     
     // Static variables to track all generators
     private static List<GeneratorInteraction> allGenerators = new List<GeneratorInteraction>();
@@ -44,6 +57,8 @@ public class GeneratorInteraction : Interactable
     protected new void Awake()
     {
         base.Awake();
+
+        UnityEngine.SceneManagement.SceneManager.sceneLoaded += OnSceneLoaded;
         
         // Initialize sound builder
         if (SoundManager.Instance != null)
@@ -64,6 +79,49 @@ public class GeneratorInteraction : Interactable
         }
         
         InitializeGenerator();
+    }
+
+        private void StartGlowFillEffect(bool activate)
+    {
+        if (!useGlowEffect || objectRenderer == null) return;
+
+        if (activate && !isGlowing)
+        {
+            // Start glow fill effect
+            objectRenderer.material = glowingMaterial;
+
+            // Animate the fill effect
+            if (glowingMaterial.HasProperty("_FillHeight"))
+            {
+                glowingMaterial.SetFloat("_FillHeight", 0f);
+                DOTween.To(() => 0f, x => glowingMaterial.SetFloat("_FillHeight", x), 1f, glowFillDuration)
+                    .SetEase(glowFillCurve);
+            }
+            
+            isGlowing = true;
+        }
+        else if (!activate && isGlowing && resetGlowOnReturn)
+        {
+            // Reset to original material
+            if (originalMaterial != null)
+            {
+                objectRenderer.material = originalMaterial;
+            }
+            isGlowing = false;
+        }
+    }
+
+    private void OnSceneLoaded(UnityEngine.SceneManagement.Scene scene, UnityEngine.SceneManagement.LoadSceneMode mode)
+    {
+        // Reset static state when any scene loads
+        ResetStaticState();
+    }
+
+    private static void ResetStaticState()
+    {
+        allGenerators.Clear();
+        blockadeRemoved = false;
+        Debug.Log("Generator static state reset for new scene");
     }
 
     private void FindPlayerReference()
@@ -166,6 +224,15 @@ public class GeneratorInteraction : Interactable
         if (isActive) return;
         
         Debug.Log($"Activating generator: {generatorName}");
+
+        if (glowOnActivation)
+        {
+            StartGlowFillEffect(true);
+        }
+        else
+        {
+            StartGlowFillEffect(false);
+        }
         
         // Mark as active
         isActive = true;
@@ -326,6 +393,8 @@ public class GeneratorInteraction : Interactable
             // Remove the blockade
             Destroy(blockadePrefab);
             blockadeRemoved = true;
+
+            EndingHintTrigger.SetActive(true); // Activate the ending hint trigger
             
             // Trigger event on all generators
             foreach (GeneratorInteraction generator in allGenerators)
@@ -416,6 +485,8 @@ public class GeneratorInteraction : Interactable
     // Clean up when destroyed
     private void OnDestroy()
     {
+        UnityEngine.SceneManagement.SceneManager.sceneLoaded -= OnSceneLoaded;
+
         if (allGenerators.Contains(this))
         {
             allGenerators.Remove(this);

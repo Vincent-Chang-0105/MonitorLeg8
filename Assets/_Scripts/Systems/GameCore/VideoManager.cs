@@ -22,7 +22,7 @@ public class VideoManager : PersistentSingleton<VideoManager>
 
     [Header("Audio Settings")]
     [SerializeField] private bool muteVideo = false;
-    [SerializeField] [Range(0f, 1f)] private float videoVolume = 0.5f;
+    [SerializeField][Range(0f, 1f)] private float videoVolume = 0.5f;
 
     [Header("Events")]
     public UnityEvent OnVideoStart;
@@ -78,17 +78,17 @@ public class VideoManager : PersistentSingleton<VideoManager>
 
 
         skipPromptImage.fillAmount = 0f; // Reset skip prompt image fill
-        
+
         SetupVideoAudio();
     }
 
     private void SetupVideoAudio()
     {
         if (videoPlayer == null) return;
-        
+
         // Configure audio output
         videoPlayer.audioOutputMode = VideoAudioOutputMode.Direct;
-        
+
         // Set volume and mute state
         SetVideoVolume(videoVolume);
         SetVideoMute(muteVideo);
@@ -97,7 +97,7 @@ public class VideoManager : PersistentSingleton<VideoManager>
     public void SetVideoVolume(float volume)
     {
         videoVolume = Mathf.Clamp01(volume);
-        
+
         if (videoPlayer != null)
         {
             // Set volume for all audio tracks
@@ -106,14 +106,14 @@ public class VideoManager : PersistentSingleton<VideoManager>
                 videoPlayer.SetDirectAudioVolume(i, videoVolume);
             }
         }
-        
+
         if (debugMode) Debug.Log($"Video volume set to: {videoVolume}");
     }
-    
+
     public void SetVideoMute(bool mute)
     {
         muteVideo = mute;
-        
+
         if (videoPlayer != null)
         {
             // Mute/unmute all audio tracks
@@ -122,7 +122,7 @@ public class VideoManager : PersistentSingleton<VideoManager>
                 videoPlayer.SetDirectAudioMute(i, muteVideo);
             }
         }
-        
+
         if (debugMode) Debug.Log($"Video muted: {muteVideo}");
     }
 
@@ -273,7 +273,7 @@ public class VideoManager : PersistentSingleton<VideoManager>
         PlayVideo(videoClip, () =>
         {
             if (debugMode) Debug.Log($"Video completed, loading scene: {sceneName}");
-            
+
             // Load the specified scene
             if (GameManager.Instance != null)
             {
@@ -334,15 +334,25 @@ public class VideoManager : PersistentSingleton<VideoManager>
 
         OnVideoStart?.Invoke();
 
-        // Show skip prompt after 2 seconds
-        yield return new WaitForSecondsRealtime(2f);
-
-        if (skipPrompt != null && isPlayingVideo)
+        // Only show skip prompt if skipping is allowed
+        if (allowSkipping)
         {
-            skipPrompt.SetActive(true);
-            isSkipPromptActive = true;
-            skipHoldTimer = 0f;
+            // Show skip prompt after 2 seconds
+            yield return new WaitForSecondsRealtime(2f);
+
+            if (skipPrompt != null && isPlayingVideo)
+            {
+                skipPrompt.SetActive(true);
+                isSkipPromptActive = true;
+                skipHoldTimer = 0f;
+                if (debugMode) Debug.Log("Skip prompt shown");
+            }
         }
+        else
+        {
+            if (debugMode) Debug.Log("Skipping disabled - skip prompt will not be shown");
+        }
+
         // Wait for video to finish or be skipped
         while (videoPlayer.isPlaying && isPlayingVideo)
         {
@@ -412,9 +422,11 @@ public class VideoManager : PersistentSingleton<VideoManager>
             if (debugMode) Debug.Log("Video canvas deactivated");
         }
 
+        // Always hide skip prompt when hiding video UI
         if (skipPrompt != null)
         {
             skipPrompt.SetActive(false);
+            isSkipPromptActive = false; // Reset the skip prompt state
             if (debugMode) Debug.Log("Skip prompt deactivated");
         }
     }
@@ -447,6 +459,9 @@ public class VideoManager : PersistentSingleton<VideoManager>
             Debug.Log("Video completed");
         }
 
+        onVideoCompleteCallback?.Invoke();
+        onVideoCompleteCallback = null;
+
         if (GameManager.Instance != null)
         {
             SceneConfiguration.SceneSettings sceneSettings = GameManager.Instance.currentSceneSettings;
@@ -454,8 +469,6 @@ public class VideoManager : PersistentSingleton<VideoManager>
         }
         // 
         // Execute callback
-        onVideoCompleteCallback?.Invoke();
-        onVideoCompleteCallback = null;
 
         // --- Reset input and skip states ---
         isSkipPromptActive = false;
@@ -477,8 +490,8 @@ public class VideoManager : PersistentSingleton<VideoManager>
 
 
         }
-    }        
-    
+    }
+
     public void ResumeVideo()
     {
         if (debugMode) Debug.Log("Resuming video");
@@ -489,5 +502,22 @@ public class VideoManager : PersistentSingleton<VideoManager>
             isPlayingVideo = true;
             ShowVideoUI();
         }
+    }
+    
+    /// <summary>
+    /// Set whether video skipping is allowed
+    /// </summary>
+    public void SetAllowSkipping(bool allow)
+    {
+        allowSkipping = allow;
+        if (debugMode) Debug.Log($"Video skipping set to: {allow}");
+    }
+
+    /// <summary>
+    /// Get current skipping setting
+    /// </summary>
+    public bool GetAllowSkipping()
+    {
+        return allowSkipping;
     }
 }

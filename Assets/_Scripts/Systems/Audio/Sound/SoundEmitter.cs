@@ -5,29 +5,32 @@ using Random = UnityEngine.Random;
 
 namespace AudioSystem {
     [RequireComponent(typeof(AudioSource))]
-    public class SoundEmitter : MonoBehaviour {
+    public class SoundEmitter : MonoBehaviour
+    {
         public SoundData Data { get; private set; }
         public LinkedListNode<SoundEmitter> Node { get; set; }
 
         AudioSource audioSource;
         Coroutine playingCoroutine;
 
-        void Awake() {
+        void Awake()
+        {
             audioSource = gameObject.GetOrAdd<AudioSource>();
         }
 
-        public void Initialize(SoundData data) {
+        public void Initialize(SoundData data)
+        {
             Data = data;
             audioSource.clip = data.clip;
             audioSource.outputAudioMixerGroup = data.mixerGroup;
             audioSource.loop = data.loop;
             audioSource.playOnAwake = data.playOnAwake;
-            
+
             audioSource.mute = data.mute;
             audioSource.bypassEffects = data.bypassEffects;
             audioSource.bypassListenerEffects = data.bypassListenerEffects;
             audioSource.bypassReverbZones = data.bypassReverbZones;
-            
+
             audioSource.priority = data.priority;
             audioSource.volume = data.volume;
             audioSource.pitch = data.pitch;
@@ -36,65 +39,80 @@ namespace AudioSystem {
             audioSource.reverbZoneMix = data.reverbZoneMix;
             audioSource.dopplerLevel = data.dopplerLevel;
             audioSource.spread = data.spread;
-            
+
             audioSource.minDistance = data.minDistance;
             audioSource.maxDistance = data.maxDistance;
-            
+
             audioSource.ignoreListenerVolume = data.ignoreListenerVolume;
             audioSource.ignoreListenerPause = data.ignoreListenerPause;
-            
+
             audioSource.rolloffMode = data.rolloffMode;
         }
 
-        public void Play() {
-            if (playingCoroutine != null) {
+        public void Play()
+        {
+            if (playingCoroutine != null)
+            {
                 StopCoroutine(playingCoroutine);
             }
-            
+
             audioSource.Play();
             playingCoroutine = StartCoroutine(WaitForSoundToEnd());
         }
 
-        IEnumerator WaitForSoundToEnd() {
+        IEnumerator WaitForSoundToEnd()
+        {
             yield return new WaitWhile(() => audioSource.isPlaying);
             Stop();
         }
 
-        public void Stop() {
-            if (playingCoroutine != null) {
+        public void Stop()
+        {
+            if (playingCoroutine != null)
+            {
                 StopCoroutine(playingCoroutine);
                 playingCoroutine = null;
             }
-            
+
             audioSource.Stop();
             SoundManager.Instance.ReturnToPool(this);
         }
 
-        public void WithRandomPitch(float min = -0.05f, float max = 0.05f) {
+        public void WithRandomPitch(float min = -0.05f, float max = 0.05f)
+        {
             audioSource.pitch += Random.Range(min, max);
         }
 
-        public void SetPitch(float newPitch) {
+        public void SetPitch(float newPitch)
+        {
             audioSource.pitch = newPitch;
         }
 
-        public void FadeOutAndStop(float fadeTime) {
+        public void FadeOutAndStop(float fadeTime)
+        {
             StartCoroutine(FadeOutRoutine(fadeTime));
         }
 
-        private IEnumerator FadeOutRoutine(float fadeTime) {
+        private IEnumerator FadeOutRoutine(float fadeTime)
+        {
             float startVolume = audioSource.volume;
             float startTime = Time.time;
             float endTime = startTime + fadeTime;
-            
-            while (Time.time < endTime) {
+
+            while (Time.time < endTime)
+            {
                 float t = 1 - ((endTime - Time.time) / fadeTime);
                 audioSource.volume = Mathf.Lerp(startVolume, 0, t);
                 yield return null;
             }
-            
+
             audioSource.volume = 0;
             Stop();
+        }
+
+        public bool IsPlaying()
+        {
+            return audioSource.isPlaying;
         }
     }
 }
